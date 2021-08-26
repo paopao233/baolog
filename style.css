@@ -1,0 +1,307 @@
+@charset "UTF-8";
+/*
+Theme Name: BaoLog
+Theme URI: https://www.guluqiu.online
+Description: 一个简洁的线报主题，自带有在线小工具。从现在起，我只想做一个快乐的affman。<br>dd
+Version: 1.0
+Author: parklot
+Author URI: https://github.com/paopao233
+Requires at least: 4.9.6
+Requires PHP: 5.2.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: https://blog.guluqiu.cc
+Tags: 线报主题,简洁,
+ */
+html {
+    --theme: #409eff;
+    --background: #fff;
+    --main: #303133;
+    --routine: #606266;
+    --minor: #909399;
+    --seat: #c0c4cc;
+    --classA: #dcdfe6;
+    --classB: #e4e7ed;
+    --classC: #ebeef5;
+    --classD: #f2f6fc;
+    --radius-wrap: 8px;
+    --radius-inner: 4px;
+    --text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --box-shadow: 0px 0px 20px -5px rgba(158, 158, 158, 0.22);
+}
+:root {
+    --Maincolor:#409EFF;
+    --MaincolorHover:#66b1ff;
+    --bagcolor:#f7f9fa;
+    --swiper-navigation-size:30px!important
+}
+/*文章头部评论的a标签*/
+.comment_a {
+    color: #868e96;
+}
+
+.comment_a:hover {
+    color: #868e96;
+}
+
+/*文字大小 大号*/
+.text-lg {
+    font-size: 29px;
+}
+
+/*文字大小 小号*/
+.text-sm {
+    font-size: 15px;
+}
+.center-404{
+    text-align:center;
+    margin: 20px 0;
+}
+/*分页*/
+.page-numbers{
+    border: 0;
+    background: #fff;
+    color: #868e96;
+    box-shadow: none;
+}
+/*底部加载时间*/
+.loadtime{
+    margin-top: 7px;
+}
+
+.comment_card_user_info{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85em;
+    color: #666E76;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #dee2e6;
+}
+.comment_card_submit{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85em;
+    color: #666E76;
+}
+.thread-content h1,.thread-content h2,.thread-content h3,.thread-content h4,.thread-content h5,.thread-content h6 {
+    color:var(--main);
+    font-size:18px;
+    line-height:24px;
+    margin-bottom:18px;
+    position:relative
+}
+.thread-content h2,h3 {
+    position:relative
+}
+.thread-content h2:before,h3:before {
+    box-shadow:0 1px 3px rgba(26,26,26,.1)
+}
+.thread-content h3 {
+    padding-bottom:10px;
+    margin:12px 0;
+    font-size:18px;
+}
+.thread-content h3:hover:before {
+    width:50px
+}
+.thread-content h3:before {
+    width:40px;
+    height:3px;
+    top:auto;
+    left:0;
+    bottom:3px;
+    transition:.4s;
+    position:absolute;
+    content:'';
+    background:var(--Maincolor);
+    border-radius:5px;
+}
+.thread-content h2 {
+    padding-left:16px;
+    margin:12px 0;
+    border:0;
+    font-weight:700;
+    color:var(--Maincolor);
+    font-size:18px
+}
+.thread-content h2:before {
+    position:absolute;
+    content:'';
+    width:4px;
+    background:var(--Maincolor);
+    top:10%;
+    left:2px;
+    bottom:10%;
+    border-radius:5px;
+    transition:.4s
+}
+.thread-content h4::before {
+    content:'「';
+    color:var(--theme);
+    font-weight:600;
+    margin-right:5px
+}
+.thread-content h4::after {
+    content:'」';
+    color:var(--theme);
+    font-weight:600;
+    margin-left:5px
+}
+.thread-content h5 {
+    padding:0 15px 0 28px
+}
+.thread-content h5::before {
+    content:'';
+    position:absolute;
+    top:2px;
+    left:0;
+    width:20px;
+    height:20px;
+    background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAC8klEQVRYR+3WP2gTURwH8O/vKnVRRHKXP52cBO3g4p/BqYNIhy4muajUQRBFKjQV1En6ZxJBcmlRCoJDRe3FDiJVwamLS3FwqbgIgss1l2ZQF5XeT3I1Z3NJ7u5dLlAwN9699/t97vfe7/EIO/yhHe5DD9jpCv3fFVTu856+Xzi62Y/35hj9CFPNrlUwWeRJAJfBGADwBcBNI0/PRZFdAdo4xlQLjCqKjBzogat7hZCRAgPghJGBgbFnxglAOvS7b/fLb+q+qnv5BHBCyEBAWTdnANy2IxOtWSC1qsY+1jOFwAVG+gIVvXyHQbcaKuZCxmf5iMQogXFQtEsBeO5JT6BcMu+Bcb1lUhcyqfExACUAB6JEtgUqi+U5JrrmmcyFHCjwSYtQO+tSUSFbAmXdnAdwJVASdyWLPAS2kbFA8xsHNS13EzCmlx8R6KJQcBcypfFpho3cKxRna3ADsgEo6+ZjAKMhgjZ1d2KWR2gTSyD0h4jnIB2gXDIXwciFCPZvSnMl0wwshYrJGDImaMUGKovlLBPVOrDjh8APzFx8zDkjNa7FzYoGZsKT9XEarQOHmei1aJA246cqOWW6/i2l8VMGzoWIPW/k6eq2Ja6UwCz8pw2JGZ8sS8pUz8fWau/jGp+SgLchcGBgZD1Py41NUuoI+ZloV8ZU93+ogZKzfBiWfXAPCgMJU8Y42avQdMzI4ZBfmSizocqrUeJaAmsvBZGGBCtTziXeRY1rCxRAViEhXckqK93AeQJ9kYTvlmVlqmcTdhNEtefc+9X3utVmuX+CkK6oyqtu4nwrWP8bF5IZdGYjJ79wDuMCz4D+XmhFWnZbt7ab5ltBB6mbkyAaBPFCJassuwMmNb4L4EZgXwBc4AoGTZrUeA6A9x1yK6tzzvnFDlxBv0D176kCP2TCpbbjBXCRV9DZk0VeAONCE1IQ1zWg3dlF1sFQHWQIXFeBNrLAw5BwHBZWjQl6E3SbbB8X+R4Mg/Ca0wN2WtFeBTut4B84mFI4VpekyAAAAABJRU5ErkJggg==");
+    background-size:100% 100%;
+    }
+.thread-content h6 {
+    padding:0 15px 0 28px
+}
+.thread-content h6::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAEI0lEQVRYR+3Xb2wTZRwH8G/vL22RPy5GW8fK6rJpGeFFY9RO3TRRE1HfmEAammEyjZmOSEg1RrPZaTD6xjhU/Ndlf0CZgwmD+qcgZBRIETeqY0Vcnc7pGonhRY2l3m2t5upqjq693l2vcy+8N81zz/NcPvf75fd7rjos8ku3yH34HyjK0PqlDLPzD56vMNL0VHxmpgXAoUIZXKgI3sMSpK+cNTAbylaj/9IkprnLM3+mkg8XQi4EsJ4lSL+ZNbAfVd+JG/XLcSERg3M8IAtZauBtDEkeNdN6fX9NfRqXueQiSwm00wQRMDMGw94snBJkqYBrSYIIXs/ojftqGq6IXHZRFIpkKYC2JSw9SJE663W0nthlqcMawwrJYpVCag1M48pNy1YNvLWRffGNIYSCv6Cnog7rjCtVIbUEXoG7qeqaNMj51F58dWoKPZY62JeWyUJG+ctcIplcIizWCpgTl9EIyODJn9BtceDWq/6B57tO/H4R688fFaZ7AWzWAiiJEyMDx39Ed6UDdyy7Ni/w1ekxbP95VJi/F8CRYoGycGLksaEJdFU6cPdy0zxkR/RbtE6FhPvHATQUm2JFODHSfyyCLmsd7lth/hf53q/jcE8OC+NTAG7PTKiNoCqcGPnpF+PotDrwwNXl+OC3H9A8cVqYPgPgFnFo1QCLwomRg4cvoPMGBzZHTgq3zwKwZ+ddKVATXAZhf+gdnPvuojAUqmJdrspRAtQU93pXEM+8clgwhQHU5itruUBNcTt6TsP9sl8weQC0S/VFOUBNcW/2folt2z+XhZPTZh6kSKJ79aqVRuFszRxfUm8sNbdz9xlsfekz2bhCQBvDMMM8z+ubN92Mjrb71brS+97dM4wtnk8U4SSBBEGErVarzeVywePxoHVLA1pb6lUh3+8bwZMv+BTjpIAVACa9Xq+uqakJ7e3tqpGd/WfR3Jr+81awIJS0mY0A+sLhMGw2W3qfGmTXvhAef/6gapxUBDuqqqoejUQiBvFbKUH2DHyNx54bLAqXF0jT9HBjY6Pd6/XOi7oc5K7936Dp2QNF4/IBrTqdLuLxeIi2tracRSGF/PDgKB55er8muHzATQB2m81m+P1+1NbmPoVyIfsOnUOj+2PNcPmAO1iWbeE4TmexWODz+WQhayrL4No2oCkuJ5Bl2VGO49ZmcisXObdeVSuRaq7ZZ3G10KBTqRQl3pQPGY1GEQgE4HQ6heVDAO5S1cklNmUDXQRB9KZSqXkfESaTCW63G7FYDKFQKDEyMoJoNKqfe/bbAJ7QGpcrxa8xDLOV5/k0kGXZv2ZnZ5FMJtNjmqYvURR1IpFInAcwAeD7ud/pUuDmAY1G41g8Hl9DkmScoqggx3FHAIyJMMlSQfI9V5zKagDC93dsoRFKimQx2dIWOV/U/yn6bx0WyDj8vgLOAAAAAElFTkSuQmCC");
+    background-size:100% 100%
+}
+.thread-content blockquote {
+    line-height: 26px;
+    margin-bottom: 18px;
+    background: #ecf8ff;
+    border-left: 5px solid #50bfff;
+    color: #50bfff;
+    padding: 8px 15px;
+    border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
+}
+
+.thread-contentli {
+    list-style-position:inside
+}
+.thread-content p {
+    margin-bottom:10px;
+    line-height:1.8;
+    word-wrap:break-word
+}
+.thread-content ul,ol {
+    list-style-position:outside
+}
+pre {
+    margin:10px 0;
+    padding:10px;
+    max-height:500px;
+    overflow:auto;
+    background-color:#f8f8f8;
+    border-radius:4px;
+    font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace,sans-serif
+}
+pre code {
+    color:unset;
+    background-color:unset
+}
+code {
+    font-family:Menlo,Monaco,Consolas,"Courier New",monospace;
+    display:inline-block;
+    padding:0 4px;
+    margin-left:2px;
+    font-size:90%;
+    margin-bottom:2px;
+    color:#c7254e;
+    background-color:#f9f2f4;
+    border-radius:4px
+}
+table {
+    width:100%;
+    margin:10px 0;
+    border-collapse:collapse
+}
+tr:nth-child(2n+1) td {
+    background:#fafafa
+}
+tr:hover td {
+    background-color:#f5f7fa
+}
+td {
+    transition:background-color .25s ease;
+    padding:8px;
+    min-width:0;
+    box-sizing:border-box;
+    text-overflow:ellipsis;
+    vertical-align:middle;
+    position:relative;
+    text-align:left;
+    border-bottom:1px solid #ebeef5
+}
+/*折叠面板*/
+.zd-plane {
+    border: 1px solid #f0f0f0;
+    padding: 8px;
+    margin: 10px 0
+}
+
+.zd-plane-title {
+    cursor: pointer
+}
+
+.zd-plane-title:before {
+    font-family: "Font Awesome 5 Pro";
+    content: "\f067";
+    font-weight: 900;
+    display: inline-block;
+    transition: transform .3s;
+    margin-right: 10px;
+    color: var(--Maincolor)
+}
+
+.zd-plane-title-zk:before {
+    transform: rotate(45deg)
+}
+
+.zd-plane-content {
+    display: none;
+    padding: 10px
+}
+
+/*久未更新*/
+
+.posts-overdue-wrapper {
+    background: #eff1ff;
+    border-radius: var(--radius-inner);
+    padding: 15px;
+    color: #406ce8;
+    border: 1px solid #767aff;
+    -webkit-animation: overdue 1.5s ease-in-out;
+    animation: overdue 1.5s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.posts-overdue-wrapper .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 500
+}
+
+.posts-overdue-wrapper .title .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px
+}
+
+.posts-overdue-wrapper .content {
+    padding-left: 28px
+}
+
+.posts-overdue-wrapper:hover {
+    -webkit-clip-path: circle(75%);
+    clip-path: circle(75%)
+}
