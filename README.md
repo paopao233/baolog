@@ -12,6 +12,6 @@ wordpress线报主题，发羊毛，我就要专一~<br>
 ## bug反馈与建议
 #### qq群 781506134（目前还没多少个人
 ## License
-GPL v2.0 © parklot
+Apache-2.0 License © parklot
 
 All assets licensed under a GPL-compatible license.
