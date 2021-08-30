@@ -47,7 +47,7 @@ if (class_exists('CSF')) {
             array(
                 'type' => 'notice',
                 'style' => 'success',
-                'content' => '当前主题版本为V0.1,请关注作者https://github.com/paopao233',
+                'content' => '当前主题版本为V0.2,请关注作者https://github.com/paopao233查看更新内容',
             ),
             array(
                 'id' => 'baolog-favicon',
@@ -91,6 +91,35 @@ if (class_exists('CSF')) {
                 'default' => '2020-2021',
                 'help' => '可为空',
             ),
+            array(
+                'id' => 'baolog-posts-blank',
+                'type' => 'switcher',
+                'title' => '首页文章新标签打开方式',
+                'label' => '是否开启?',
+                'subtitle' => '默认是当前标签载入文章',
+                'text_on' => '开启',
+                'text_off' => '禁用',
+                'text_width' => 100
+            ),
+            array(
+                'id' => 'baolog-index-menu',
+                'type' => 'switcher',
+                'title' => '首页导航是否开启',
+                'desc' => '首页导航既是最新线报、24小时热门这个导航，做博客可关闭',
+                'label' => '是否开启?',
+                'subtitle' => '默认是开启',
+                'text_on' => '开启',
+                'text_off' => '禁用',
+                'text_width' => 100,
+                'default' => 'true',
+            ), array(
+                'id' => 'baolog-footer-custom',
+                'type' => 'textarea',
+                'title' => '自定义footer',
+                'desc' => '例如：<p>This is inserted at the footer</p>',
+                'subtitle' => '显示在底部的链接，支持html代码，可加入统计代码',
+                'help' => '为空则不显示',
+            ),
 
         )
     ));
@@ -133,10 +162,10 @@ if (class_exists('CSF')) {
                 'id' => 'baolog-posts-update',
                 'type' => 'switcher',
                 'title' => '文章3天内未更新提示',
-                'label'   => '是否开启?',
+                'label' => '是否开启?',
                 'subtitle' => '显示在文章页面',
-                'text_on'    => '开启',
-                'text_off'   => '禁用',
+                'text_on' => '开启',
+                'text_off' => '禁用',
                 'text_width' => 100
             )
 

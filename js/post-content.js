@@ -1,3 +1,3 @@
-$(".zd-plane-title").click(function(a) {
-    $(this).hasClass("zd-plane-title-zk") ? ($(this).removeClass("zd-plane-title-zk"), $(this).next().slideUp()) : ($(this).addClass("zd-plane-title-zk"), $(this).next().slideDown())
+$(".fold-plane-title").click(function(a) {
+    $(this).hasClass("fold-plane-title-zk") ? ($(this).removeClass("fold-plane-title-zk"), $(this).next().slideUp()) : ($(this).addClass("fold-plane-title-zk"), $(this).next().slideDown())
 });

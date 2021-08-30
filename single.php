@@ -234,9 +234,3 @@ get_sidebar();
         $('.enlargeImg_wrapper').fadeOut(200).remove();
     })
 </script>
-<!--<script>-->
-<!--    var jmessage = $('#message');-->
-<!--    var jbutton = $('#submit');-->
-<!--    jmessage.val('文章已经关闭').attr('readonly', 'readonly');-->
-<!--    jbutton.attr("disabled", "disabled");-->
-<!--</script>-->

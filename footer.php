@@ -22,10 +22,15 @@
         <div class="loadtime">
             网页加载时间：<?php timer_stop(1); ?>/ms
         </div>
+        <!--制作不易 请给个star 勿移除本声明-->
+        <div>作者：<a href="https://github.com/paopao233/baolog">parklot</a></div>
+
     </div>
+    <?php wp_footer(); ?>
 </div>
 
 <script src="<?php bloginfo('template_url'); ?>/js/jquery-3.1.0.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/lang.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/popper.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/bootstrap.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog.js"></script>
@@ -162,5 +167,5 @@
 </body>
 <div id="edge-translate-notifier-container" class="edge-translate-notifier-center"></div>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
-<?php wp_footer(); ?>
+
 </html>

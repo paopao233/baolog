@@ -117,12 +117,13 @@ html {
     border-radius:5px;
 }
 .thread-content h2 {
-    padding-left:16px;
-    margin:12px 0;
-    border:0;
-    font-weight:700;
-    color:var(--Maincolor);
-    font-size:18px
+    margin: 12px 0;
+    border: 0;
+    font-weight: 700;
+    color: var(--Maincolor);
+    font-size: 18px;
+    background-color: #f6f7fa;
+    padding: 6px 0px 6px 16px;
 }
 .thread-content h2:before {
     position:absolute;
@@ -241,67 +242,74 @@ td {
     border-bottom:1px solid #ebeef5
 }
 /*折叠面板*/
-.zd-plane {
+.fold-plane {
     border: 1px solid #f0f0f0;
+    margin: 10px 0;
+    background-color: #f6f7fa;
+    border-radius: 12px 0;
+}
+
+.fold-plane-title {
+    cursor: pointer;
+    font-weight: 600;
     padding: 8px;
-    margin: 10px 0
 }
 
-.zd-plane-title {
-    cursor: pointer
-}
-
-.zd-plane-title:before {
+.fold-plane-title:before {
     font-family: "Font Awesome 5 Pro";
-    content: "\f067";
-    font-weight: 900;
+    content: "\f00d";
     display: inline-block;
     transition: transform .3s;
     margin-right: 10px;
     color: var(--Maincolor)
 }
+.fold-plane-title-zk{
+    color: #5368f1;
+}
 
-.zd-plane-title-zk:before {
+.fold-plane-title-zk:before {
     transform: rotate(45deg)
 }
 
-.zd-plane-content {
+.fold-plane-content {
     display: none;
-    padding: 10px
+    padding: 10px;
+    background-color: white;
+}
+/* callout */
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #e9ecef;
+    border-left-width: .25rem;
+    border-radius: .25rem
 }
 
-/*久未更新*/
-
-.posts-overdue-wrapper {
-    background: #eff1ff;
-    border-radius: var(--radius-inner);
-    padding: 15px;
-    color: #406ce8;
-    border: 1px solid #767aff;
-    -webkit-animation: overdue 1.5s ease-in-out;
-    animation: overdue 1.5s ease-in-out;
-    margin-bottom: 20px;
+.bd-callout h4 {
+    margin-bottom: .25rem
 }
 
-.posts-overdue-wrapper .title {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 15px;
-    font-weight: 500
+.bd-callout p:last-child {
+    margin-bottom: 0
 }
 
-.posts-overdue-wrapper .title .icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px
+.bd-callout code {
+    border-radius: .25rem
 }
 
-.posts-overdue-wrapper .content {
-    padding-left: 28px
+.bd-callout+.bd-callout {
+    margin-top: -.25rem
 }
 
-.posts-overdue-wrapper:hover {
-    -webkit-clip-path: circle(75%);
-    clip-path: circle(75%)
+.bd-callout-info {
+    border-left-color: #5bc0de
+}
+
+.bd-callout-warning {
+    border-left-color: #f0ad4e
+}
+
+.bd-callout-danger {
+    border-left-color: #d9534f
 }
