@@ -11291,3 +11291,6 @@ small, .small {
 select > option {
   background-color: #fff;
 }
+.mdi-arrow-right:before {
+  content: "\F054"
+}

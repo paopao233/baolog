@@ -15,9 +15,33 @@ include(get_template_directory() . '/functions/shortcodes.php');
 
 //引入主题选项
 require_once dirname(__FILE__) . '/framework/codestar-framework.php';
+
+//获取后台主题选项参数
+$options = get_option('baolog_framework');
+
 //禁用5.0编辑器
-add_filter('use_block_editor_for_post_type', '__return_false');
-wp_deregister_style('wp-block-library');
+$is_gutenberg = $options['baolog-gutenberg'];
+if ($is_gutenberg == 1) {
+    add_filter('use_block_editor_for_post_type', '__return_false');
+    remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
+}
+
+//禁用文章自动保存功能
+$is_autosave = $options['baolog-posts-autosave'];
+if ($is_autosave == 1) {
+    add_action('wp_print_scripts', 'fanly_no_autosave');
+    function fanly_no_autosave()
+    {
+        wp_deregister_script('autosave');
+    }
+}
+
+//禁用WordPress修订版本
+$is_revisions_to_keep = $options['revisions_to_keep'];
+if($is_revisions_to_keep == 1){
+    add_filter( 'wp_revisions_to_keep', 'fanly_wp_revisions_to_keep', 10, 2 );
+    function fanly_wp_revisions_to_keep( $num, $post ) { return 0;}
+}
 
 //添加菜单
 add_action('after_setup_theme', 'baolog_setup');
@@ -571,7 +595,7 @@ function baolog_get_most_viewed($limit = 15, $day)
     $options = get_option('baolog_framework');
     $is_blank = $options['baolog-posts-blank'];
     $target = '_self';
-    if ($is_blank == 1){
+    if ($is_blank == 1) {
         $target = '_blank';
     }
 
@@ -586,7 +610,7 @@ function baolog_get_most_viewed($limit = 15, $day)
     foreach ($postlist as $post) {
         echo '<li class="list-group-item px-0">
                  <div class="subject break-all">
-                            <h2><a class="mr-1" href="' . get_permalink($post->ID) . '" target="'.$target.'"  rel="bookmark"  
+                            <h2><a class="mr-1" href="' . get_permalink($post->ID) . '" target="' . $target . '"  rel="bookmark"  
                             title="' . $post->post_title . '">' . $post->post_title . '</a></h2>';
         //标签
 
@@ -644,7 +668,7 @@ function balolog_get_the_posts()
     $options = get_option('baolog_framework');
     $is_blank = $options['baolog-posts-blank'];
     $target = '_self';
-    if ($is_blank == 1){
+    if ($is_blank == 1) {
         $target = '_blank';
     }
 
@@ -672,7 +696,7 @@ function balolog_get_the_posts()
             the_permalink();
             echo '" title="';
             the_title();
-            echo '" target="'.$target.'" rel="bookmark">
+            echo '" target="' . $target . '" rel="bookmark">
                                     <span class="huux_thread_hlight_style1">';
             the_title();
             echo '</span>
@@ -709,7 +733,7 @@ function balolog_get_the_posts()
         echo '"
                                     title="';
         the_title();
-        echo '" target="'.$target.'"
+        echo '" target="' . $target . '"
                                     rel="bookmark">';
         the_title();
         echo '</a>
@@ -873,30 +897,40 @@ function baolog_is_overdue()
     $u_time = get_the_time('U');
     $u_modified_time = get_the_modified_time('U');
 
-        $updated_date = date('Y-m-d H:i', $u_modified_time);
-        //两个时间相减 等到了整天 算一天
-        $days = date_diff(date_create(date('Ymd', $u_modified_time)), date_create(date('Ymd', time())));
-        if ($is_open == 1){
-            if ($days->days >= 3) {
-               echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-               echo '温馨提示：<br>本文最后更新时间<strong>';
-               echo $updated_date;
-               echo '</strong>，已超过<strong>';
-               echo $days->days;
-               echo '</strong>天没有更新，若内容或图片失效，请留言反馈。</div>';
+    $updated_date = date('Y-m-d H:i', $u_modified_time);
+    //两个时间相减 等到了整天 算一天
+    $days = date_diff(date_create(date('Ymd', $u_modified_time)), date_create(date('Ymd', time())));
+    if ($is_open == 1) {
+        if ($days->days >= 3) {
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
+            echo '温馨提示：<br>本文最后更新时间<strong>';
+            echo $updated_date;
+            echo '</strong>，已超过<strong>';
+            echo $days->days;
+            echo '</strong>天没有更新，若内容或图片失效，请留言反馈。</div>';
 
-            }
         }
+    }
 
 }
 
 //自定义底部代码 支持html
-function baolog_wp_footer_plus() {
+function baolog_wp_footer_plus()
+{
     $options = get_option('baolog_framework');
     $custom_footer = $options['baolog-footer-custom'];
     echo $custom_footer;
 }
-add_action( 'wp_footer', 'baolog_wp_footer_plus', 100 );
+
+add_action('wp_footer', 'baolog_wp_footer_plus', 100);
+
+//线报时效
+function baolog_post_deadline()
+{
+//    $get_post_meta(get_the_ID(), 'deadline', true);
+
+}
+
 ?>
 
 

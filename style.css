@@ -277,6 +277,7 @@ td {
     background-color: white;
 }
 /* callout */
+/*面板*/
 .bd-callout {
     padding: 1.25rem;
     margin-top: 1.25rem;
@@ -312,4 +313,35 @@ td {
 
 .bd-callout-danger {
     border-left-color: #d9534f
+}
+
+/*note 面板*/
+.alert {
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px
+}
+.alert-light-warning {
+    color: #030202;
+    background-color: #fbeccd;
+    border-color: #fbeccd
+}
+.mdi:before {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Font Awesome 5 Pro";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0,0);
+}
+.mdi-arrow-right:before {
+    content: "\f061";
+    padding-right: 10px;
+}
+.mdi-arrow-right:hover {
+    transition: transform .3s;
 }

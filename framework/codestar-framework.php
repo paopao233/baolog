@@ -47,7 +47,7 @@ if (class_exists('CSF')) {
             array(
                 'type' => 'notice',
                 'style' => 'success',
-                'content' => '当前主题版本为V0.2,请关注作者https://github.com/paopao233查看更新内容',
+                'content' => '当前主题版本为V0.3,请关注作者https://github.com/paopao233查看更新内容',
             ),
             array(
                 'id' => 'baolog-favicon',
@@ -97,20 +97,30 @@ if (class_exists('CSF')) {
                 'title' => '首页文章新标签打开方式',
                 'label' => '是否开启?',
                 'subtitle' => '默认是当前标签载入文章',
-                'text_on' => '开启',
-                'text_off' => '禁用',
-                'text_width' => 100
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140
+            ),
+            array(
+                'id' => 'baolog-gutenberg',
+                'type' => 'switcher',
+                'title' => '关闭古腾堡编辑器',
+                'desc' => '关闭新版的文章编辑器',
+                'subtitle' => '默认是开启古腾堡编辑器的，如果要禁用，需要自己在这里点开启此功能！',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
             ),
             array(
                 'id' => 'baolog-index-menu',
                 'type' => 'switcher',
-                'title' => '首页导航是否开启',
+                'title' => '是否关闭',
                 'desc' => '首页导航既是最新线报、24小时热门这个导航，做博客可关闭',
                 'label' => '是否开启?',
                 'subtitle' => '默认是开启',
-                'text_on' => '开启',
-                'text_off' => '禁用',
-                'text_width' => 100,
+                'text_off' => '开启此功能',
+                'text_on' => '关闭此功能',
+                'text_width' => 140,
                 'default' => 'true',
             ), array(
                 'id' => 'baolog-footer-custom',
@@ -164,10 +174,33 @@ if (class_exists('CSF')) {
                 'title' => '文章3天内未更新提示',
                 'label' => '是否开启?',
                 'subtitle' => '显示在文章页面',
-                'text_on' => '开启',
-                'text_off' => '禁用',
-                'text_width' => 100
-            )
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140
+            ), array(
+                'id' => 'baolog-posts-autosave',
+                'type' => 'switcher',
+                'title' => '禁用文章自动保存功能',
+                'desc' => '编辑文章时，会自动保存草稿，如果嫌弃这个太累赘可以禁用！',
+                'label' => '是否禁用?',
+                'subtitle' => '默认是禁用',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+
+            ),
+        array(
+                'id' => 'is_revisions_to_keep',
+                'type' => 'switcher',
+                'title' => '禁用文章保存修订版本功能',
+                'desc' => '当我们发布一个新文章时，以前的版本会保留着，如果觉得这个是累赘，可以禁用掉',
+                'label' => '是否禁用?',
+                'subtitle' => '默认是禁用',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+
+            ),
 
         )
     ));
