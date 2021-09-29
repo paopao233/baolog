@@ -345,3 +345,8 @@ td {
 .mdi-arrow-right:hover {
     transition: transform .3s;
 }
+/*短代码按钮*/
+.bt-shortcode a,bt-shortcode a:hover{
+    color: white!important;
+    text-decoration: none;
+}

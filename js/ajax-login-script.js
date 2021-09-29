@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
                         window.alert('登录成功，正在跳转中~', 30, {size: 'sm'});
                         document.location.href = data.portal;
                     }else{
-                        window.alert('登录失败，请检查您的用户名或者密码~', 30, {size: 'sm'});
+                        alert('登录失败，请检查您的用户名或者密码~', 30, {size: 'sm'});
                     }
                 },error:function (res){
                     console.log("登录失败")

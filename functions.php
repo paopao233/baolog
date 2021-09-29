@@ -37,11 +37,16 @@ if ($is_autosave == 1) {
 }
 
 //禁用WordPress修订版本
-$is_revisions_to_keep = $options['revisions_to_keep'];
-if($is_revisions_to_keep == 1){
-    add_filter( 'wp_revisions_to_keep', 'fanly_wp_revisions_to_keep', 10, 2 );
-    function fanly_wp_revisions_to_keep( $num, $post ) { return 0;}
+$is_revisions_to_keep = $options['baolog-posts-revisions-to-keep'];
+    echo $is_revisions_to_keep;
+if ($is_revisions_to_keep == 1) {
+    add_filter('wp_revisions_to_keep', 'fanly_wp_revisions_to_keep', 10, 2);
+    function fanly_wp_revisions_to_keep($num, $post)
+    {
+        return 0;
+    }
 }
+
 
 //添加菜单
 add_action('after_setup_theme', 'baolog_setup');
@@ -855,33 +860,56 @@ add_action('wp_ajax_register_user_front_end', 'register_user_front_end', 0);
 add_action('wp_ajax_nopriv_register_user_front_end', 'register_user_front_end');
 function register_user_front_end()
 {
-    $new_user_name = stripcslashes($_POST['new_user_name']);
-    $new_user_email = stripcslashes($_POST['new_user_email']);
-    $new_user_password = $_POST['new_user_password'];
-    $user_nice_name = strtolower($_POST['new_user_email']);
-    $user_data = array(
-        'user_login' => $new_user_name,
-        'user_email' => $new_user_email,
-        'user_pass' => $new_user_password,
-        'user_nicename' => $user_nice_name,
-        'display_name' => $new_user_first_name,
-        'role' => 'subscriber'
-    );
-    $user_id = wp_insert_user($user_data);
-    if (!is_wp_error($user_id)) {
-        $notice_key = 'we have Created an account for you.';
-        echo json_encode(array('status' => true, 'message' => $notice_key));
-    } else {
-        if (isset($user_id->errors['empty_user_login'])) {
-            $notice_key = 'User Name and Email are mandatory';
+    //注册环节
+    $is_allow_sign_up = get_option('users_can_register');
+    if ($is_allow_sign_up){
+        //用户提交的数据
+        $new_user_name = stripcslashes($_POST['new_user_name']);
+        $new_user_email = stripcslashes($_POST['new_user_email']);
+        $new_user_password = $_POST['new_user_password'];
+        $new_user_confirm_password = $_POST['new_user_confirm_password'];
+        $user_nice_name = strtolower($_POST['new_user_email']);
+        //判断用户密码是否两次都一样
+        if ($new_user_password !== $new_user_confirm_password){
+            $notice_key = 'The two passwords are inconsistent';
             echo json_encode(array('status' => false, 'message' => $notice_key));
-        } elseif (isset($user_id->errors['existing_user_login'])) {
-            $notice_key = 'User name already exixts.';
-            echo json_encode(array('status' => false, 'message' => $notice_key));
-        } else {
-            $notice_key = 'Error Occured please fill up the sign up form carefully.';
-            echo json_encode(array('status' => false, 'message' => $notice_key));
+            die;
         }
+        //判断用户密码强度
+        if (strlen($new_user_password) < 7){
+            $notice_key = 'The password length is less than 7 digits';
+            echo json_encode(array('status' => false, 'message' => $notice_key));
+            die;
+        }
+
+        $user_data = array(
+            'user_login' => $new_user_name,
+            'user_email' => $new_user_email,
+            'user_pass' => $new_user_password,
+            'user_nicename' => $user_nice_name,
+            'display_name' => $new_user_name,
+            //默认角色
+            'role' => get_option('default_role'),
+    );
+        $user_id = wp_insert_user($user_data);
+        if (!is_wp_error($user_id)) {
+            $notice_key = 'we have Created an account for you.';
+            echo json_encode(array('status' => true, 'message' => $notice_key));
+        } else {
+            if (isset($user_id->errors['empty_user_login'])) {
+                $notice_key = 'User Name and Email are mandatory';
+                echo json_encode(array('status' => false, 'message' => $notice_key));
+            } elseif (isset($user_id->errors['existing_user_login'])) {
+                $notice_key = 'User name already exixts.';
+                echo json_encode(array('status' => false, 'message' => $notice_key));
+            } else {
+                $notice_key = 'Error Occured please fill up the sign up form carefully.';
+                echo json_encode(array('status' => false, 'message' => $notice_key));
+            }
+        }
+    }else{
+        $notice_key = 'not allow everyone to sign up';
+        echo json_encode(array('status' => false, 'message' => $notice_key));
     }
     die;
 }
@@ -924,13 +952,47 @@ function baolog_wp_footer_plus()
 
 add_action('wp_footer', 'baolog_wp_footer_plus', 100);
 
-//线报时效
-function baolog_post_deadline()
+//文章活动时间倒计时
+function countdown($atts, $content = null)
 {
-//    $get_post_meta(get_the_ID(), 'deadline', true);
-
+    extract(shortcode_atts(array("time" => ''), $atts));
+    date_default_timezone_set('PRC');
+    $endtime = strtotime($time);
+    $nowtime = time();
+    global $endtimes;
+    $endtimes = str_replace(array("-", " ", ":"), ",", $time);
+    if ($endtime > $nowtime) {
+        return '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                    <div id="countdown" class="flex-row justify-content-center text-center">
+                    <span id="time"></span>
+                                        <strong> 
+                                        <span id="day"></span>
+                                        <span id="hour"></span>
+                                        <span id="min"></span>
+                                        <span id="sec"></span>
+                                        </strong>
+                                        </div>
+                </div>
+                ';
+    } else {
+        return '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                    <div id="countdown" class="flex-row justify-content-center text-center">
+                                        <span id="time"><strong>当前活动已经过期了哦</strong></span>
+                     </div>
+                </div>';
+    }
 }
 
+function countdown_js()
+{
+    global $endtimes;
+    echo '<script>window.setInterval(function(){ShowCountDown(' . $endtimes . ');}, interval);</script>' . "\n";
+}
+
+add_shortcode('countdown', 'countdown');
+add_action('wp_footer', 'countdown_js');
+wp_register_script('countdown_js', get_template_directory_uri() . '/js/countdownjs.js', array(), '1.0', false);
+wp_enqueue_script('countdown_js');
 ?>
 
 

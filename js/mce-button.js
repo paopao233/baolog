@@ -111,7 +111,15 @@
                         editor.insertContent('[btn-lg-secondary]在这里输入内容[/btn-lg-secondary]');
                     }
                 }, {
-                    text: '==进度条==',
+                    text: '==进度条（正在写）==',
+                },
+                {
+                    text: '==普通类==',
+                },{
+                    text: '文章过期时间',
+                    onclick: function () {
+                        editor.insertContent('[countdown time="填入时间格式要固定 比如：2021-09-20 12:22:57"]');
+                    }
                 },
 
             ]

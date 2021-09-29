@@ -112,7 +112,7 @@ function note_callout_footer_shortcode($attr, $content = '')
 add_shortcode('btn-primary', 'btn_primary_shortcode');
 function btn_primary_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-primary mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-primary mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 
@@ -120,7 +120,7 @@ function btn_primary_shortcode($attr, $content = '')
 add_shortcode('btn-secondary', 'btn_secondary_shortcode');
 function btn_secondary_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-secondary mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-secondary mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 
@@ -128,7 +128,7 @@ function btn_secondary_shortcode($attr, $content = '')
 add_shortcode('btn-success', 'btn_success_shortcode');
 function btn_success_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-success mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-success mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 
@@ -136,7 +136,7 @@ function btn_success_shortcode($attr, $content = '')
 add_shortcode('btn-danger', 'btn_danger_shortcode');
 function btn_danger_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-danger mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-danger mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 
@@ -144,7 +144,7 @@ function btn_danger_shortcode($attr, $content = '')
 add_shortcode('btn-warning', 'btn_warning_shortcode');
 function btn_warning_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-warning mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-warning mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 
@@ -152,7 +152,7 @@ function btn_warning_shortcode($attr, $content = '')
 add_shortcode('btn-info', 'btn_info_shortcode');
 function btn_info_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-info mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-info mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 
@@ -160,34 +160,34 @@ function btn_info_shortcode($attr, $content = '')
 add_shortcode('btn-light', 'btn_light_shortcode');
 function btn_light_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-light mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-light mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 //黑色按钮
 add_shortcode('btn-dark', 'btn_dark_shortcode');
 function btn_dark_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-dark mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-dark mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 //链接按钮
 add_shortcode('btn-link', 'btn_link_shortcode');
 function btn_link_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-link mr-3 mt-3">' . $content . '</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-link mr-3 mb-3">' . $content . '</button>';
     return $out;
 }
 //通栏普通按钮
 add_shortcode('btn-lg-primary', 'btn_lg_primary_shortcode');
 function btn_lg_primary_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-primary btn-lg btn-block mr-3 mt-3">'.$content.'</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-primary btn-lg btn-block mr-3  mb-3">'.$content.'</button>';
     return $out;
 }
 //通栏灰色按钮
 add_shortcode('btn-lg-secondary', 'btn_lg_secondary_shortcode');
 function btn_lg_secondary_shortcode($attr, $content = '')
 {
-    $out = '<button type="button" class="btn btn-secondary btn-lg btn-block mr-3 mt-3">'.$content.'</button>';
+    $out = '<button type="button" class="bt-shortcode btn btn-secondary btn-lg btn-block mr-3 mb-3">'.$content.'</button>';
     return $out;
 }

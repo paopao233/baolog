@@ -114,9 +114,9 @@ if (class_exists('CSF')) {
             array(
                 'id' => 'baolog-index-menu',
                 'type' => 'switcher',
-                'title' => '是否关闭',
+                'title' => '关闭首页导航',
                 'desc' => '首页导航既是最新线报、24小时热门这个导航，做博客可关闭',
-                'label' => '是否开启?',
+                'label' => '是否开启此功能?',
                 'subtitle' => '默认是开启',
                 'text_off' => '开启此功能',
                 'text_on' => '关闭此功能',
@@ -190,7 +190,7 @@ if (class_exists('CSF')) {
 
             ),
         array(
-                'id' => 'is_revisions_to_keep',
+                'id' => 'baolog-posts-revisions-to-keep',
                 'type' => 'switcher',
                 'title' => '禁用文章保存修订版本功能',
                 'desc' => '当我们发布一个新文章时，以前的版本会保留着，如果觉得这个是累赘，可以禁用掉',

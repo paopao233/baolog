@@ -31,7 +31,7 @@ if (!$user_ID) { //判断用户是否登录
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon icon-envelope icon-fw"></i></span>
                                 </div>
-                                <input type="email" class="form-control" placeholder="Email" name="email" id="email"
+                                <input type="email" class="form-control" placeholder="请输入邮箱" name="email" id="email"
                                        required="">
                             </div>
 
@@ -40,7 +40,8 @@ if (!$user_ID) { //判断用户是否登录
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="用户名" name="username" id="username">
+                                <input type="text" class="form-control" placeholder="请输入用户名" name="username"
+                                       id="username">
                             </div>
 
 
@@ -50,8 +51,21 @@ if (!$user_ID) { //判断用户是否登录
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon icon-lock icon-fw"></i></span>
                                         </div>
-                                        <input type="password" class="form-control" placeholder="密码" name="password"
+                                        <input type="password" class="form-control" placeholder="请输入密码" name="password"
                                                id="password">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="media">
+                                <div class="media-body">
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon icon-lock icon-fw"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="请再次输入密码"
+                                               name="confirmPassword"
+                                               id="confirmPassword">
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +83,6 @@ if (!$user_ID) { //判断用户是否登录
 
                                 </div>
                                 <div class="media-body text-right">
-
                                     <a href="<?php
                                     $options = get_option('baolog_framework');
                                     echo $options['baolog-page-login'];
@@ -92,13 +105,14 @@ if (!$user_ID) { //判断用户是否登录
 <?php
 get_sidebar();
 ?>
-<script src="<?php bloginfo('template_url'); ?>/js/bbs.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/lang.js"></script>
 <script type="text/javascript">
     jQuery('form#signup').on('submit', function (e) {
         e.preventDefault();
         var newUserName = jQuery('form#signup #username').val();
         var newUserEmail = jQuery('form#signup #email').val();
         var newUserPassword = jQuery('form#signup #password').val();
+        var newUserConfirmPassword = jQuery('form#signup #confirmPassword').val();
         jQuery.ajax({
             type: "POST",
             url: "<?php echo admin_url('admin-ajax.php'); ?>",
@@ -106,18 +120,25 @@ get_sidebar();
                 action: "register_user_front_end",
                 new_user_name: newUserName,
                 new_user_email: newUserEmail,
-                new_user_password: newUserPassword
+                new_user_password: newUserPassword,
+                new_user_confirm_password: newUserConfirmPassword,
             },
             success: function (data) {
                 var res = JSON.parse(data);
                 if (res.status === true) {
-                    window.alert("注册成功，请点击用户登录链接进行登录~");
-                }else if (res.message=="User Name and Email are mandatory"){
-                    alert("邮箱和用户名是必须的~");
-                }else if (res.message=="User name already exixts."){
-                    alert("该用户已经存在，请更换邮箱或者用户名~");
-                }else{
-                    alert("注册失败，出现未知的错误~")
+                    $.alert('注册成功，请点击用户登录链接进行登录~', 30, {size: 'sm'});
+                } else if (res.message == "User Name and Email are mandatory") {
+                    $.alert('邮箱和用户名是必须的~', 30, {size: 'sm'});
+                } else if (res.message == "User name already exixts.") {
+                    $.alert('该用户已经存在，请更换邮箱或者用户名~', 30, {size: 'sm'});
+                } else if (res.message == "not allow everyone to sign up") {
+                    $.alert('该站点不允许注册哦~', 30, {size: 'sm'});
+                } else if (res.message == "The two passwords are inconsistent") {
+                    $.alert('两次密码不一致，请检查后再次输入~', 30, {size: 'sm'});
+                }else if (res.message == "The password length is less than 7 digits") {
+                    $.alert('密码不能小于7位哦，请重新输入~', 30, {size: 'sm'});
+                } else {
+                    $.alert('注册失败，出现未知的错误~', 30, {size: 'sm'});
                 }
             },
             error: function (results) {

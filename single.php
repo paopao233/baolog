@@ -37,13 +37,17 @@ get_header(); ?>
             <div class="divider"></div>
             <div class="thread-content message break-all">
                 <!--内容区-->
+                <!--文章是否已经很久未更新-->
                 <?php baolog_is_overdue() ?>
+                <!--活动过期时间-->
+
+                <!--文章内容-->
                 <?php the_content(); ?>
                 <div class="thread-footer plugin d-flex justify-content-center my-4">
                     <!--点赞-->
                     <div class="haya-favoriter px-2">
 	<span class="btn-group haya-favoriter-info" role="group">
-					<button  class="btn btn-outline-secondary js-haya-favorite-tip" href="javascript:;"
+					<button class="btn btn-outline-secondary js-haya-favorite-tip" href="javascript:;"
                             data-action="ding" data-id="<?php the_ID(); ?>">
 				<i class="icon <?php if (isset($_COOKIE['specs_zan_' . $post->ID])) echo 'icon-star done'; else echo 'icon-star-o'; ?>"
                    aria-label="喜欢本帖"></i>
@@ -67,10 +71,10 @@ get_header(); ?>
                     <div class="support-author">
                         <!--要启用主题的时候就得自动建立page -->
                         <a href="<?php
-                        $options = get_option( 'baolog_framework' );
+                        $options = get_option('baolog_framework');
                         echo $options['baolog-page-support'];
                         ?>" data-modal-title="赞助我们" data-modal-size="md"
-                           class="btn btn-outline-danger support-us" >赞助网站</a>
+                           class="btn btn-outline-danger support-us">赞助网站</a>
                     </div>
                 </div>
                 <div class="haya-favoriter">
