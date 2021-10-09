@@ -38,7 +38,6 @@ if ($is_autosave == 1) {
 
 //禁用WordPress修订版本
 $is_revisions_to_keep = $options['baolog-posts-revisions-to-keep'];
-    echo $is_revisions_to_keep;
 if ($is_revisions_to_keep == 1) {
     add_filter('wp_revisions_to_keep', 'fanly_wp_revisions_to_keep', 10, 2);
     function fanly_wp_revisions_to_keep($num, $post)
@@ -942,15 +941,24 @@ function baolog_is_overdue()
 
 }
 
-//自定义底部代码 支持html
-function baolog_wp_footer_plus()
+//自定义底部代码 支持html 不支持javascript
+function baolog_wp_footer_custom()
 {
     $options = get_option('baolog_framework');
     $custom_footer = $options['baolog-footer-custom'];
     echo $custom_footer;
 }
 
-add_action('wp_footer', 'baolog_wp_footer_plus', 100);
+add_action('wp_footer', 'baolog_wp_footer_custom', 100);
+
+//自定义统计代码 支持html 不支持javascript
+function baolog_wp_footer_analysis()
+{
+    $options = get_option('baolog_framework');
+    $custom_footer = $options['baolog-footer-analysis'];
+    echo '<script>'.$custom_footer.'</script>';
+}
+add_action('wp_footer', 'baolog_wp_footer_analysis', 100);
 
 //文章活动时间倒计时
 function countdown($atts, $content = null)

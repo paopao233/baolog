@@ -44,7 +44,7 @@ get_header(); ?>
                 <!--文章内容-->
                 <?php the_content(); ?>
                 <div class="thread-footer plugin d-flex justify-content-center my-4">
-                    <!--点赞-->
+                    <!--like-->
                     <div class="haya-favoriter px-2">
 	<span class="btn-group haya-favoriter-info" role="group">
 					<button class="btn btn-outline-secondary js-haya-favorite-tip" href="javascript:;"
@@ -67,36 +67,83 @@ get_header(); ?>
 		</button>
 	</span>
                     </div>
-
-                    <div class="support-author">
+                    <!--share-->
+                    <div class="share px-2">
                         <!--要启用主题的时候就得自动建立page -->
+                        <a href="#" data-toggle="modal" data-target="#shareModal"
+                           class="btn btn-outline-info share-post">分享文章</a>
+                    </div>
+                    <!--support-->
+<!--                    <div class="support-author px-2">-->
+                        <!--要启用主题的时候就得自动建立page -->
+<!--                        <a href="--><?php
+//                        $options = get_option('baolog_framework');
+//                        echo $options['baolog-page-support'];
+//                        ?><!--" data-modal-title="赞助我们" data-modal-size="md"-->
+<!--                           class="btn btn-outline-danger support-us">赞助网站</a>-->
+<!--                    </div>-->
+                    <div class="support-author px-2">
                         <a href="<?php
                         $options = get_option('baolog_framework');
                         echo $options['baolog-page-support'];
-                        ?>" data-modal-title="赞助我们" data-modal-size="md"
-                           class="btn btn-outline-danger support-us">赞助网站</a>
+                        ?>" data-modal-title="赞助我们" data-modal-size="md" class="btn btn-outline-danger support-us">赞助网站</a>
                     </div>
                 </div>
-                <div class="haya-favoriter">
-                    <div class="text-center d-none haya-favorite-show-users">
-                        <div class="text-left m-0 p-0 col-md-6 mx-auto">
-                            <div class="modal-content">
-                                <div class="modal-header small">
-                                    <b>收藏的用户（<span class="haya-favorite-user-count">0</span>）</b>
 
-                                    <span class="close small p-3 haya-favorite-close js-haya-favorite-show-users"
-                                          data-dismiss="dodal">X</span>
+                <!-- share Modal -->
+                <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModal"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content share-modal">
+                            <div class="modal-header" style="border-bottom:none;">
+                                <h5 class="modal-title" id="shareModalLabel">选择分享的方式</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!--share style-->
+                                <div class="px-2 d-flex justify-content-around ">
+                                    <a href="#" class="share-logo icon-wx" title="分享到微信" data-toggle="modal" data-target="#wxModalCenter"></a>
+                                    <a href="http://v.t.sina.com.cn/share/share.php?url=<?php the_permalink(); ?>&title=<?php echo the_title();echo ' | ';echo bloginfo('name'); ?>&content=utf-8" rel=”nofollow” class="share-logo icon-wb" title="分享到微博" target="_blank"></a>
+                                    <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<?php the_permalink(); ?>&title=<?php echo the_title();echo ' | ';echo bloginfo('name'); ?>&content=utf-8" class="share-logo icon-qqzone" title="分享到QQ空间" target="_blank"></a>
+                                    <a href="http://connect.qq.com/widget/shareqq/index.html?url=<?php the_permalink(); ?>&title=<?php echo the_title();?>" class="share-logo icon-qq-1" title="分享到QQ" target="_blank"></a>
                                 </div>
-
-                                <div class="modal-body p-3">
-                                    <div class="text-muted haya-favorite-users small break-all">
-                                        <div class="text-muted">正在加载信息~</div>
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top:none;">
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!--wx-share-modal-->
+                <div class="modal fade" id="wxModalCenter" tabindex="-1" role="dialog" aria-labelledby="wxModalCenter" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                        <div class="modal-content share-modal">
+                            <div class="modal-header" style="border-bottom:none;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="wxModal">
+                                    <div class="d-flex flex-column">
+                                        <p class="d-flex justify-content-center mb-3 font-weight-bold">本文章的二维码</p>
+                                        <div class="d-flex justify-content-center  px-2">
+                                            <img class="w-75 h-75" src="http://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php the_permalink(); ?>" alt="<?php the_title(); ?>"/>
+                                        </div>
+                                        <p class="d-flex justify-content-center mt-3 font-weight-ligh">用手机扫码打开本页</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top:none">
+<!--                                <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!--返回首页-->
                 <div class="back_index text-center num-font mb-4">
                     <a href="<?php echo get_option('home'); ?>" class="text-small" style="color: gray;">
@@ -147,94 +194,12 @@ get_sidebar();
 <!--footer-->
 <?php get_footer(); ?>
 
-<style>
-    /*.enlargeImg_wrapper {*/
-    /*    display: none;*/
-    /*    position: fixed;*/
-    /*    z-index: 999;*/
-    /*    top: 0;*/
-    /*    right: 0;*/
-    /*    bottom: 0;*/
-    /*    left: 0;*/
-    /*    background-repeat: no-repeat;*/
-    /*    background-attachment: fixed;*/
-    /*    background-position: center;*/
-    /*    background-color: rgba(52, 52, 52, 0.8)*/
-    /*}*/
-
-    /*.message img:hover {*/
-    /*    cursor: zoom-in*/
-    /*}*/
-
-    /*.enlargeImg_wrapper:hover {*/
-    /*    cursor: zoom-out*/
-    /*}*/
-</style>
 <script>
-    var jform = $('#quick_reply_form');
-    var jsubmit = $('#submit');
-    jform.on('submit', function () {
-        jform.reset();
-        jsubmit.button('loading');
-        var postdata = jform.serialize();
-        $.xpost(jform.attr('action'), postdata, function (code, message) {
-            if (code == 0) {
-                var s = '<ul>' + message + '</ul>';
-                var jli = $(s).find('li');
-                //jli.insertBefore($('.comment-list > .post').last());
-                $('.comment-list').append(jli);
-                $('.comment-top').show();
-                jsubmit.button('reset');
-                $('#message').val('');
-
-                // 楼层 +1
-                /* 			var jfloor = $('#newfloor');
-                            jfloor.html(xn.intval(jfloor.html()) + 1); */
-
-                // 回复数 +1
-                var jposts = $('.posts');
-                jposts.html(xn.intval(jposts.html()) + 1);
-
-            } else if (code < 0) {
-                $.alert(message);
-                jsubmit.button('reset');
-            } else {
-                jform.find('[name="' + code + '"]').alert(message).focus();
-                jsubmit.button('reset');
-            }
-        });
-        return false;
-    });
-    $('.post_reply').on('click', function () {
-        var jthis = $(this);
-        var tid = jthis.data('tid');
-        var pid = jthis.data('pid');
-        var jmessage = $('#message');
-        var jli = jthis.closest('.post');
-        var jpostlist = jli.closest('.postlist');
-        var jadvanced_reply = $('#advanced_reply');
-        var jform = $('#quick_reply_form');
-        if (jli.hasClass('quote')) {
-            jli.removeClass('quote');
-            jform.find('input[name="quotepid"]').val(0);
-            jadvanced_reply.attr('href', xn.url('post-create-' + tid));
-        } else {
-            jpostlist.find('.post').removeClass('quote');
-            jli.addClass('quote');
-            var s = jmessage.val();
-            jform.find('input[name="quotepid"]').val(pid);
-            jadvanced_reply.attr('href', xn.url('post-create-' + tid + '-0-' + pid));
-        }
-        jmessage.focus();
-        return false;
-    });
-    $(".message img").on('click', function () {
-        $(this).after("<div class='enlargeImg_wrapper'></div>");
-        var imgSrc = $(this).attr('src');
-        $(".enlargeImg_wrapper").css("background-image", "url(" + imgSrc + ")");
-        $('.enlargeImg_wrapper').fadeIn(200);
+    $('.share-logo').click(function (){
+        $('#shareModal').modal('hide')
     })
-    $('.message').on('click', '.enlargeImg_wrapper', function () {
-        $('.enlargeImg_wrapper').fadeOut(200).remove();
+    $('#wxModalCenter').on('hidden.bs.modal', function (e) {
+        $('#shareModal').modal('show')
     })
 </script>
+

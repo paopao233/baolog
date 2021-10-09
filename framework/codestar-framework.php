@@ -30,6 +30,7 @@ if (class_exists('CSF')) {
 
     // Create options
     CSF::createOptions($prefix, array(
+        'ajax_save' => false,
         'menu_title' => 'baolog主题选项',
         'menu_slug' => 'baolog-framework',
     ));
@@ -47,7 +48,7 @@ if (class_exists('CSF')) {
             array(
                 'type' => 'notice',
                 'style' => 'success',
-                'content' => '当前主题版本为V0.3,请关注作者https://github.com/paopao233查看更新内容',
+                'content' => '当前主题版本为V0.3.2,请关注作者https://github.com/paopao233查看更新内容',
             ),
             array(
                 'id' => 'baolog-favicon',
@@ -127,7 +128,14 @@ if (class_exists('CSF')) {
                 'type' => 'textarea',
                 'title' => '自定义footer',
                 'desc' => '例如：<p>This is inserted at the footer</p>',
-                'subtitle' => '显示在底部的链接，支持html代码，可加入统计代码',
+                'subtitle' => '显示在底部的链接，支持html代码，不支持JavaScript',
+                'help' => '为空则不显示',
+            ), array(
+                'id' => 'baolog-footer-analysis',
+                'type' => 'textarea',
+                'title' => '统计代码',
+                'desc' => '例如：<script>我是统计代码~</script>',
+                'subtitle' => '自定义统计代码,可用百度统计,CNZZ...',
                 'help' => '为空则不显示',
             ),
 
@@ -282,7 +290,10 @@ if (class_exists('CSF')) {
         'title' => '首页设置',
         'icon' => 'fa fa-window-maximize',
         'fields' => array(// A textarea field
-
+            array(
+                'type' => 'heading',
+                'content' => '这里还没有设置内容哦,等待parklot更新~',
+            ),
         )
     ));
 

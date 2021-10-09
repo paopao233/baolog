@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-    <body mpa-version="7.16.12" mpa-extension-id="aidjohbjielfdhcaookdaolppglahebo"
+<body mpa-version="7.16.12" mpa-extension-id="aidjohbjielfdhcaookdaolppglahebo"
           data-new-gr-c-s-check-loaded="14.990.0"
           data-gr-ext-installed="">
 <!--header-->

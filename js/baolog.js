@@ -1,3 +1,5 @@
+console.log("作者:parklot https://github.com/paopao233/baolog")
+
 /*
 * xiuno.js 封装了部分 PHP 常用的函数，便于代码移植和使用。
 * 技术支持： http://bbs.xiuno.com/

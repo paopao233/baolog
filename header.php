@@ -145,7 +145,10 @@
     <div class="container">
         <div class="jumbotron bg-white mb-0 text-center hidden-sm">
             <h1><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h1>
-            <span class="text-grey"><?php bloginfo('description') ?></span>
+            <span class="text-grey"><?php
+                $options = get_option('baolog_framework');
+                echo $options['baolog-description'];
+                ?></span>
         </div>
         <div class="d-sm-none d-block text-center mt-4">
             <h2><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h2>

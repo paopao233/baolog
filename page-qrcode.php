@@ -12,10 +12,9 @@ get_header(); ?>
         <div class="divider"></div>
 
         <div class="post-body">
-            <!--首页导航 需要自己添加进去-->
 
             <!--内容-->
-            <h2>正在开发中...</h2>
+            <h2 class="d-flex justify-content-center">正在开发中...</h2>
 
         </div>
 

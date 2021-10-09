@@ -43,7 +43,7 @@ if (isset($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['S
                         'comment_notes_before' => '',
                         'comment_notes_after' => '',
                         // redefine your own textarea (the comment body)
-                        'comment_field' => '<p class="comment-form-comment"><textarea class="form-control" id="comments" style="height: 5rem;" spellcheck="false" name="comment" placeholder="快来评论一下这篇文章吧(所有评论要经过管理员审核后才可以显示哦)~" aria-required="true"></textarea></p>',
+                        'comment_field' => '<p class="comment-form-comment"><textarea class="form-control" id="comments" style="height: 5rem;box-shadow: none;" spellcheck="false" name="comment" placeholder="快来评论一下这篇文章吧(所有评论要经过管理员审核后才可以显示哦)~" aria-required="true"></textarea></p>',
                         'class_submit' => 'btn btn-sm btn-dark',
                     );
 
