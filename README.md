@@ -12,9 +12,9 @@ PHP 5.7+ 7.0+
 ### 24小时热门
 ![24小时热门](https://i.loli.net/2021/08/26/incjTJN8BL79XOF.png)
 ### 最新线报
-![最新线报](https://i.loli.net/2021/08/26/mOCsEn9ywcVjMGh.png)
+![最新线报](https://i.loli.net/2021/10/09/mhjIvcLqUYSaFpM.png)
 ### 文章页面
-![文章页面](https://i.loli.net/2021/08/26/ZkQRoN78W5pihgI.png)
+![post.png](https://i.loli.net/2021/10/09/eapTA4KZoUvIMNw.png)
 ## 安装
 请到 [发行版本](https://github.com/paopao233/baolog/releases) 中进行下载最新版本，<br>
 然后到WordPress管理后台中的「外观」-「主题」中点击「添加」，选择baolog的主题包进行上传安装并启用即可。
