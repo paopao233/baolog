@@ -1,3 +1,4 @@
+![cover.png](https://i.loli.net/2021/10/15/Ng4bm2sBETYrylL.png)
 # baolog
 wordpress线报主题，发羊毛，我就要专一~<br>
 在线预览及其配置说明：https://www.guluqiu.online/archives/125.html
