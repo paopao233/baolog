@@ -30,21 +30,65 @@
             echo " - ";
             bloginfo('name');
         } ?></title>
-    <meta name="description" content="<?php
+    <?php
+    global $set;
     $options = get_option('baolog_framework');
-    echo $options['baolog-description'];
-    ?>" />
-    <meta name="keywords" content="<?php
-    $options = get_option('baolog_framework');
-    echo $options['baolog-keywords'];
-    ?>" />
-    <meta name="renderer" content="webkit" />
+    $keywords = $options['baolog-keywords'];
+    $description = $options['baolog-description'];
+    if (is_home()) {
+        if ($description == null) {
+            $description = get_bloginfo('description');
+        }
+    } else if (is_single() || is_page()) {
+        global $post;
+        global $baolog_post_meta;
+        $baolog_post_meta = json_decode(get_post_meta($post->ID, 'baolog_post_meta', true), true);
+        if (empty($baolog_post_meta['seo']['open'])) {
+            $baolog_post_meta['seo']['open'] = 0;
+        }
+        if (empty($baolog_post_meta['closesidebar'])) {
+            $baolog_post_meta['closesidebar'] = 0;
+        }
+        if (empty($baolog_post_meta['postrighttag']['open'])) {
+            $baolog_post_meta['postrighttag']['open'] = 0;
+        }
+        if (empty($baolog_post_meta['catalog'])) {
+            $baolog_post_meta['catalog'] = 0;
+        }
+
+        if ($baolog_post_meta['seo']['open'] == 1) {
+            $description = $baolog_post_meta['seo']['description'];
+            $keywords = $baolog_post_meta['seo']['keywords'];
+        } else {
+            $description = str_replace("\n", "", mb_strimwidth(strip_tags($post->post_content), 0, 200, "…", 'utf-8'));
+            $tags = wp_get_post_tags($post->ID);
+            foreach ($tags as $tag) {
+                $keywords = $keywords . $tag->name . ", ";
+            }
+            $keywords = rtrim($keywords, ', ');
+        }
+    } elseif (is_tag()) {
+        // 标签的description可以到后台 - 文章 - 标签，修改标签的描述
+        $description = tag_description();
+        $keywords = single_tag_title('', false);
+    } elseif (is_category()) {
+        $description = category_description();
+        $keywords = single_tag_title('', false);
+    }
+    $description = trim(strip_tags($description));
+    $keywords = trim(strip_tags($keywords));
+
+    if (post_password_required() == false) {
+        ?><meta name="keywords" content="<?php echo $keywords; ?>"/>
+    <meta name="description" content="<?php echo $description; ?>"/>
+    <?php
+    }
+    ?><meta name="renderer" content="webkit"/>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
-    <link rel="shortcut icon" href="
-            <?php
+    <link rel="shortcut icon" href="<?php
     $options = get_option('baolog_framework');
     echo $options['baolog-favicon'];
     ?>">
@@ -57,7 +101,11 @@
     echo $options['baolog-favicon'];
     ?>">
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen"/>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ghboke/corepresscdn@master/static/lib/fontawesome5pro/css/all.min.css?v=5.6">
+    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/bootstrap.css">
+    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/baolog.css">
+    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/huux-notice.css" name="huux_notice">
+    <?php wp_head(); ?>
     <style>
         table.nav_tag_list {
             margin-bottom: 0.2rem;
@@ -90,10 +138,6 @@
             text-decoration: none;
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ghboke/corepresscdn@master/static/lib/fontawesome5pro/css/all.min.css?v=5.6">
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/bootstrap.css">
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/baolog.css">
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/huux-notice.css" name="huux_notice">
     <style type="text/css" data-model="huux_hlight">
         .huux_thread_hlight_style1 {
             color: #D9534D;
@@ -136,7 +180,7 @@
             width: 38px !important
         }
     </style>
-    <?php wp_head(); ?>
+
 </head>
 
 <!--刷新缓存-->

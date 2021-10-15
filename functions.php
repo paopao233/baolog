@@ -10,11 +10,13 @@
  */
 ?>
 <?php
-// Content
+// 引入 Content
 include(get_template_directory() . '/functions/shortcodes.php');
 
 //引入主题选项
 require_once dirname(__FILE__) . '/framework/codestar-framework.php';
+
+//引入自定义functions文件
 
 //获取后台主题选项参数
 $options = get_option('baolog_framework');
@@ -951,12 +953,12 @@ function baolog_wp_footer_custom()
 
 add_action('wp_footer', 'baolog_wp_footer_custom', 100);
 
-//自定义统计代码 支持html 不支持javascript
+//自定义统计代码
 function baolog_wp_footer_analysis()
 {
     $options = get_option('baolog_framework');
     $custom_footer = $options['baolog-footer-analysis'];
-    echo '<script>'.$custom_footer.'</script>';
+    echo $custom_footer;
 }
 add_action('wp_footer', 'baolog_wp_footer_analysis', 100);
 
@@ -1001,7 +1003,23 @@ add_shortcode('countdown', 'countdown');
 add_action('wp_footer', 'countdown_js');
 wp_register_script('countdown_js', get_template_directory_uri() . '/js/countdownjs.js', array(), '1.0', false);
 wp_enqueue_script('countdown_js');
+
+/**
+ *
+ * 侧栏相关配置
+ */
+//检查是否需要关闭侧栏的app悬浮
+function baolog_check_sidebar_switcher($option){
+    $options = get_option('baolog_framework');
+    $isCLose = $options[$option];
+
+    if ($isCLose != 1){
+        echo "hide ";
+    }
+    echo $isCLose;
+}
 ?>
+
 
 
 

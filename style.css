@@ -433,3 +433,7 @@ td {
     color: white !important;
     text-decoration: none;
 }
+
+.hide{
+    display: none;
+}

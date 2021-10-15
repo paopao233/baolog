@@ -1,5 +1,6 @@
-<ul class="baolog_side_nav">
-    <li>
+    <ul class="baolog_side_nav">
+
+    <li class="sidebar_app <?php baolog_check_sidebar_switcher("baolog-sidebar-app-switcher") ?>">
         <i class="baolog_sn1 icon-android"></i>
         <i class="baolog_sn_i"></i>
         <div class="baolog_sn2">
@@ -15,7 +16,7 @@
             </div>
         </div>
     </li>
-    <li>
+    <li class="sidebar_qrcode <?php baolog_check_sidebar_switcher("baolog-sidebar-qrcode-switcher") ?>">
         <i class="baolog_sn1 icon-weixin"></i>
         <i class="baolog_sn_i"></i>
         <div class="baolog_sn2">

@@ -23,7 +23,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
     public $args         = array(
 
       // framework title
-      'framework_title'         => 'baolog 线报主题 <small>当前版本为v0.3.2</small>',
+      'framework_title'         => 'baolog 线报主题 <small>当前版本为v0.3.3</small>',
       'framework_class'         => '',
 
       // menu settings

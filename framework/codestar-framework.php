@@ -48,7 +48,7 @@ if (class_exists('CSF')) {
             array(
                 'type' => 'notice',
                 'style' => 'success',
-                'content' => '当前主题版本为V0.3.2,请关注作者https://github.com/paopao233查看更新内容',
+                'content' => '当前主题版本为V0.3.3,请关注作者https://github.com/paopao233查看更新内容。加入QQ群一起探讨：781506134',
             ),
             array(
                 'id' => 'baolog-favicon',
@@ -96,7 +96,6 @@ if (class_exists('CSF')) {
                 'id' => 'baolog-posts-blank',
                 'type' => 'switcher',
                 'title' => '首页文章新标签打开方式',
-                'label' => '是否开启?',
                 'subtitle' => '默认是当前标签载入文章',
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
@@ -117,24 +116,31 @@ if (class_exists('CSF')) {
                 'type' => 'switcher',
                 'title' => '关闭首页导航',
                 'desc' => '首页导航既是最新线报、24小时热门这个导航，做博客可关闭',
-                'label' => '是否开启此功能?',
                 'subtitle' => '默认是开启',
-                'text_off' => '开启此功能',
-                'text_on' => '关闭此功能',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
                 'text_width' => 140,
-                'default' => 'true',
+
             ), array(
                 'id' => 'baolog-footer-custom',
-                'type' => 'textarea',
+                'type' => 'code_editor',
+                'sanitize' => false,
                 'title' => '自定义footer',
-                'desc' => '例如：<p>This is inserted at the footer</p>',
-                'subtitle' => '显示在底部的链接，支持html代码，不支持JavaScript',
+                'desc' => '例如：&lt;p type="text/javascript"&gt;This is inserted at the footer&lt;/p&gt;',
+                'subtitle' => '显示在底部的链接，支持html代码，同样支持javascript',
                 'help' => '为空则不显示',
+
+
             ), array(
                 'id' => 'baolog-footer-analysis',
-                'type' => 'textarea',
+                'type' => 'code_editor',
+                'sanitize' => false,
+                'settings' => array(
+                    'theme'  => 'mbo',
+                    'mode'   => 'javascript',
+                ),
                 'title' => '统计代码',
-                'desc' => '例如：<script>我是统计代码~</script>',
+                'desc' => '例如：&lt;script&gt;我是统计代码~&lt;/script&gt;',
                 'subtitle' => '自定义统计代码,可用百度统计,CNZZ...',
                 'help' => '为空则不显示',
             ),
@@ -147,13 +153,13 @@ if (class_exists('CSF')) {
         'title' => '页面设置',
         'icon' => 'fa fa-navicon',
         'fields' => array(
-            // A textarea field
             array(
-                'id' => 'baolog-page-support',
-                'type' => 'text',
-                'title' => '赞助网站页面地址',
-                'desc' => '评论里面显示。默认是：' . get_option('home') . '/mod-support.html',
-                'default' => get_option('home') . '/mod-support.html',
+                'type' => 'heading',
+                'content' => '有关页面的设置',
+            ),
+            array(
+                'type' => 'subheading',
+                'content' => '页面配置，不是文章页面，单纯的页面的相关配置',
             ),
             array(
                 'id' => 'baolog-page-login',
@@ -177,10 +183,17 @@ if (class_exists('CSF')) {
         'icon' => 'fa fa-clipboard',
         'fields' => array(
             array(
+                'type' => 'heading',
+                'content' => '有关文章页面的设置',
+            ),
+            array(
+                'type' => 'subheading',
+                'content' => '文章页面配置',
+            ),
+            array(
                 'id' => 'baolog-posts-update',
                 'type' => 'switcher',
                 'title' => '文章3天内未更新提示',
-                'label' => '是否开启?',
                 'subtitle' => '显示在文章页面',
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
@@ -190,7 +203,6 @@ if (class_exists('CSF')) {
                 'type' => 'switcher',
                 'title' => '禁用文章自动保存功能',
                 'desc' => '编辑文章时，会自动保存草稿，如果嫌弃这个太累赘可以禁用！',
-                'label' => '是否禁用?',
                 'subtitle' => '默认是禁用',
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
@@ -202,7 +214,6 @@ if (class_exists('CSF')) {
                 'type' => 'switcher',
                 'title' => '禁用文章保存修订版本功能',
                 'desc' => '当我们发布一个新文章时，以前的版本会保留着，如果觉得这个是累赘，可以禁用掉',
-                'label' => '是否禁用?',
                 'subtitle' => '默认是禁用',
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
@@ -248,6 +259,16 @@ if (class_exists('CSF')) {
                 'content' => '侧栏相关图片配置',
             ),
             array(
+                'id' => 'baolog-sidebar-app-switcher',
+                'type' => 'switcher',
+                'title' => '侧栏的app悬浮',
+                'desc' => '关闭侧栏app悬浮以后，下面安卓app无论有没有图片都是不会显示的。',
+                'subtitle' => '默认是开启',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+            ),
+            array(
                 'id' => 'baolog-sidebar-app',
                 'type' => 'upload',
                 'title' => '安卓app',
@@ -255,6 +276,16 @@ if (class_exists('CSF')) {
                 'desc' => '默认是作者的，需要自己更换',
                 'help' => '显示在侧栏的安卓app二维码',
                 'subtitle' => '显示在侧栏的安卓app二维码',
+            ),
+            array(
+                'id' => 'baolog-sidebar-qrcode-switcher',
+                'type' => 'switcher',
+                'title' => '侧栏的二维码悬浮',
+                'desc' => '关闭侧栏的二维码悬浮以后，下面二维码图片无论有没有图片都是不会显示的。',
+                'subtitle' => '默认是开启',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
             ),
             array(
                 'id' => 'baolog-sidebar-wx',
@@ -299,8 +330,8 @@ if (class_exists('CSF')) {
 
     //备份
     CSF::createSection($prefix, array(
-        'title' => '备份',
-        'desc' => '这里是备份',
+        'title' => '备份配置',
+        'desc' => '这里是对主题配置的一个备份',
         'icon' => 'fa fa-credit-card',
         'fields' => array(
             array(

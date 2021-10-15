@@ -40,6 +40,7 @@
 <script src="<?php bloginfo('template_url'); ?>/js/post-content.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog-like.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog-top.js"></script>
+
 <script>
     jsearch_form = $('#search_form');
     jsearch_form.on('submit', function () {
