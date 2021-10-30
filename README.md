@@ -2,6 +2,7 @@
 # baolog
 wordpress线报主题，发羊毛，我就要专一~<br>
 在线预览及其配置说明：https://www.guluqiu.online/archives/125.html
+最后请求不要去除作者的链接，感谢！
 ## 环境要求
 WordPress 4.4+
 WordPress 伪静态
