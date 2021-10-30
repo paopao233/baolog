@@ -3,7 +3,10 @@
 * @author parklot
 * @link https://github.com/paopao233
  */
-get_header(); ?>
+get_header();
+$the_post_category_name = get_the_category(get_the_ID())[0]->cat_name;
+$the_post_category_link = get_category_link(get_the_category(get_the_ID())[0]->term_id);
+?>
 <body>
 <main id="body">
     <div class="container">
@@ -21,17 +24,15 @@ get_header(); ?>
                 </h1>
                 <div class="text-muted text-small">
                     <span class="mr-2">
-                        <!--获取头像-->
-                    <?php
-                    the_post();
+                    <?php the_post();
                     echo get_avatar(get_the_author_meta('ID'), $args['96'], '', 'avatar', array('class' => 'avatar-1 mr-1'));
                     rewind_posts();
                     ?>
-                        <!--获取作者名-->
                     <?php echo get_the_author_meta('display_name', $post->post_author) ?></span>
                     <span class="mr-2"><i class="icon-clock-o"></i> <?php the_time('Y-m-d H:i') ?></span>
                     <span class="mr-2"><i class="icon-eye"></i> <?php echo bzg_post_views(); ?>次浏览</span>
-                    <span><i class="icon-edit"></i> <?php comments_popup_link('0 条评论', '1 条评论', '% 条评论', 'comment_a', '评论已关闭'); ?></span>
+                    <span class="mr-2"><i class="icon-edit"></i> <?php comments_popup_link('0 条评论', '1 条评论', '% 条评论', 'comment_a', '评论已关闭'); ?></span>
+                    <span><i class="icon-book"></i><a class="comment_a" href="<?php echo $the_post_category_link;?>" title="所属分类：<?php  echo $the_post_category_name; ?>"><?php  echo $the_post_category_name; ?></a> </span>
                 </div>
             </div>
             <div class="divider"></div>
@@ -43,6 +44,9 @@ get_header(); ?>
 
                 <!--文章内容-->
                 <?php the_content(); ?>
+                <div class="mt-3 mb-3" style="max-width: 770px;height: auto;">
+                    <?php baolog_advertisement("single-content-bottom"); ?>
+                </div>
                 <div class="thread-footer plugin d-flex justify-content-center my-4">
                     <!--like-->
                     <div class="haya-favoriter px-2">
@@ -101,8 +105,8 @@ get_header(); ?>
                                 <div class="px-2 d-flex justify-content-around ">
                                     <a href="#" class="share-logo icon-wx" title="分享到微信" data-toggle="modal" data-target="#wxModalCenter"></a>
                                     <a href="http://v.t.sina.com.cn/share/share.php?url=<?php the_permalink(); ?>&title=<?php echo the_title();echo ' | ';echo bloginfo('name'); ?>&content=utf-8" rel=”nofollow” class="share-logo icon-wb" title="分享到微博" target="_blank"></a>
-                                    <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<?php the_permalink(); ?>&title=<?php echo the_title();echo ' | ';echo bloginfo('name'); ?>&content=utf-8" class="share-logo icon-qqzone" title="分享到QQ空间" target="_blank"></a>
-                                    <a href="http://connect.qq.com/widget/shareqq/index.html?url=<?php the_permalink(); ?>&title=<?php echo the_title();?>" class="share-logo icon-qq-1" title="分享到QQ" target="_blank"></a>
+                                    <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<?php the_permalink(); ?>&title=<?php echo the_title();echo ' | ';echo bloginfo('name'); ?>&content=utf-8" class="share-logo icon-qqzone" title="分享到QQ空间" target="_blank"></a>
+                                    <a href="https://connect.qq.com/widget/shareqq/index.html?url=<?php the_permalink(); ?>&title=<?php echo the_title();?>" class="share-logo icon-qq-1" title="分享到QQ" target="_blank"></a>
                                 </div>
                             </div>
                             <div class="modal-footer" style="border-top:none;">
@@ -158,8 +162,6 @@ get_header(); ?>
                                     </div>
                                     <div class="col-7">
                                         <div class="tab-content" id="v-pills-tabContent">
-                                            <div></div>
-                                            <div></div>
                                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><img src="<?php
                                                 $options = get_option( 'baolog_framework' );
                                                 echo $options['baolog-support-alipay'];
@@ -236,14 +238,9 @@ get_sidebar();
     $('#wxModalCenter').on('hidden.bs.modal', function (e) {
         $('#shareModal').modal('show')
     })
-    // $('#supportModalCenter .modal-content').empty();
-    // $('#supportModalCenter').removeData('bs.modal').modal({
-    //     remote: $('.support-us').attr('website')
-    // });
     $(".support-author").click(function(){
         $("#supportModalCenter").modal({
 
         });
     });
 </script>
-

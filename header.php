@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="zh-CN">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
     <title><?php if (is_home()) {
             bloginfo('name');
             echo " - ";
@@ -83,11 +88,7 @@
     <meta name="description" content="<?php echo $description; ?>"/>
     <?php
     }
-    ?><meta name="renderer" content="webkit"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta http-equiv="Cache-Control" content="no-transform">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
+    ?><link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
     <link rel="shortcut icon" href="<?php
     $options = get_option('baolog_framework');
     echo $options['baolog-favicon'];
@@ -191,7 +192,7 @@
             <h1><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h1>
             <span class="text-grey"><?php
                 $options = get_option('baolog_framework');
-                echo $options['baolog-description'];
+                echo $options['baolog-subtitle'];
                 ?></span>
         </div>
         <div class="d-sm-none d-block text-center mt-4">

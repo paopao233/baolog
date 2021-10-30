@@ -3,7 +3,7 @@
 Theme Name: BaoLog
 Theme URI: https://www.guluqiu.online
 Description: 一个简洁的线报主题，自带有在线小工具。从现在起，我只想做一个快乐的affman。
-Version: 0.3.2
+Version: 0.3.4
 Author: parklot
 Author URI: https://github.com/paopao233
 Requires at least: 4.9.6
@@ -250,7 +250,7 @@ html {
     border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
 }
 
-.thread-contentli {
+.thread-content li {
     list-style-position: inside
 }
 
@@ -436,4 +436,9 @@ td {
 
 .hide{
     display: none;
+}
+/*nav*/
+.nav_active{
+border-bottom: 1px solid #000;
+    
 }

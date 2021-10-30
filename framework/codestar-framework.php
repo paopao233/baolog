@@ -48,7 +48,7 @@ if (class_exists('CSF')) {
             array(
                 'type' => 'notice',
                 'style' => 'success',
-                'content' => '当前主题版本为V0.3.3,请关注作者https://github.com/paopao233查看更新内容。加入QQ群一起探讨：781506134',
+                'content' => '当前主题版本为V0.3.4,请关注作者https://github.com/paopao233查看更新内容。加入QQ群一起探讨：781506134',
             ),
             array(
                 'id' => 'baolog-favicon',
@@ -148,6 +148,34 @@ if (class_exists('CSF')) {
         )
     ));
 
+    // 首页设置
+    CSF::createSection($prefix, array(
+        'title' => '首页设置',
+        'icon' => 'fa fa-window-maximize',
+        'fields' => array(// A textarea field
+            array(
+                'type' => 'heading',
+                'content' => '这里是有关首页的设置',
+            ),array(
+                'id' => 'baolog-subtitle',
+                'type' => 'text',
+                'title' => '网站描述',
+                'subtitle' => '只显示在首页的副标题 例如：baolog主题真的是太好用啦！',
+                'default' => '又一个Wordpress网站',
+                'help' => '可为空',
+            ),array(
+                'id' => 'baolog-home-todayUpdate',
+                'type' => 'switcher',
+                'title' => '关闭文章&nbsp[今日更新]&nbsp提示',
+                'desc' => '这个功能是在首页的文章那里，如果你的文章是今日更新的，那么就会显示一个[今日更新]文字。注意：如果服务器时间与北京时间不对，该功能将会失效。',
+                'subtitle' => '主题默认是显示[今日更新]的提示的',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+            ),
+        )
+    ));
+
     // 页面设置
     CSF::createSection($prefix, array(
         'title' => '页面设置',
@@ -209,7 +237,7 @@ if (class_exists('CSF')) {
                 'text_width' => 140,
 
             ),
-        array(
+            array(
                 'id' => 'baolog-posts-revisions-to-keep',
                 'type' => 'switcher',
                 'title' => '禁用文章保存修订版本功能',
@@ -223,6 +251,7 @@ if (class_exists('CSF')) {
 
         )
     ));
+
     // 图片设置
     CSF::createSection($prefix, array(
         'title' => '图片设置',
@@ -316,27 +345,67 @@ if (class_exists('CSF')) {
             ),
         )
     ));
-    // 首页设置
-    CSF::createSection($prefix, array(
-        'title' => '首页设置',
-        'icon' => 'fa fa-window-maximize',
-        'fields' => array(// A textarea field
+
+    //广告设置
+    CSF::createSection($prefix,array(
+        'title' => '广告设置',
+        'icon' => 'fa fa-bandcamp',
+        'fields' => array(
             array(
                 'type' => 'heading',
-                'content' => '这里还没有设置内容哦,等待parklot更新~',
+                'content' => '这里是有关全站广告位的设置，需要自己写好html和css样式，否侧会错位。',
             ),
+            array(
+                'type' => 'subheading',
+                'content' => '全局广告',
+            ),
+            array(
+                'id' => 'baolog-ad-global-right',
+                'type' => 'code_editor',
+                'sanitize' => false,
+                'title' => '右下角固定广告',
+                'desc' => '例如： &lt;a href="#" target="_blank"&gt;&lt;img style="width: 100%;" src="#"&gt;&lt;/a&gt;',
+                'subtitle' => '自定义广告代码，可以放html代码，可放联盟广告',
+                'help' => '为空则不显示',
+            ),
+            array(
+                'type' => 'subheading',
+                'content' => '文章广告',
+            ),
+            array(
+                'id' => 'baolog-ad-single-content-bottom',
+                'type' => 'code_editor',
+                'sanitize' => false,
+                'title' => '文章内容底部固定广告',
+                'desc' => '例如： &lt;a href="#" target="_blank"&gt;&lt;img style="width: 100%;" src="#"&gt;&lt;/a&gt;',
+                'subtitle' => '自定义广告代码，可以放html代码，可放联盟广告',
+                'help' => '为空则不显示',
+            ),
+            array(
+                'type' => 'subheading',
+                'content' => '搜索页面广告',
+            ),
+            array(
+                'id' => 'baolog-ad-search-bottom',
+                'type' => 'code_editor',
+                'sanitize' => false,
+                'title' => '搜索页面内容底部广告',
+                'desc' => '例如： &lt;a href="#" target="_blank"&gt;&lt;img style="width: 100%;" src="#"&gt;&lt;/a&gt;',
+                'subtitle' => '自定义广告代码，可以放html代码，可放联盟广告',
+                'help' => '为空则不显示',
+        ),
         )
     ));
 
     //备份
     CSF::createSection($prefix, array(
-        'title' => '备份配置',
+        'title' => '主题配置备份',
         'desc' => '这里是对主题配置的一个备份',
         'icon' => 'fa fa-credit-card',
         'fields' => array(
             array(
                 'type' => 'heading',
-                'content' => '每次更新主题的时候，记得把相关配置导出备份哦~',
+                'content' => '每次更新主题的时候，记得把相关配置导出备份哦~或者直接复制下面的代码，更新完以后再import就好了。',
             ),
             array(
                 'type' => 'backup',

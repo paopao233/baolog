@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2021, https://github.com/paopao233
  * All right reserved.
@@ -10,13 +9,15 @@
  */
 ?>
 <?php
-// 引入 Content
-include(get_template_directory() . '/functions/shortcodes.php');
-
+/**
+ * 自定义引入
+ */
+include(get_template_directory() . '/inc/functions.php');
 //引入主题选项
 require_once dirname(__FILE__) . '/framework/codestar-framework.php';
-
-//引入自定义functions文件
+/**
+ * functions
+ */
 
 //获取后台主题选项参数
 $options = get_option('baolog_framework');
@@ -107,15 +108,15 @@ function baolog_menu_link_class($atts, $item, $args)
                 //is_page('页面名')
                 if (is_page('24小时热门')) {
                     if ($item_name == "24小时热门") {
-                        $class .= ' active';
+                        $class .= ' active ';
                     }
                 } else if (is_home()) {
                     if ($item_name == "最新线报") {
-                        $class .= ' active';
+                        $class .= ' active ';
                     }
                 } else if (is_page('一周热门')) {
                     if ($item_name == "一周热门") {
-                        $class .= ' active';
+                        $class .= ' active ';
                     }
                 }
             }
@@ -157,7 +158,7 @@ class baolog_Walker_Nav_Menu extends Walker_Nav_Menu
     function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output)
     {
         if ($element->current)
-            $element->classes[] = 'active';
+            $element->classes[] = 'active nav_active';
 
         $element->is_dropdown = !empty($children_elements[$element->ID]);
 
@@ -290,38 +291,7 @@ function wp_description()
     return $description = mb_substr($description, 0, 220, 'utf-8') . '..';
 }
 
-// 文章关键词seo keywords优化
-function wp_keywords()
-{
-    global $s, $post;
-    $keywords = '';
-    if (is_single()) {  //如果是文章页，关键词则是：标签+分类ID
-        if (get_the_tags($post->ID)) {
-            foreach (get_the_tags($post->ID) as $tag) {
-                $keywords .= $tag->name . ', ';
-            }
-        }
-        foreach (get_the_category($post->ID) as $category) {
-            $keywords .= $category->cat_name . ', ';
-        }
-        $keywords = substr_replace($keywords, '', -2);
-    } elseif (is_home()) {
-        $keywords = rebirth_option('site_meta_keywords');  //主页关键词设置
-    } elseif (is_tag()) {  //标签页关键词设置
-        $keywords = single_tag_title('', false);
-    } elseif (is_category()) {//分类页关键词设置
-        $keywords = single_cat_title('', false);
-    } elseif (is_search()) {//搜索页关键词设置
-        $keywords = esc_html($s, 1);
-    } else {//默认页关键词设置
-        $keywords = trim(wp_title('', false));
-    }
-    if ($keywords) {  //输出关键词
-        return $keywords;
-    }
 
-    return "";
-}
 
 //the_tags过滤器
 // add custom class to tag blog.guluqiu.cc 标签自定义类名
@@ -512,6 +482,9 @@ function posts_link_attributes()
     return 'class="page-link"';
 }
 
+/**
+ * 文章相关
+ */
 /* 访问计数 */
 //https://www.beizigen.com/1615.html
 function bzg_set_post_views()
@@ -543,18 +516,80 @@ function bzg_post_views($post_ID = '')
     return $post_views;
 }
 
-//Gravatar缓存头像
-//[推荐]七牛镜像源 https://dn-qiniu-avatar.qbox.me/avatar/
-//[推荐]WP-China-Yes 镜像源 https://gravatar.wp-china-yes.net/avatar/
-//[推荐]极客族 https://sdn.geekzu.org/avatar/
-function baolog_get_avatar($avatar)
+//文章活动时间倒计时
+function countdown($atts, $content = null)
 {
-    $avatar = str_replace(array("www.gravatar.com", "0.gravatar.com", "1.gravatar.com", "2.gravatar.com", "secure.gravatar.com"),
-        "dn-qiniu-avatar.qbox.me", $avatar);
-    return $avatar;
+    extract(shortcode_atts(array("time" => ''), $atts));
+    date_default_timezone_set('PRC');
+    $endtime = strtotime($time);
+    $nowtime = time();
+    global $endtimes;
+    $endtimes = str_replace(array("-", " ", ":"), ",", $time);
+    if ($endtime > $nowtime) {
+        return '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                    <div id="countdown" class="flex-row justify-content-center text-center">
+                    <span id="time"></span>
+                                        <strong> 
+                                        <span id="day"></span>
+                                        <span id="hour"></span>
+                                        <span id="min"></span>
+                                        <span id="sec"></span>
+                                        </strong>
+                                        </div>
+                </div>
+                ';
+    } else {
+        return '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                    <div id="countdown" class="flex-row justify-content-center text-center">
+                                        <span id="time"><strong>当前活动已经过期了哦</strong></span>
+                     </div>
+                </div>';
+    }
 }
 
-add_filter('get_avatar', 'baolog_get_avatar', 10, 3);
+function countdown_js()
+{
+    global $endtimes;
+    echo '<script>window.setInterval(function(){ShowCountDown(' . $endtimes . ');}, interval);</script>' . "\n";
+}
+
+add_shortcode('countdown', 'countdown');
+add_action('wp_footer', 'countdown_js');
+wp_register_script('countdown_js', get_template_directory_uri() . '/js/countdownjs.js', array(), '1.0', false);
+wp_enqueue_script('countdown_js');
+
+// 文章关键词seo keywords优化
+function wp_keywords()
+{
+    global $s, $post;
+    $keywords = '';
+    if (is_single()) {  //如果是文章页，关键词则是：标签+分类ID
+        if (get_the_tags($post->ID)) {
+            foreach (get_the_tags($post->ID) as $tag) {
+                $keywords .= $tag->name . ', ';
+            }
+        }
+        foreach (get_the_category($post->ID) as $category) {
+            $keywords .= $category->cat_name . ', ';
+        }
+        $keywords = substr_replace($keywords, '', -2);
+    } elseif (is_home()) {
+        $keywords = rebirth_option('site_meta_keywords');  //主页关键词设置
+    } elseif (is_tag()) {  //标签页关键词设置
+        $keywords = single_tag_title('', false);
+    } elseif (is_category()) {//分类页关键词设置
+        $keywords = single_cat_title('', false);
+    } elseif (is_search()) {//搜索页关键词设置
+        $keywords = esc_html($s, 1);
+    } else {//默认页关键词设置
+        $keywords = trim(wp_title('', false));
+    }
+    if ($keywords) {  //输出关键词
+        return $keywords;
+    }
+
+    return "";
+}
 
 //like
 add_action('wp_ajax_nopriv_specs_zan', 'specs_zan');
@@ -578,6 +613,39 @@ function specs_zan()
     }
     die;
 }
+
+//add a class name to the post img
+function add_responsive_class($content){
+
+    $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+    $document = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $document->loadHTML(utf8_decode($content));
+
+    $imgs = $document->getElementsByTagName('img');
+    foreach ($imgs as $img) {
+        $img->setAttribute('class','thread-content-img');
+    }
+
+    $html = $document->saveHTML();
+    return $html;
+}
+add_filter('the_content', 'add_responsive_class');
+
+
+//Gravatar缓存头像
+//[推荐]七牛镜像源 https://dn-qiniu-avatar.qbox.me/avatar/
+//[推荐]WP-China-Yes 镜像源 https://gravatar.wp-china-yes.net/avatar/
+//[推荐]极客族 https://sdn.geekzu.org/avatar/
+function baolog_get_avatar($avatar)
+{
+    $avatar = str_replace(array("www.gravatar.com", "0.gravatar.com", "1.gravatar.com", "2.gravatar.com", "secure.gravatar.com"),
+        "dn-qiniu-avatar.qbox.me", $avatar);
+    return $avatar;
+}
+
+add_filter('get_avatar', 'baolog_get_avatar', 10, 3);
+
 
 /**
  * 获取阅读数最多的文章： $day代表几天前的文章 比如-1day是一天内
@@ -671,8 +739,10 @@ function IncludeAll($dir)
 //https://wordpress.stackexchange.com/questions/104127/display-all-sticky-post-before-regular-post/104136
 function balolog_get_the_posts()
 {
+    $today = date('Y-m-d');
     $options = get_option('baolog_framework');
     $is_blank = $options['baolog-posts-blank'];
+    $is_open_posts_today = $options['baolog-home-todayUpdate'];
     $target = '_self';
     if ($is_blank == 1) {
         $target = '_blank';
@@ -690,68 +760,61 @@ function balolog_get_the_posts()
         // The Query
         $the_query = new WP_Query($args);
 
-        // The Loop //we are only getting a list of the title as a li see the loop docs for details on the loop or copy this from index.php (or posts.php)
-        while ($the_query->have_posts()) {
-            $the_query->the_post();
-            echo '<li class="list-group-item px-0">
+        if (is_paged()){
+            // The Loop //we are only getting a list of the title as a li see the loop docs for details on the loop or copy this from index.php (or posts.php)
+            while ($the_query->have_posts()) {
+                $the_query->the_post();
+                echo '<li class="list-group-item px-0">
                         <div class="subject break-all">
 
                             <span class="font-weight-bold">[ 置顶 ]</span>
                             <h2>
                                 <a class="mr-1" href="';
-            the_permalink();
-            echo '" title="';
-            the_title();
-            echo '" target="' . $target . '" rel="bookmark">
+                the_permalink();
+                echo '" title="';
+                the_title();
+                echo '" target="' . $target . '" rel="bookmark">
                                     <span class="huux_thread_hlight_style1">';
-            the_title();
-            echo '</span>
+                the_title();
+                echo '</span>
                                 </a>
                             </h2>
                         </div>
                         <span class="num-font text-muted" style="flex-shrink: 0;">
 							';
 
-            the_time('Y-m-d H:i');
-            echo '</span>
+                the_time('Y-m-d H:i');
+                echo '</span>
                     </li>';
+            }
+            wp_reset_query(); //reset the original WP_Query
         }
-        wp_reset_query(); //reset the original WP_Query
     }
-
-//now get the not sticky post
-    $args2 = array(
-        'posts_per_page' => 5,
-        'post__not_in' => $sticky, //are they NOT sticky post
-    );
-// The Query
-    $the_query2 = new WP_Query($args2);
 
 // The Loop....
-    //没有加query的话 置顶文章也会显示出来 意思就是回显示两次置顶 不知道怎么解决 加上query 分页就不生效- -
+    //加入了一个判断 解决了显示两次置顶文章的问题
     while (have_posts()) {
         the_post();
-
         echo '<li class="list-group-item px-0">
                             <div class="subject break-all">
-                                <h2><a class="mr-1" href="';
+                                <h2>';
+        if (($today == get_the_time('Y-m-d')) && !$is_open_posts_today) echo '<span class="font-weight-bold" style="color: red;">[&nbsp;今日更新&nbsp;]&nbsp;</span>';
+        if (is_sticky()) echo '<span class="font-weight-bold">[&nbsp;置顶&nbsp;]&nbsp;</span>';
+        echo '<a class="mr-1" href="';
         the_permalink();
-        echo '"
-                                    title="';
+        echo '"title="';
         the_title();
-        echo '" target="' . $target . '"
-                                    rel="bookmark">';
+        echo '" target="' . $target . '"rel="bookmark">';
+        if (is_sticky()) echo '<span class="huux_thread_hlight_style1">';
         the_title();
-        echo '</a>
-                                </h2>';
+        echo '</a></h2>';
         the_tags('', '', '');
-        echo '</div>
-                            <span class="num-font text-muted" style="flex-shrink: 0;">';
+        echo '</div><span class="num-font text-muted" style="flex-shrink: 0;';
+        if (($today == get_the_time('Y-m-d')) && !$is_open_posts_today) echo 'color:red !important;';
+        echo '">';
         the_time('Y-m-d H:i');
-        echo '</span>
-                        </li>';
+        echo '</span></li>';
     }
-
 }
 
 //自定义评论内容的样式
@@ -863,7 +926,7 @@ function register_user_front_end()
 {
     //注册环节
     $is_allow_sign_up = get_option('users_can_register');
-    if ($is_allow_sign_up){
+    if ($is_allow_sign_up) {
         //用户提交的数据
         $new_user_name = stripcslashes($_POST['new_user_name']);
         $new_user_email = stripcslashes($_POST['new_user_email']);
@@ -871,13 +934,13 @@ function register_user_front_end()
         $new_user_confirm_password = $_POST['new_user_confirm_password'];
         $user_nice_name = strtolower($_POST['new_user_email']);
         //判断用户密码是否两次都一样
-        if ($new_user_password !== $new_user_confirm_password){
+        if ($new_user_password !== $new_user_confirm_password) {
             $notice_key = 'The two passwords are inconsistent';
             echo json_encode(array('status' => false, 'message' => $notice_key));
             die;
         }
         //判断用户密码强度
-        if (strlen($new_user_password) < 7){
+        if (strlen($new_user_password) < 7) {
             $notice_key = 'The password length is less than 7 digits';
             echo json_encode(array('status' => false, 'message' => $notice_key));
             die;
@@ -891,7 +954,7 @@ function register_user_front_end()
             'display_name' => $new_user_name,
             //默认角色
             'role' => get_option('default_role'),
-    );
+        );
         $user_id = wp_insert_user($user_data);
         if (!is_wp_error($user_id)) {
             $notice_key = 'we have Created an account for you.';
@@ -908,7 +971,7 @@ function register_user_front_end()
                 echo json_encode(array('status' => false, 'message' => $notice_key));
             }
         }
-    }else{
+    } else {
         $notice_key = 'not allow everyone to sign up';
         echo json_encode(array('status' => false, 'message' => $notice_key));
     }
@@ -943,6 +1006,7 @@ function baolog_is_overdue()
 
 }
 
+
 //自定义底部代码 支持html 不支持javascript
 function baolog_wp_footer_custom()
 {
@@ -962,58 +1026,20 @@ function baolog_wp_footer_analysis()
 }
 add_action('wp_footer', 'baolog_wp_footer_analysis', 100);
 
-//文章活动时间倒计时
-function countdown($atts, $content = null)
-{
-    extract(shortcode_atts(array("time" => ''), $atts));
-    date_default_timezone_set('PRC');
-    $endtime = strtotime($time);
-    $nowtime = time();
-    global $endtimes;
-    $endtimes = str_replace(array("-", " ", ":"), ",", $time);
-    if ($endtime > $nowtime) {
-        return '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                    <div id="countdown" class="flex-row justify-content-center text-center">
-                    <span id="time"></span>
-                                        <strong> 
-                                        <span id="day"></span>
-                                        <span id="hour"></span>
-                                        <span id="min"></span>
-                                        <span id="sec"></span>
-                                        </strong>
-                                        </div>
-                </div>
-                ';
-    } else {
-        return '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                    <div id="countdown" class="flex-row justify-content-center text-center">
-                                        <span id="time"><strong>当前活动已经过期了哦</strong></span>
-                     </div>
-                </div>';
-    }
-}
 
-function countdown_js()
-{
-    global $endtimes;
-    echo '<script>window.setInterval(function(){ShowCountDown(' . $endtimes . ');}, interval);</script>' . "\n";
-}
 
-add_shortcode('countdown', 'countdown');
-add_action('wp_footer', 'countdown_js');
-wp_register_script('countdown_js', get_template_directory_uri() . '/js/countdownjs.js', array(), '1.0', false);
-wp_enqueue_script('countdown_js');
 
 /**
  *
  * 侧栏相关配置
  */
 //检查是否需要关闭侧栏的app悬浮
-function baolog_check_sidebar_switcher($option){
+function baolog_check_sidebar_switcher($option)
+{
     $options = get_option('baolog_framework');
     $isCLose = $options[$option];
 
-    if ($isCLose != 1){
+    if ($isCLose != 1) {
         echo "hide ";
     }
     echo $isCLose;

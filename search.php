@@ -54,8 +54,8 @@
                 </div>
             <?php endif; ?>
         </div>
-        <div class="col-lg-3 hidden-sm hidden-md">
-
+        <div class="mt-3 mb-3" style="max-width: 770px;height: auto;">
+            <?php baolog_advertisement("search-bottom"); ?>
         </div>
 
 

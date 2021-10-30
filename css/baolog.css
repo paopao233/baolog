@@ -5,7 +5,7 @@
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-/****************************************   bbs 业务部分  ****************************************/
+/**/
 html, table {
     font-size: 14px;
 }
@@ -54,13 +54,13 @@ a:hover {
         max-width: 100%;
     }
 
-    .iehou_side_nav {
+    .baolog_side_nav {
         display: none;
     }
 }
 
 @media (max-width: 950px) {
-    .iehou_side_nav {
+    .baolog_side_nav {
         left: unset !important;
         right: 20px;
         margin: 0;
@@ -78,7 +78,7 @@ a:hover {
         margin-top: 1em;
     }
 
-    .thread-content img {
+    .thread-content>img {
         max-width: 90% !important;
         height: 90% !important;
     }
@@ -129,10 +129,6 @@ a:hover {
 }
 
 .divider {
-    /*    background: #ddd;
-        background: -webkit-gradient(linear, left top, right top, from(rgba(255,255,255,0)), color-stop(#ccc), to(rgba(255,255,255,0)));
-        background: -webkit-linear-gradient(left, rgba(255,255,255,0), #ccc, rgba(255,255,255,0));
-        background: linear-gradient(to right, rgba(255,255,255,0), #ccc, rgba(255,255,255,0)); */
     border-bottom: 1px solid #efefef;
     height: 1px;
     margin-bottom: 1em;
@@ -162,9 +158,16 @@ a:hover {
 .thread-content a {
     color: #868e96;
 }
-.thread-content img{
+.thread-content>img{
     max-height: 100%;
     height: 100%;
+  /*max-width: 80%;*/
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 1em;
+    box-shadow: 0 0 10px #555;
+    -webkit-box-shadow: 0 0 10px #4A4A4A;
 }
 
 .thread-content {

@@ -1619,44 +1619,6 @@ $.fn.serializeObject = function() {
 	return json;
 };
 
-/*
-$.fn.serializeObject = function() {
-	var o = {};
-	var a = this.serializeArray();
-	$.each(a, function() {
-		if(o[this.name]) {
-			if(!o[this.name].push) {
-				o[this.name] = [o[this.name]];
-			}
-			o[this.name].push(this.value || '');
-		} else {
-			o[this.name] = this.value || '';
-		}
-	});
-	return o;
-};*/
- 
-/*
-$.fn.serializeObject = function() {
-	var formobj = {};
-	$([].slice.call(this.get(0).elements)).each(function() {
-		var jthis = $(this);
-		var type = jthis.attr('type');
-		var name = jthis.attr('name');
-		if (name && xn.strtolower(this.nodeName) != 'fieldset' && !this.disabled && type != 'submit' && type != 'reset' && type != 'button' &&
-		((type != 'radio' && type != 'checkbox') || this.checked)) {
-			// 还有一些情况没有考虑, 比如: hidden 或 text 类型使用 name 数组时
-			if(type == 'radio' || type == 'checkbox') {
-				if(!formobj[name]) formobj[name] = [];
-				formobj[name].push(jthis.val());
-			}else{
-				formobj[name] = jthis.val();
-			}
-		}
-	})
-	return formobj;
-}*/
-
 // 批量修改 input name="gid[123]" 中的 123 的值
 $.fn.attr_name_index = function(rowid) {
 	return this.each(function() {
@@ -1956,4 +1918,3 @@ $.fn.xn_toggle = function() {
 $('.xn-dropdown').xn_dropdown();
 $('.xn-toggle').xn_toggle();
 
-console.log('xiuno.js loaded');

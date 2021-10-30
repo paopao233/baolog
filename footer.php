@@ -40,6 +40,7 @@
 <script src="<?php bloginfo('template_url'); ?>/js/post-content.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog-like.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog-top.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/baolog-func.js"></script>
 
 <script>
     jsearch_form = $('#search_form');
@@ -73,4 +74,7 @@
 <div id="edge-translate-notifier-container" class="edge-translate-notifier-center"></div>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
 
+<div style="position: fixed; right: 10px; bottom: 20px;width: 100px;height: auto;">
+    <?php baolog_advertisement("global-right"); ?>
+</div>
 </html>
