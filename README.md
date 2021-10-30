@@ -6,6 +6,12 @@ wordpress线报主题，发羊毛，我就要专一~<br>
 WordPress 4.4+
 WordPress 伪静态
 PHP 5.7+ 7.0+
+## 捐赠
+> 支持我们，让线报主题走的更远！
+
+<a href="#" target="_blank"><img style="width:30%;hight:30%;" src="https://i.loli.net/2021/10/30/CXKWMDijLoB9SQu.png" /></a>
+
+
 ## bug反馈与建议
 #### qq群 781506134（目前还没多少个人
 ## 预览
