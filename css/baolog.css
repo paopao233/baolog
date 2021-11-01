@@ -78,7 +78,7 @@ a:hover {
         margin-top: 1em;
     }
 
-    .thread-content>img {
+    .thread-content p>img {
         max-width: 90% !important;
         height: 90% !important;
     }
@@ -158,10 +158,9 @@ a:hover {
 .thread-content a {
     color: #868e96;
 }
-.thread-content>img{
+.thread-content p>img{
     max-height: 100%;
     height: 100%;
-  /*max-width: 80%;*/
     height: auto;
     display: block;
     margin: 20px auto;

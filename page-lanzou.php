@@ -25,7 +25,7 @@ get_header(); ?>
                     <button class="btn btn-dark " type="button" id="button-lanzou">开始解析</button>
                 </div>
             </div>
-            <span class="short-tips text-small text-danger mt-2 d-block">示例链接：https://vpao.lanzouw.com/idwwKve3dzg</span>
+            <span class="short-tips text-small text-danger mt-2 d-block">示例链接：https://vpao.lanzoui.com/idwwKve3dzg?w</span>
             <h5 class="my-4" style="border-left:2px solid #ec1611;padding-left:10px;">解析结果</h5>
             <div class="input-group flex-nowrap mt-4">
                 <div class="input-group-prepend">
