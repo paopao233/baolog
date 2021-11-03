@@ -9,6 +9,7 @@ WordPress 伪静态
 PHP 5.7+ 7.0+
 ## 捐赠
 > 支持我们，让线报主题走的更远！
+> https://www.guluqiu.online/donation.html
 
 <a href="#" target="_blank"><img style="width:30%;hight:30%;" src="https://i.loli.net/2021/10/30/CXKWMDijLoB9SQu.png" /></a>
 
