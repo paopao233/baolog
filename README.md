@@ -35,6 +35,6 @@ PHP 5.7+ 7.0+
 ## 鸣谢
 Jetbrains
 ## License
-Apache-2.0 License © parklot <br>
+GPL-3.0 License © parklot <br>
 All assets licensed under a GPL-compatible license.<br>
 请遵守开源协议，保留主题底部的署名
