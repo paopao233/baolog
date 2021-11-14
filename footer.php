@@ -1,3 +1,11 @@
+<?php
+echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . ' %c by parklot | '. THEME_DOWNURL .'", "color:#000;background:#f90;padding:5px 0;", "color:#eee;background:#444;padding:5px 10px;");
+</script>';
+/*
+喝水不忘挖井人，请勿删除版权，让更多人使用，作者才有动力更新下去
+删版权可能会影响SEO哦，good luck
+*/
+?>
 <div class="footer text-muted text-center py-3">
     <div class="container">
         <div class="frend-link mb-2">
@@ -11,7 +19,7 @@
             $options = get_option('baolog_framework');
             echo $options['baolog-website-create'];
             ?>
-            <a href="http://beian.miit.gov.cn/" target="_blank">
+            <a href="https://beian.miit.gov.cn/" target="_blank">
                 <?php
                 $options = get_option('baolog_framework');
                 echo $options['baolog-beian'];
@@ -27,20 +35,20 @@
 
 
     </div>
-    <?php wp_footer(); ?>
+  <?php wp_footer(); ?>
 </div>
-
+</body>
 <script src="<?php bloginfo('template_url'); ?>/js/jquery-3.1.0.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/lang.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/popper.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/bootstrap.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/baolog.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/bootstrap-plugin.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/async.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/post-content.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/baolog-like.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/baolog-top.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/baolog-alert.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog-func.js"></script>
+<?php 
+    if (is_singular()) {
+        wp_print_scripts('pagejs'); 
+    }
+?>
 
 <script>
     jsearch_form = $('#search_form');
@@ -53,26 +61,16 @@
         }
     });
 </script>
+<script>
+    $('.share-logo').click(function (){
+        $('#shareModal').modal('hide')
+    })
 
-<div class="mpa-sc mpa-plugin-article-gatherer mpa-new mpa-rootsc" data-z="100" style="display: block;"
-     id="mpa-rootsc-article-gatherer"></div>
-<div class="mpa-sc mpa-plugin-image-gatherer mpa-new mpa-rootsc" data-z="100" style="display: block;"
-     id="mpa-rootsc-image-gatherer"></div>
-<div class="mpa-sc mpa-plugin-page-clipper mpa-new mpa-rootsc" data-z="100" style="display: block;"
-     id="mpa-rootsc-page-clipper"></div>
-<div class="mpa-sc mpa-plugin-text-gatherer mpa-new mpa-rootsc" data-z="100" style="display: block;"
-     id="mpa-rootsc-text-gatherer"></div>
-<div class="mpa-sc mpa-plugin-video-gatherer mpa-new mpa-rootsc" data-z="100" style="display: block;"
-     id="mpa-rootsc-video-gatherer"></div>
-<div class="mpa-sc mpa-plugin-side-function-panel mpa-new mpa-rootsc" data-z="110" style="display: block;"
-     id="mpa-rootsc-side-function-panel"></div>
-<div class="mpa-sc mpa-plugin-notifier mpa-new mpa-rootsc" data-z="120" style="display: block;"
-     id="mpa-rootsc-notifier"></div>
-<div class="mpa-sc mpa-plugin-notification-manager mpa-new mpa-rootsc" data-z="130" style="display: block;"
-     id="mpa-rootsc-notification-manager"></div>
-</body>
-<div id="edge-translate-notifier-container" class="edge-translate-notifier-center"></div>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+    $(".support-author").click(function(){
+        $("#supportModalCenter").modal({
+        });
+    });
+</script>
 
 <div style="position: fixed; right: 10px; bottom: 20px;width: 100px;height: auto;">
     <?php baolog_advertisement("global-right"); ?>

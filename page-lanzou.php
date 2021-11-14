@@ -4,8 +4,6 @@ Template Name: 蓝奏云盘直链解析
  **/
 get_header(); ?>
 
-    <body mpa-version="7.16.12" mpa-extension-id="aidjohbjielfdhcaookdaolppglahebo" data-new-gr-c-s-check-loaded="14.990.0"
-          data-gr-ext-installed="">
 <!--header-->
 <main id="body">
     <div class="container">
@@ -43,9 +41,5 @@ get_header(); ?>
     </div>
 </main>
 
-<!-- sidebar -->
-<?php
-get_sidebar();
-?>
-<!--footer-->
+<?php get_sidebar();?>
 <?php get_footer(); ?>

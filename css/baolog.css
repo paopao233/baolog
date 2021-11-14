@@ -114,6 +114,12 @@ a:hover {
     box-shadow: none;
 }
 
+.pagination .page-item .page-link:hover {
+    color: #0f243a !important;
+    text-decoration: none;
+    border-color: #dee2e6 !important;
+}
+
 .pagination .active .page-link {
     color: #000;
 }

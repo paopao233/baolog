@@ -81,11 +81,7 @@ if (!$user_ID) { //判断用户是否登录
     </div>
 </main>
 
-<!-- sidebar -->
-<?php
-get_sidebar();
-?>
-<script src="<?php bloginfo('template_url'); ?>/js/bbs.js"></script>
+<?php get_sidebar();?>
 
 <!--footer-->
     <?php get_footer();
@@ -93,4 +89,4 @@ get_sidebar();
 } else { //跳转到首页
     echo "<script type='text/javascript'>window.location='" . get_bloginfo('url') . "/wp-admin/'</script>";
 }
-
+wp_print_scripts('ajax-login-script'); 

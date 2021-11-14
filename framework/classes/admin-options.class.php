@@ -23,7 +23,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
     public $args         = array(
 
       // framework title
-      'framework_title'         => 'baolog 线报主题 <small>当前版本为v0.3.4</small>',
+      'framework_title'         => '<i class="fas fa-blog"></i>&nbsp'. THEME_NAME .'主题选项 <small>当前版本为v'. THEME_VERSIONNAME .'</small>',
       'framework_class'         => '',
 
       // menu settings

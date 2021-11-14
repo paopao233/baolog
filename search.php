@@ -62,11 +62,7 @@
     </div>
 </main>
 
-<!-- sidebar -->
-<?php
-get_sidebar();
-?>
-<!--footer-->
+<?php get_sidebar();?>
 <?php get_footer(); ?>
 
 <script>
@@ -80,6 +76,7 @@ get_sidebar();
 
     });
 </script>
+
 
 
 

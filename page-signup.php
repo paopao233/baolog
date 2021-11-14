@@ -9,9 +9,6 @@ if (!$user_ID) { //判断用户是否登录
 //这里添加登录表单代码
     get_header(); ?>
 
-    <body mpa-version="7.16.12" mpa-extension-id="aidjohbjielfdhcaookdaolppglahebo"
-          data-new-gr-c-s-check-loaded="14.990.0"
-          data-gr-ext-installed="">
 <!--header-->
 <main id="body">
     <div class="container">
@@ -102,9 +99,7 @@ if (!$user_ID) { //判断用户是否登录
 </main>
 
 <!-- sidebar -->
-<?php
-get_sidebar();
-?>
+<?php get_sidebar();?>
 <script src="<?php bloginfo('template_url'); ?>/js/lang.js"></script>
 <script type="text/javascript">
     jQuery('form#signup').on('submit', function (e) {
@@ -147,8 +142,8 @@ get_sidebar();
         });
     });
 </script>
-<!--footer-->
-    <?php get_footer();
+
+ <?php get_footer();
 
 } else { //跳转到首页
     echo "<script type='text/javascript'>window.location='" . get_bloginfo('url') . "/wp-admin/'</script>";

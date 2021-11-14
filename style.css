@@ -1,18 +1,18 @@
-@charset "UTF-8";
 /*
 Theme Name: BaoLog
 Theme URI: https://www.guluqiu.online
 Description: 一个简洁的线报主题，自带有在线小工具。从现在起，我只想做一个快乐的affman。
-Version: 0.3.4
+Version: 0.4.0
 Author: parklot
 Author URI: https://github.com/paopao233
 Requires at least: 4.9.6
 Requires PHP: 5.2.4
-License: GNU General Public License v2 or later
+License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: https://blog.guluqiu.cc
-Tags: 线报主题,简洁,
+Author Blog: https://blog.guluqiu.cc
+Tags: 线报主题,简洁,好看
  */
+ @charset "UTF-8";
 html {
     --theme: #409eff;
     --background: #fff;
@@ -31,13 +31,13 @@ html {
 }
 
 :root {
-    --Maincolor: #409EFF;
+    --Maincolor: #000000;
     --MaincolorHover: #66b1ff;
     --bagcolor: #f7f9fa;
     --swiper-navigation-size: 30px !important
 }
 
-/*文章头部评论的a标签*/
+/*评论*/
 .comment_a {
     color: #868e96;
 }
@@ -45,7 +45,14 @@ html {
 .comment_a:hover {
     color: #868e96;
 }
-
+.comment_submit:before {
+    font-family: "FontAwesome";
+    content: "\f00d";
+    display: inline-block;
+    transition: transform .3s;
+    margin-right: 10px;
+    color: var(--Maincolor)
+}
 /*赞助 a*/
 .support-author a{
     color: #c6303e!important;
@@ -332,7 +339,7 @@ td {
 }
 
 .fold-plane-title:before {
-    font-family: "Font Awesome 5 Pro";
+    font-family: "FontAwesome";
     content: "\f00d";
     display: inline-block;
     transition: transform .3s;
@@ -438,7 +445,12 @@ td {
     display: none;
 }
 /*nav*/
-.nav_active{
-border-bottom: 1px solid #000;
-    
+.nav-item.active :not(.dropdown-menu){
+    border-bottom: 1px solid #000;
+
 }
+
+.menu-item-has-children:hover .dropdown-menu{
+    display: block !important;
+}
+

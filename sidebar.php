@@ -6,7 +6,7 @@
         <div class="baolog_sn2">
             <div class="wx_qrcode">
                 <div class="qq_qr">
-                    <img src="
+                    <img alt="扫码下载安卓app"  src="
                     <?php
                     $options = get_option('baolog_framework');
                     echo $options['baolog-sidebar-app'];
@@ -22,7 +22,7 @@
         <div class="baolog_sn2">
             <div class="wx_qrcode">
                 <div class="mr-3">
-                    <img src="
+                    <img alt="微信扫一扫关注我们" src="
                     <?php
                     $options = get_option('baolog_framework');
                     echo $options['baolog-sidebar-wx'];
@@ -30,7 +30,7 @@
                     <span>微信扫一扫关注我们</span>
                 </div>
                 <div class="mr-3">
-                    <img src="
+                    <img alt="微信扫一扫使用小程序"  src="
                     <?php
                     $options = get_option('baolog_framework');
                     echo $options['baolog-sidebar-miniapp'];
@@ -38,7 +38,7 @@
                     <span>微信扫一扫打开小程序</span>
                 </div>
                 <div class="qq_qr">
-                    <img src="
+                    <img alt="手Q扫一扫使用小程序"  src="
                     <?php
                     $options = get_option('baolog_framework');
                     echo $options['baolog-sidebar-qqapp'];

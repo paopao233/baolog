@@ -7,17 +7,27 @@
  * @date 2021-8月-9日 20:29
  * @license GPL v3 LICENSE
  */
-?>
-<?php
-/**
- * 自定义引入
- */
+ 
+
+date_default_timezone_set("PRC");
+define('THEME_NAME', 'BaoLog');
+define('THEME_VERSIONNAME', '0.4.0');
+define('THEME_DOWNURL', 'https://www.guluqiu.online');
+
 include(get_template_directory() . '/inc/functions.php');
-//引入主题选项
-require_once dirname(__FILE__) . '/framework/codestar-framework.php';
+require_once dirname(__FILE__) . '/framework/baolog-framework.php';
+
 /**
  * functions
  */
+ //update
+require_once(get_template_directory() . '/theme-update-checker/plugin-update-checker.php');
+$baologUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'https://gitee.com/parklot/baolog/raw/main/inc/update_api.json',
+	get_template_directory() . '/functions.php',
+	'BaoLog'
+);
+
 
 //获取后台主题选项参数
 $options = get_option('baolog_framework');
@@ -57,8 +67,7 @@ function baolog_setup()
     // register_nav_menus(); 是注册所有的 不能有选择
     register_nav_menus(array(
         'menu_primary' => '主导航',
-        'menu_index' => '首页导航',
-        'menu_footer' => '底部导航'
+       
     ));
 }
 
@@ -67,9 +76,6 @@ function baolog_setup()
 function baolog_menu_classes($classes, $item, $args)
 {
     if ($args->theme_location == 'menu_primary') { //这里的 main 是菜单id
-        $classes[] = 'nav-item'; //这里的 nav-item 是要添加的class类
-    }
-    if ($args->theme_location == 'menu_index') { //这里的 main 是菜单id
         $classes[] = 'nav-item'; //这里的 nav-item 是要添加的class类
     }
     return $classes;
@@ -89,40 +95,7 @@ function baolog_menu_link_class($atts, $item, $args)
             $atts['class'] = 'nav-link';
         }
     }
-
-    //menu_index
-    //判断当前页面是属于哪个导航 添加active
-    // 这就意味着，页面的名字和导航栏的名字是固定的！
-    if ($args->theme_location == 'menu_index') {
-        //获取导航id
-        $menuLocations = get_nav_menu_locations();
-        $menuID = $menuLocations['menu_index'];
-        //获取当前导航名
-        $id = $item->ID;
-        $primaryNav = wp_get_nav_menu_items($menuID);
-
-        $class = 'nav-link';
-        foreach ($primaryNav as $navItem) {
-            $item_name = $navItem->title;
-            if ($navItem->ID == $id) {
-                //is_page('页面名')
-                if (is_page('24小时热门')) {
-                    if ($item_name == "24小时热门") {
-                        $class .= ' active ';
-                    }
-                } else if (is_home()) {
-                    if ($item_name == "最新线报") {
-                        $class .= ' active ';
-                    }
-                } else if (is_page('一周热门')) {
-                    if ($item_name == "一周热门") {
-                        $class .= ' active ';
-                    }
-                }
-            }
-        }
-        $atts['class'] = $class;
-    }
+    
     return $atts;
 }
 
@@ -250,47 +223,6 @@ function remove_dns_prefetch($hints, $relation_type)
 }
 
 add_filter('wp_resource_hints', 'remove_dns_prefetch', 10, 2);
-
-// 文章关键词seo description优化
-function wp_description()
-{
-    global $s, $post;
-    $description = '';
-    $blog_name = get_bloginfo('name');
-    if (is_singular()) {  //文章页如果存在描述字段，则显示描述，否则截取文章内容
-        if (!empty ($post->post_excerpt)) {
-            $text = $post->post_excerpt;
-        } else {
-            $text = $post->post_content;
-        }
-        $description = trim(str_replace(array(
-            "\r\n",
-            "\r",
-            "\n",
-            "　",
-            " "
-        ), " ", str_replace("\"", "'", strip_tags($text))));
-        if (!($description)) {
-            $description = $blog_name . "-" . trim(wp_title('', false));
-        }
-    } elseif (is_home()) {//首页显示描述设置
-        $description = rebirth_option('site_meta_description'); // 首頁要自己加
-    } elseif (is_tag()) {//标签页显示描述设置
-        $description = $blog_name . "有关 '" . single_tag_title('', false) . "' 的文章";
-    } elseif (is_category()) {//分类页显示描述设置
-        $description = $blog_name . "有关 '" . single_cat_title('', false) . "' 的文章";
-    } elseif (is_archive()) {//文档页显示描述设置
-        $description = $blog_name . "在: '" . trim(wp_title('', false)) . "' 的文章";
-    } elseif (is_search()) {//搜索页显示描述设置
-        $description = $blog_name . ": '" . esc_html($s, 1) . "' 的搜索結果";
-    } else {//默认其他页显示描述设置
-        $description = $blog_name . "有关 '" . trim(wp_title('', false)) . "' 的文章";
-    }
-
-    //输出描述
-    return $description = mb_substr($description, 0, 220, 'utf-8') . '..';
-}
-
 
 
 //the_tags过滤器
@@ -528,7 +460,7 @@ function countdown($atts, $content = null)
     if ($endtime > $nowtime) {
         return '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
                     <div id="countdown" class="flex-row justify-content-center text-center">
-                    <span id="time"></span>
+                    <span id="time">内容正在加载中...</span>
                                         <strong> 
                                         <span id="day"></span>
                                         <span id="hour"></span>
@@ -557,6 +489,7 @@ add_shortcode('countdown', 'countdown');
 add_action('wp_footer', 'countdown_js');
 wp_register_script('countdown_js', get_template_directory_uri() . '/js/countdownjs.js', array(), '1.0', false);
 wp_enqueue_script('countdown_js');
+
 
 // 文章关键词seo keywords优化
 function wp_keywords()
@@ -632,8 +565,12 @@ add_filter('get_avatar', 'baolog_get_avatar', 10, 3);
  * 获取阅读数最多的文章： $day代表几天前的文章 比如-1day是一天内
  * 只返回前15条
  */
-function baolog_get_most_viewed($limit = 15, $day)
+function baolog_get_most_viewed($limit, $day)
 {
+
+    $options = get_option('baolog_framework');
+    $is_blank = $options['baolog-posts-blank'];
+    $target = '_self';
     $args = array(
         'posts_per_page' => $limit,
         'order' => 'DESC',
@@ -647,39 +584,45 @@ function baolog_get_most_viewed($limit = 15, $day)
         ),
     );
 
-    $options = get_option('baolog_framework');
-    $is_blank = $options['baolog-posts-blank'];
-    $target = '_self';
-    if ($is_blank == 1) {
-        $target = '_blank';
-    }
-
     $str = implode('&', $args);
-    $postlist = wp_cache_get('hot_post_' . md5($str), 'baolog');
-    if (false === $postlist) {
+    if($day == 1){
+        $postlist = wp_cache_get('day_hot_post_' . md5($str), 'baolog');
+        if (false === $postlist) {
         $postlist = get_posts($args);
-        wp_cache_set('hot_post_' . md5($str), $postlist, 'baolog', 86400);
+        wp_cache_set('day_hot_post_' . md5($str), $postlist, 'baolog', 86400);
+         }
+    }else if($day == 7){
+        $postlist = wp_cache_get('week_hot_post_' . md5($str), 'baolog');
+        if (false === $postlist) {
+        $postlist = get_posts($args);
+        wp_cache_set('week_hot_post_' . md5($str), $postlist, 'baolog', 86400);
+         }
     }
-
-    echo '<ul class="list-group post-list mt-3">';
-    foreach ($postlist as $post) {
-        echo '<li class="list-group-item px-0">
+    
+    if ($postlist != null){
+        echo '<ul class="list-group post-list mt-3">';
+        foreach ($postlist as $post) {
+            echo '<li class="list-group-item px-0">
                  <div class="subject break-all">
                             <h2><a class="mr-1" href="' . get_permalink($post->ID) . '" target="' . $target . '"  rel="bookmark"  
                             title="' . $post->post_title . '">' . $post->post_title . '</a></h2>';
-        //标签
+            //标签
 
-        echo get_the_tag_list('', '', '', $post->ID);
+            echo get_the_tag_list('', '', '', $post->ID);
 
-        echo '</div>';
-        //日期
-        echo '<span class="num-font text-muted" style="flex-shrink: 0;">'
-            . date('Y-m-d H:i', strtotime($post->post_date)) .
-            '</span></li>';
+            echo '</div>';
+            //日期
+            echo '<span class="num-font text-muted" style="flex-shrink: 0;">'
+                . date('Y-m-d H:i', strtotime($post->post_date)) .
+                '</span></li>';
+
+        }
+        echo '</ul>';
+    }else{
+        echo '<h5 class="mt-5" style="text-align: center;">没有查询到该模块的文章哦~ </h5>';
     }
-    echo '</ul>';
 
-    wp_reset_postdata();
+    wp_reset_postdata();//
 }
 
 //关闭顶部管理员登录工具
@@ -697,24 +640,6 @@ function html_page_permalink()
 
 add_action('init', 'html_page_permalink', -1);
 
-// 引入其它functions文件夹php文件
-define('functions', TEMPLATEPATH . '/inc/functions');
-IncludeAll(functions);
-function IncludeAll($dir)
-{
-    $dir = realpath($dir);
-    if ($dir) {
-        $files = scandir($dir);
-        sort($files);
-        foreach ($files as $file) {
-            if ($file == '.' || $file == '..') {
-                continue;
-            } elseif (preg_match('/.php$/i', $file)) {
-                include_once $dir . '/' . $file;
-            }
-        }
-    }
-}
 
 //获取首页文章 包括置顶文章
 //https://wordpress.stackexchange.com/questions/104127/display-all-sticky-post-before-regular-post/104136
@@ -727,49 +652,6 @@ function balolog_get_the_posts()
     $target = '_self';
     if ($is_blank == 1) {
         $target = '_blank';
-    }
-
-    //is sticky
-    $sticky = get_option('sticky_posts');
-
-    if (!empty($sticky)) {
-        $args = array(
-            'posts_per_page' => -1, //get all post
-            'post__in' => $sticky, //are they sticky post
-        );
-
-        // The Query
-        $the_query = new WP_Query($args);
-
-        if (is_paged()){
-            // The Loop //we are only getting a list of the title as a li see the loop docs for details on the loop or copy this from index.php (or posts.php)
-            while ($the_query->have_posts()) {
-                $the_query->the_post();
-                echo '<li class="list-group-item px-0">
-                        <div class="subject break-all">
-
-                            <span class="font-weight-bold">[ 置顶 ]</span>
-                            <h2>
-                                <a class="mr-1" href="';
-                the_permalink();
-                echo '" title="';
-                the_title();
-                echo '" target="' . $target . '" rel="bookmark">
-                                    <span class="huux_thread_hlight_style1">';
-                the_title();
-                echo '</span>
-                                </a>
-                            </h2>
-                        </div>
-                        <span class="num-font text-muted" style="flex-shrink: 0;">
-							';
-
-                the_time('Y-m-d H:i');
-                echo '</span>
-                    </li>';
-            }
-            wp_reset_query(); //reset the original WP_Query
-        }
     }
 
 // The Loop....
@@ -798,6 +680,61 @@ function balolog_get_the_posts()
     }
 }
 
+//评论开启@人 回复
+function baolog_comment_add_at($comment_text, $comment = '') {  
+  if($comment->comment_parent > 0 & $comment->user_id == 1) {  
+    $comment_text = '<span class="badge badge-dark atwho">@ '.get_comment_author($comment->comment_parent) . '</span> ' . $comment_text.'';  
+  }  
+  if($comment->comment_parent > 0 & $comment->user_id != 1) {  
+    $comment_text = '<span class="badge badge-dark atwho">@ '.get_comment_author($comment->comment_parent) . '</span> ' . $comment_text;  
+  }
+  return $comment_text;  
+}  
+add_filter('comment_text', 'baolog_comment_add_at', 20, 2);  
+
+//返回本文章多少条评论
+function baolog_comments_counts($postid=0,$which=0) {
+    $comments = get_comments('status=approve&type=comment&post_id='.$postid); //获取文章的所有评论
+    if ($comments) {
+        $i=0; $j=0; $commentusers=array();
+        foreach ($comments as $comment) {
+            ++$i;
+            if ($i==1) { $commentusers[] = $comment->comment_author_email; ++$j; }
+            if ( !in_array($comment->comment_author_email, $commentusers) ) {
+                $commentusers[] = $comment->comment_author_email;
+                ++$j;
+            }
+        }
+        $output = array($j,$i);
+        $which = ($which == 0) ? 0 : 1;
+        return $output[$which]; //返回评论人数
+    }
+    return 0; //没有评论返回 0
+}
+
+
+
+//TODO 禁止解析html的评论内容
+
+//取消评论转义
+remove_filter('comment_text', 'wptexturize');
+
+//屏蔽纯英文评论和纯日文
+function refused_english_comments($incoming_comment) {
+  $pattern = '/[一-龥]/u';
+  // 禁止全英文评论
+  if(!preg_match($pattern, $incoming_comment['comment_content'])) {
+    wp_die( "您的评论中必须包含汉字!" );
+  }
+  $pattern = '/[あ-んア-ン]/u';
+  // 禁止日文评论
+  if(preg_match($pattern, $incoming_comment['comment_content'])) {
+    wp_die( "评论禁止包含日文!" );
+  }
+  return( $incoming_comment );
+}
+add_filter('preprocess_comment', 'refused_english_comments');
+
 //自定义评论内容的样式
 //http://wanlimm.com/77201505264102.html
 function aurelius_comment($comment, $args, $depth)
@@ -824,13 +761,14 @@ function aurelius_comment($comment, $args, $depth)
                         <em style="color: red">你的评论正在审核，稍后会显示出来！</em><br/>
                     <?php endif; ?>
                     <?php comment_text(); ?>
+                    
                 </div>
             </div>
 
         </div>
     </div>
+    <?php }
 
-<?php }
 
 //自定义提交评论按钮的样式
 // define the comment_form_submit_button callback
@@ -846,7 +784,7 @@ function filter_comment_form_submit_button($submit_button, $args)
     return $submit_before . $submit_button . $submit_after;
 }
 
-;
+
 
 add_filter('comment_form_submit_button', 'filter_comment_form_submit_button', 10, 2);
 
@@ -855,8 +793,8 @@ add_filter('comment_form_submit_button', 'filter_comment_form_submit_button', 10
 function ajax_login_init()
 {
 
-    wp_register_script('ajax-login-script', get_template_directory_uri() . '/js/ajax-login-script.js', array('jquery'));
-    wp_enqueue_script('ajax-login-script');
+    wp_register_script('ajax-login-script', get_template_directory_uri() . '/js/ajax-login-script.js');
+    // wp_enqueue_script('ajax-login-script');
 
     wp_localize_script('ajax-login-script', 'ajax_login_object', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
@@ -1025,8 +963,3 @@ function baolog_check_sidebar_switcher($option)
     }
     echo $isCLose;
 }
-?>
-
-
-
-
