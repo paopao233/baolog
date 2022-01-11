@@ -2,7 +2,6 @@
 /**
  * Template Name: 注册页面
  **/
-
 global $wpdb, $user_ID;
 
 if (!$user_ID) { //判断用户是否登录
@@ -37,7 +36,7 @@ if (!$user_ID) { //判断用户是否登录
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon icon-user icon-fw"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="请输入用户名" name="username"
+                                <input type="text" class="form-control" placeholder="用户名长度为4到16位（字母，数字，下划线，减号）" name="username"
                                        id="username">
                             </div>
 
@@ -48,7 +47,7 @@ if (!$user_ID) { //判断用户是否登录
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon icon-lock icon-fw"></i></span>
                                         </div>
-                                        <input type="password" class="form-control" placeholder="请输入密码" name="password"
+                                        <input type="password" class="form-control" placeholder="密码长度为6-20且必须包含数字和英文" name="password"
                                                id="password">
                                     </div>
                                 </div>
@@ -99,7 +98,9 @@ if (!$user_ID) { //判断用户是否登录
 </main>
 
 <!-- sidebar -->
-<?php get_sidebar();?>
+<?php get_sidebar();
+      get_footer();
+?>
 <script src="<?php bloginfo('template_url'); ?>/js/lang.js"></script>
 <script type="text/javascript">
     jQuery('form#signup').on('submit', function (e) {
@@ -108,7 +109,9 @@ if (!$user_ID) { //判断用户是否登录
         var newUserEmail = jQuery('form#signup #email').val();
         var newUserPassword = jQuery('form#signup #password').val();
         var newUserConfirmPassword = jQuery('form#signup #confirmPassword').val();
-        jQuery.ajax({
+        
+        if(<?php echo get_option('users_can_register'); ?> == 1){
+            jQuery.ajax({
             type: "POST",
             url: "<?php echo admin_url('admin-ajax.php'); ?>",
             data: {
@@ -121,17 +124,21 @@ if (!$user_ID) { //判断用户是否登录
             success: function (data) {
                 var res = JSON.parse(data);
                 if (res.status === true) {
-                    $.alert('注册成功，请点击用户登录链接进行登录~', 30, {size: 'sm'});
+                    $.alert('注册成功，请点击用户登录链接进行登录', 30, {size: 'sm'});
+                } else if(res.message == "The email format is incorrect"){
+                    $.alert('邮箱格式错误，请输入正确的邮箱', 30, {size: 'sm'});
                 } else if (res.message == "User Name and Email are mandatory") {
-                    $.alert('邮箱和用户名是必须的~', 30, {size: 'sm'});
+                    $.alert('邮箱和用户名是必须的', 30, {size: 'sm'});
                 } else if (res.message == "User name already exixts.") {
                     $.alert('该用户已经存在，请更换邮箱或者用户名~', 30, {size: 'sm'});
                 } else if (res.message == "not allow everyone to sign up") {
                     $.alert('该站点不允许注册哦~', 30, {size: 'sm'});
                 } else if (res.message == "The two passwords are inconsistent") {
-                    $.alert('两次密码不一致，请检查后再次输入~', 30, {size: 'sm'});
-                }else if (res.message == "The password length is less than 7 digits") {
-                    $.alert('密码不能小于7位哦，请重新输入~', 30, {size: 'sm'});
+                    $.alert('两次密码不一致，请检查后再次输入', 30, {size: 'sm'});
+                } else if (res.message == "The password format is incorrect") {
+                    $.alert('密码必须包含字母和数字，长度要求在6到20位', 30, {size: 'sm'});
+                } else if (res.message == "The username format is incorrect") {
+                    $.alert('用户名长度必须为4到16位（可选字母、数字、下划线、减号）', 30, {size: 'sm'});
                 } else {
                     $.alert('注册失败，出现未知的错误~', 30, {size: 'sm'});
                 }
@@ -140,10 +147,14 @@ if (!$user_ID) { //判断用户是否登录
                 console.log(results)
             }
         });
+        } else {
+            $.alert('该站点当前暂不接受新用户注册', 30, {size: 'sm'});
+        }
+   
     });
 </script>
 
- <?php get_footer();
+ <?php 
 
 } else { //跳转到首页
     echo "<script type='text/javascript'>window.location='" . get_bloginfo('url') . "/wp-admin/'</script>";

@@ -22,6 +22,20 @@ include(get_template_directory() . '/inc/func/page-func.php');
  */
 $GLOBALS['theme_options'] = get_option('baolog_framework');
 
+function _park($name, $default = false)
+{
+    $option_name = 'baolog_framework';
+
+    $options = get_option($option_name);
+
+    // Return specific option
+    if (isset($options[$name])) {
+        return $options[$name];
+    }
+
+    return $default;
+}
+
 /**
  * 广告位
  */
@@ -93,6 +107,9 @@ if(!function_exists('cn_nf_url_parse')){
     }
 }
 add_filter( 'the_content', 'cn_nf_url_parse');
+
+//文章页底部小提示
+
 
 
 //给文章添加一个noopener noreferrer值 预防跨站攻击

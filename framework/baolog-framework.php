@@ -34,7 +34,18 @@ if (class_exists('CSF')) {
         'menu_title' => ''. THEME_NAME .'选项',
         'menu_slug' => 'baolog-framework',
     ));
-
+    // 主题说明
+    CSF::createSection($prefix, array(
+        'title' => '主题说明',
+        'icon' => 'fa fa-bell',
+        'description' => '<div class="groups_title"><h3>欢迎使用BaoLog线报主题，当前主题版本为V'. THEME_VERSIONNAME .'</h3><p>亲爱的用户你好呀！感谢您支持我的作品，一套优秀的作品离不开大家的共同维护和支持！本主题是开源作品，但是我想声明以下几点。</p><p style="margin-top:20px;">1. 本主题近阶段不会考虑收费版本，会一步一步迭代主题。</p><p>2. 本主题使用文档目前较少，可能对新手不友好。大多数人都是以采集为主，如果你觉得你采集的内容没有被收录就怪罪到本主题，请直接更换主题。</p><p>3. 本主题作者也是php新手，所以主题也会存在一些不足之处。如果你觉得这个主题很烂，请直接自行离开，不要在交流群BB。</p><p>4. 使用本主题时，请保留主题的底部作者信息，不要逼我加密开源。</p><p>5. 要作者更新的快，就快推荐朋友使用吧，或者直接赞助我们，让我们更好的用爱发电。</p><br><h3>主题交流群</h3><p>1. 作者 Q Q ：1319082534</p><p>2. 线报主题用户交流QQ群：781506134</p><br><h3>主题在线文档</h3><p>1. <a href="https://www.yuque.com/parklot/pcod7h">线报主题使用文档</a> （
+       目前正在一点点完善）</p><p>2. <a href="https://www.guluqiu.cc/archives/125.html">主题博文</a> </p><br><h3>关注作者</h3><p>1. 官方博客：<a href="https://
+       blog.guluqiu.cc">www.guluqiu.online</a></p><p>2. GITHUB：<a href="https://github.com/paopao233/baolog">欢迎STAR</a></p><p>3. 作者QQ: 1319082534</p><p>4. 赞助我们：<a href="https://www.guluqiu.online/donation.html">快来赞助我们呀</a></p></div>',
+         'fields' => array(
+                
+                )
+             
+        ));
     // 全局设置
     CSF::createSection($prefix, array(
         'title' => '全局设置',
@@ -44,7 +55,6 @@ if (class_exists('CSF')) {
                 'type' => 'heading',
                 'content' => '这里的全局记得填写好相关配置哦',
             ),
-            // A Notice
             array(
                 'type' => 'notice',
                 'style' => 'success',
@@ -57,7 +67,6 @@ if (class_exists('CSF')) {
                 'default' => get_stylesheet_directory_uri() . '/favicon.ico',
                 'desc' => '默认是主题根目录的favicon.ico，可直接替换或者在这里重新上传',
                 'help' => '默认是主题根目录的favicon.ico，可直接替换或者在这里重新上传',
-                'subtitle' => '全站icon',
             ),
             array(
                 'id' => 'baolog-description',
@@ -110,40 +119,7 @@ if (class_exists('CSF')) {
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
-            ),
-            array(
-                'id' => 'baolog-index-menu',
-                'type' => 'switcher',
-                'title' => '关闭首页导航',
-                'desc' => '首页导航既是最新线报、24小时热门这个导航，做博客可关闭',
-                'subtitle' => '默认是开启',
-                'text_off' => '点击开启此功能',
-                'text_on' => '点击关闭此功能',
-                'text_width' => 140,
-
-            ), array(
-                'id' => 'baolog-footer-custom',
-                'type' => 'code_editor',
-                'sanitize' => false,
-                'title' => '自定义footer',
-                'desc' => '例如：&lt;p type="text/javascript"&gt;This is inserted at the footer&lt;/p&gt;',
-                'subtitle' => '显示在底部的链接，支持html代码，同样支持javascript',
-                'help' => '为空则不显示',
-
-
-            ), array(
-                'id' => 'baolog-footer-analysis',
-                'type' => 'code_editor',
-                'sanitize' => false,
-                'settings' => array(
-                    'theme'  => 'mbo',
-                    'mode'   => 'javascript',
-                ),
-                'title' => '统计代码',
-                'desc' => '例如：&lt;script&gt;我是统计代码~&lt;/script&gt;',
-                'subtitle' => '自定义统计代码,可用百度统计,CNZZ...',
-                'help' => '为空则不显示',
-            ),
+            )
 
         )
     ));
@@ -229,7 +205,7 @@ if (class_exists('CSF')) {
             array(
                 'id' => 'baolog-posts-update',
                 'type' => 'switcher',
-                'title' => '文章3天内未更新提示',
+                'title' => '开启文章3天内未更新提示',
                 'subtitle' => '显示在文章页面',
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
@@ -255,6 +231,22 @@ if (class_exists('CSF')) {
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
 
+            ),
+            array(
+                'id' => 'baolog-posts-content-tips',
+                'type' => 'switcher',
+                'title' => '开启文章内容来源提示',
+                'subtitle' => '在文章页面下面的内容来源提示，暂不支持自定义，默认是禁用',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140
+            ), 
+            array(
+            'id' => 'baolog-posts-content-tips-change',
+            'type' => 'text',
+            'title' => '文章页面底部来源提示内容',
+            'desc' => '显示在文章的底部，默认内容是：本条线报内容来自互联网，所推荐内容不代表本站立场，请自行鉴别。必须是开启该功能修改才会生效。',
+            'default' => '本条线报内容来自互联网，所推荐内容不代表本站立场，请自行鉴别。',
             ),
 
         )
@@ -402,6 +394,40 @@ if (class_exists('CSF')) {
                 'subtitle' => '自定义广告代码，可以放html代码，可放联盟广告',
                 'help' => '为空则不显示',
         ),
+        )
+    ));
+
+   //自定义代码
+    CSF::createSection($prefix,array(
+        'title' => '自定义代码',
+        'icon' => 'fa fa-code',
+        'fields' => array(
+            array(
+                'type' => 'heading',
+                'content' => '这里是有关全站的自定义代码设置区域。',
+            ),
+           array(
+                'id' => 'baolog-footer-custom',
+                'type' => 'code_editor',
+                'sanitize' => false,
+                'title' => '自定义footer',
+                'desc' => '例如：&lt;p type="text/javascript"&gt;This is inserted at the footer&lt;/p&gt;',
+                'subtitle' => '显示在底部的链接，支持html代码，同样支持javascript',
+                'help' => '为空则不显示',
+            ), array(
+                'id' => 'baolog-footer-analysis',
+                'type' => 'code_editor',
+                'sanitize' => false,
+                'settings' => array(
+                    'theme'  => 'mbo',
+                    'mode'   => 'javascript',
+                ),
+                'title' => '统计代码',
+                'desc' => '例如：&lt;script&gt;我是统计代码~&lt;/script&gt;',
+                'subtitle' => '自定义统计代码,可用百度统计,CNZZ...',
+                'help' => '为空则不显示',
+            ),
+            //加一个自定义CSS
         )
     ));
 

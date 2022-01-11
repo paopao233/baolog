@@ -115,30 +115,37 @@
 <?php flush(); ?>
 <div class="header mb-3">
     <div class="container">
-        <div class="jumbotron bg-white mb-0 text-center hidden-sm">
+        <div class="jumbotron  d-md-block d-none bg-white mb-0 text-center ">
             <h1><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h1>
             <span class="text-grey"><?php
                 $options = get_option('baolog_framework');
                 echo $options['baolog-subtitle'];
                 ?></span>
         </div>
-        <div class="d-sm-none d-block text-center mt-4">
-            <h2><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h2>
-        </div>
         <!--primary menu-->
-        <nav class="row">
+        <nav class="row navbar navbar-expand-md">
+        <button class="navbar-toggler border-0 pl-0" type="button" data-toggle="collapse"
+                data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="iconfont icon-bars"></span>
+        </button>
+          <div class="d-md-none d-block text-center mt-4 navbar-logo-brand">
+           <h4><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h4>
+          </div>
             <?php
             if (has_nav_menu('menu_primary')) {
                 wp_nav_menu(array(
                         'theme_location' => 'menu_primary',
-                        'container_class' => 'col-sm-8 px-0',
+                        'container_class' => 'col-sm-8 px-0 collapse navbar-collapse',
+                        'container_id' => 'navbarContent',
                         'menu_class' => 'nav sm-center',
                         'menu_id' => 'menu-primary-items',
                         'fallback_cb' => '', 'depth' => 2,
                         'walker' => new baolog_Walker_Nav_Menu())
                 );
             } else {
-                echo '<div class="col-sm-8 px-0">
+                echo '
+                <div class="col-sm-8 px-0 collapse navbar-collapse" id="navbarContent">
 						<ul class="nav sm-center">
 							<li class="nav-item">
 								<a class="nav-link" href="' . get_option('home') . '"> 
@@ -151,10 +158,19 @@
                 echo '</ul></div>';
             }
             ?>
+            
             <!--搜索-->
-            <div class="col-sm-4">
+            <button class="navbar-toggler border-0 px-1 ml-auto" type="button" data-toggle="collapse"
+                data-target="#navbarSearch"
+                aria-controls="navbarSearch" aria-expanded="false" aria-label="Search navigation">
+            <span class="iconfont icon-search"></span>
+            </button>
+         
+            <div class="col-sm-4 collapse navbar-collapse navbar-collapse-search" id="navbarSearch">
                 <?php get_search_form(); ?>
             </div>
+    
+      
         </nav>
     </div>
 </div>

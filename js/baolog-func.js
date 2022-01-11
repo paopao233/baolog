@@ -5,19 +5,20 @@ $(".fold-plane-title").click(function(a) {
 });
 //like
 $(document).on('click', '.haya-favoriter', function (e) {
-            var post_id = $(".js-haya-favorite-tip").attr("data-id");
+            var post_item = $(".js-haya-favorite-tip");
+            var post_id = post_item.attr("data-id");
             if ($(this).hasClass('done')) {
                 $.alert('您已赞过本博客啦~', 30, {size: 'sm'});
                 return false;
           
             } else if (getCookie('specs_zan_' + post_id) != '') {
-                $.alert('您过本博客啦~', 30, {size: 'sm'});
+                $.alert('您赞过本博客啦~', 30, {size: 'sm'});
                 return false;
             } else {
                 $(this).addClass('done');
-                var id = $(this).data("id"),
-                    action = $(this).data('action'),
-                    rateHolder = $(this).children('.count');
+                var id = post_item.data("id"),
+                    action = post_item.data('action'),
+                    rateHolder = post_item.children('.count');
                 var ajax_data = {
                     action: "specs_zan",
                     um_id: id,
@@ -32,10 +33,7 @@ $(document).on('click', '.haya-favoriter', function (e) {
 
         };
         
-        $(document).on("click", ".js-haya-favorite-tip",
-            function () {
-                $(this).postLike();
-            });
+
 });
 
 //获取cookie
@@ -75,4 +73,8 @@ $(document).ready(function () {
     });
 });
 
+//阻止下拉菜单点击事件
+$(".dropdown").on("click",function (e) {
+    e.stopPropagation();
+})
 

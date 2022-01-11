@@ -13,25 +13,26 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
             <?php wp_get_links('after=&orderby=name'); ?>
         </div>
 
-        <div class="copy-right">
-            Copyright © <?php bloginfo('name'); ?> (<?php echo get_option('home'); ?>)
+        <div class="copy-right mb-2">
+            Copyright © <?php bloginfo('name'); ?> | 
             <?php
             $options = get_option('baolog_framework');
             echo $options['baolog-website-create'];
-            ?>
+            ?> | 
             <a href="https://beian.miit.gov.cn/" target="_blank">
                 <?php
                 $options = get_option('baolog_framework');
                 echo $options['baolog-beian'];
-                ?></a>
-
+            ?></a> | 
+            网页加载时间：<?php timer_stop(1); ?>/ms | 
+            主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>
         </div>
 
-        <div class="loadtime">
-            网页加载时间：<?php timer_stop(1); ?>/ms
+        <!--<div class="loadtime">-->
+        <!--    网页加载时间：<?php timer_stop(1); ?>/ms-->
             <!--制作不易 请给个star 勿移除本声明-->
-          主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>
-        </div>
+        <!--  主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>-->
+        <!--</div>-->
 
 
     </div>
@@ -44,6 +45,7 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
 <script src="<?php bloginfo('template_url'); ?>/js/bootstrap.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog-alert.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/baolog-func.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/baolog-page.js"></script>
 <?php 
     if (is_singular()) {
         wp_print_scripts('pagejs'); 

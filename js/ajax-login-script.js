@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
         var username = $('form#form #email').val();
         var password = $('form#form #password').val();
         if (username==""||password==""){
-            $.alert('用户名和密码不能未空~', 30, {size: 'sm'});
+            $.alert('用户名和密码不能为空~', 30, {size: 'sm'});
             return;
         }else{
             $.ajax({

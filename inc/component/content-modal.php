@@ -12,7 +12,7 @@
                                         <div class="d-flex flex-column">
                                             <p class="d-flex justify-content-center mb-3 font-weight-bold">本文章的二维码</p>
                                             <div class="d-flex justify-content-center  px-2">
-                                                <img class="w-75 h-75" src="http://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php the_permalink(); ?>" alt="<?php the_title(); ?>"/>
+                                                <img class="w-75 h-75" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php the_permalink(); ?>" alt="<?php the_title(); ?>"/>
                                             </div>
                                             <p class="d-flex justify-content-center mt-3 font-weight-ligh">用手机扫码打开本页</p>
                                         </div>

@@ -6,6 +6,7 @@
 get_header();
 $the_post_category_name = get_the_category(get_the_ID())[0]->cat_name;
 $the_post_category_link = get_category_link(get_the_category(get_the_ID())[0]->term_id);
+$options = get_option('baolog_framework');
 ?>
 <body>
 <main id="body">
@@ -98,6 +99,14 @@ $the_post_category_link = get_category_link(get_the_category(get_the_ID())[0]->t
 
                 </div>
                 
+               <?php if($options['baolog-posts-content-tips'] == 1):?>
+               <div class="thread-content-tips">
+                    <div class="alert alert-warning text-center small" role="alert">
+                    <?php echo $options['baolog-posts-content-tips-change']; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                
                  <!--返回首页-->
                 <div class="back_index text-center num-font mb-4">
                     <a href="<?php echo get_option('home'); ?>" class="text-small" style="color: gray;">
@@ -136,8 +145,6 @@ $the_post_category_link = get_category_link(get_the_category(get_the_ID())[0]->t
             //上面出现的相关文章混乱了当前文章id 需要重置一下postid
             wp_reset_postdata();
             comments_template(); ?>
-
-
         </div>
 </main>
 

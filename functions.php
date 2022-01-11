@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) { exit; }
 /**
  * Copyright 2021, https://github.com/paopao233
  * All right reserved.
@@ -7,11 +8,9 @@
  * @date 2021-8月-9日 20:29
  * @license GPL v3 LICENSE
  */
- 
-
 date_default_timezone_set("PRC");
 define('THEME_NAME', 'BaoLog');
-define('THEME_VERSIONNAME', '0.4.0');
+define('THEME_VERSIONNAME', '0.4.1');
 define('THEME_DOWNURL', 'https://www.guluqiu.online');
 
 include(get_template_directory() . '/inc/functions.php');
@@ -20,13 +19,6 @@ require_once dirname(__FILE__) . '/framework/baolog-framework.php';
 /**
  * functions
  */
- //update
-require_once(get_template_directory() . '/theme-update-checker/plugin-update-checker.php');
-$baologUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://gitee.com/parklot/baolog/raw/main/inc/update_api.json',
-	get_template_directory() . '/functions.php',
-	'BaoLog'
-);
 
 
 //获取后台主题选项参数
@@ -233,13 +225,12 @@ function add_class_the_tags($html)
     $postid = get_the_ID();
     $tags = wp_get_post_tags($postid); //this is the adjustment, all the rest is bhlarsen
     $class = '<a class="badge badge-pill mr-1 tag ';
-    $badge = array(" badge-dark ", " badge-danger ", " badge-primary ", " badge-warning ", " badge-success ", " badge-secondary ", " badge-info ");
+    $badge = array("badge-dark ", "badge-danger ", "badge-primary ", "badge-warning ", "badge-success ", "badge-secondary ", "badge-info ");
     if ($tags != null) {
         //这里是文章的id
         foreach ($tags as $tag) {
             $name = $tag->name;
             //同篇文章中的标签也会得到这个class名 不知道怎么解决
-
             switch ($name) {
                 case "优惠券":
                 {
@@ -282,11 +273,11 @@ function add_class_the_tags($html)
                     break;
                 }
             }
+            break;
         }
     } else {
         //这里的post_id是页面文章的id
         $class .= $badge[rand(0, 6)];
-
     }
     $class .= '"';
     $html = str_replace("<a", $class, $html);
@@ -605,9 +596,9 @@ function baolog_get_most_viewed($limit, $day)
             echo '<li class="list-group-item px-0">
                  <div class="subject break-all">
                             <h2><a class="mr-1" href="' . get_permalink($post->ID) . '" target="' . $target . '"  rel="bookmark"  
-                            title="' . $post->post_title . '">' . $post->post_title . '</a></h2>';
+                            title="' . $post->post_title . '">' . wp_trim_words($post->post_title,25) . '</a></h2>';
             //标签
-
+            
             echo get_the_tag_list('', '', '', $post->ID);
 
             echo '</div>';
@@ -647,14 +638,13 @@ function balolog_get_the_posts()
 {
     $today = date('Y-m-d');
     $options = get_option('baolog_framework');
-    $is_blank = $options['baolog-posts-blank'];
-    $is_open_posts_today = $options['baolog-home-todayUpdate'];
+    $is_blank = $options['baolog-posts-blank'];//跳转方式
+    $is_open_posts_today = $options['baolog-home-todayUpdate'];//今日更新
     $target = '_self';
     if ($is_blank == 1) {
         $target = '_blank';
     }
 
-// The Loop....
     //加入了一个判断 解决了显示两次置顶文章的问题
     while (have_posts()) {
         the_post();
@@ -669,7 +659,7 @@ function balolog_get_the_posts()
         the_title();
         echo '" target="' . $target . '"rel="bookmark">';
         if (is_sticky()) echo '<span class="huux_thread_hlight_style1">';
-        the_title();
+        echo wp_trim_words(get_the_title(),25);//限制标题字数
         echo '</a></h2>';
         the_tags('', '', '');
         echo '</div><span class="num-font text-muted" style="flex-shrink: 0;';
@@ -852,15 +842,35 @@ function register_user_front_end()
         $new_user_password = $_POST['new_user_password'];
         $new_user_confirm_password = $_POST['new_user_confirm_password'];
         $user_nice_name = strtolower($_POST['new_user_email']);
+        
+        //校验邮箱是否正确
+        $emailIsMatched = preg_match('~\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*~', $new_user_email);
+        if ($emailIsMatched !== 1) {
+            $notice_key = 'The email format is incorrect';
+            echo json_encode(array('status' => false, 'message' => $notice_key));
+            die;
+        }
+        
+        //校验用户名 4到16位（字母，数字，下划线，减号）
+        $usernameMatched = preg_match('~^[a-zA-Z0-9_-]{4,16}$~', $new_user_name);
+        if ($usernameMatched !== 1) {
+            $notice_key = 'The username format is incorrect';
+            echo json_encode(array('status' => false, 'message' => $notice_key));
+            die;
+        }
+        
         //判断用户密码是否两次都一样
         if ($new_user_password !== $new_user_confirm_password) {
             $notice_key = 'The two passwords are inconsistent';
             echo json_encode(array('status' => false, 'message' => $notice_key));
             die;
         }
-        //判断用户密码强度
-        if (strlen($new_user_password) < 7) {
-            $notice_key = 'The password length is less than 7 digits';
+
+        
+        //判断用户密码强度 6到20位字符必须包含字母和数字
+        $passwordIsMatched = preg_match('~^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]{6,20})$~', $new_user_password);
+        if ($passwordIsMatched !== 1) {
+            $notice_key = 'The password format is incorrect';
             echo json_encode(array('status' => false, 'message' => $notice_key));
             die;
         }
