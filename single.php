@@ -94,7 +94,7 @@ $options = get_option('baolog_framework');
                     </div>
                     
                  <?php
-                get_template_part('inc/component/content-modal');
+                get_template_part('component/content-modal');
                 ?>
 
                 </div>
@@ -116,7 +116,7 @@ $options = get_option('baolog_framework');
             
             <div class="divider"></div>
             <div class="related-body">
-                <h5 class="text-center font-weight-bold">相关线报</h5>
+                <h5 class="text-center font-weight-bold">相关文章</h5>
                 <ul class="related-list list-unstyled d-flex flex-wrap my-3">
                     <?php
                     if (is_single()) :
@@ -141,7 +141,7 @@ $options = get_option('baolog_framework');
             </div>
             <div class="divider"></div>
             <!--评论页面 -->
-            <?php
+             <?php
             //上面出现的相关文章混乱了当前文章id 需要重置一下postid
             wp_reset_postdata();
             comments_template(); ?>

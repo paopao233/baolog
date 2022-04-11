@@ -108,6 +108,26 @@ if(!function_exists('cn_nf_url_parse')){
 }
 add_filter( 'the_content', 'cn_nf_url_parse');
 
+
+// 文章外链转内链并转入跳转页面，只有内容的外链 2022/3/31------------------------------
+// https://www.jianzhanmi.com/wordpress/wp-35.html
+if(_lot('baolog-open-goto')){
+    
+    add_filter('the_content','goto_url',999);
+    function goto_url($content){
+        preg_match_all('/href="(.*?)"/',$content,$matches);
+        if($matches){
+            foreach($matches[1] as $val){
+                if( strpos($val,home_url())===false&&strpos($val,"javascript:void(0)")===false )
+                    $content=str_replace("href=\"$val\"", "rel=\"nofollow\" target=\"_blank\" href=\"" . get_bloginfo('home'). "/goto.html?url=" .$val. "\"",$content);
+            }
+        }
+        return $content;
+    }
+
+}
+
+
 //文章页底部小提示
 
 
@@ -170,3 +190,16 @@ function add_custom_field_automatically($post_ID) {
 }
 
 add_filter('wp_targeted_link_rel', 'bzg_targeted_link_rel', 10, 2);
+
+
+// define the do_robots ---------------------------------------------------------------------
+add_filter( 'robots_txt', 'add_robots_rewrite', 10, 2 );
+function add_robots_rewrite( $output, $public ) {
+    $output = "User-agent: *\n";
+    $output .= "Disallow: /wp-admin/\n";
+    $output .= "Disallow: /goto.php?*\n";
+    $output .= "Allow: /wp-admin/admin-ajax.php\n";
+    
+    $output .= "Sitemap: ". get_option('home')."/wp-sitemap.xml\n";
+    return $output; 
+}

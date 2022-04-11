@@ -4,7 +4,7 @@
 * @link https://github.com/paopao233
  */
 /**
- * Template Name: 登录页面
+ * Template Name: BaoLog-登录页面
  **/
 
 global $wpdb, $user_ID;

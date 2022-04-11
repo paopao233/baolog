@@ -1,5 +1,7 @@
 <?php
-if (!defined('ABSPATH')) { exit; }
+if (!defined('ABSPATH')) {
+    exit;
+}
 /**
  * Copyright 2021, https://github.com/paopao233
  * All right reserved.
@@ -10,8 +12,8 @@ if (!defined('ABSPATH')) { exit; }
  */
 date_default_timezone_set("PRC");
 define('THEME_NAME', 'BaoLog');
-define('THEME_VERSIONNAME', '0.4.1');
-define('THEME_DOWNURL', 'https://www.guluqiu.online');
+define('THEME_VERSIONNAME', '0.4.2');
+define('THEME_DOWNURL', 'https://www.guluqiu.cc');
 
 include(get_template_directory() . '/inc/functions.php');
 require_once dirname(__FILE__) . '/framework/baolog-framework.php';
@@ -20,6 +22,21 @@ require_once dirname(__FILE__) . '/framework/baolog-framework.php';
  * functions
  */
 
+// 获取后台选项配置
+function _lot($name, $default = false)
+{
+    $option_name = 'baolog_framework';
+
+    // Get option settings from database
+    $options = get_option($option_name);
+
+    // Return specific option
+    if (isset($options[$name])) {
+        return $options[$name];
+    }
+
+    return $default;
+}
 
 //获取后台主题选项参数
 $options = get_option('baolog_framework');
@@ -59,7 +76,7 @@ function baolog_setup()
     // register_nav_menus(); 是注册所有的 不能有选择
     register_nav_menus(array(
         'menu_primary' => '主导航',
-       
+
     ));
 }
 
@@ -87,7 +104,7 @@ function baolog_menu_link_class($atts, $item, $args)
             $atts['class'] = 'nav-link';
         }
     }
-    
+
     return $atts;
 }
 
@@ -576,29 +593,29 @@ function baolog_get_most_viewed($limit, $day)
     );
 
     $str = implode('&', $args);
-    if($day == 1){
+    if ($day == 1) {
         $postlist = wp_cache_get('day_hot_post_' . md5($str), 'baolog');
         if (false === $postlist) {
-        $postlist = get_posts($args);
-        wp_cache_set('day_hot_post_' . md5($str), $postlist, 'baolog', 86400);
-         }
-    }else if($day == 7){
+            $postlist = get_posts($args);
+            wp_cache_set('day_hot_post_' . md5($str), $postlist, 'baolog', 86400);
+        }
+    } else if ($day == 7) {
         $postlist = wp_cache_get('week_hot_post_' . md5($str), 'baolog');
         if (false === $postlist) {
-        $postlist = get_posts($args);
-        wp_cache_set('week_hot_post_' . md5($str), $postlist, 'baolog', 86400);
-         }
+            $postlist = get_posts($args);
+            wp_cache_set('week_hot_post_' . md5($str), $postlist, 'baolog', 86400);
+        }
     }
-    
-    if ($postlist != null){
+
+    if ($postlist != null) {
         echo '<ul class="list-group post-list mt-3">';
         foreach ($postlist as $post) {
             echo '<li class="list-group-item px-0">
                  <div class="subject break-all">
                             <h2><a class="mr-1" href="' . get_permalink($post->ID) . '" target="' . $target . '"  rel="bookmark"  
-                            title="' . $post->post_title . '">' . wp_trim_words($post->post_title,25) . '</a></h2>';
+                            title="' . $post->post_title . '">' . wp_trim_words($post->post_title, 25) . '</a></h2>';
             //标签
-            
+
             echo get_the_tag_list('', '', '', $post->ID);
 
             echo '</div>';
@@ -609,18 +626,23 @@ function baolog_get_most_viewed($limit, $day)
 
         }
         echo '</ul>';
-    }else{
+    } else {
         echo '<h5 class="mt-5" style="text-align: center;">没有查询到该模块的文章哦~ </h5>';
     }
 
     wp_reset_postdata();//
 }
 
-//关闭顶部管理员登录工具
+// 关闭顶部管理员登录工具
 add_filter('show_admin_bar', '__return_false');
 
+// 修改后台底部信息
+function footerText () {
+	return '感谢使用<a href="https://cn.wordpress.org/">WordPress</a>进行创作。当前使用<a href="https://github.com/paopao233/baolog">'.THEME_NAME.'</a>主题，版本为V'.THEME_VERSIONNAME.'。官方博客：<a href="'.THEME_DOWNURL.'">线报主题</a>';
+}
+add_filter('admin_footer_text', 'footerText', 9999);
 
-//页面链接添加html后缀(需要后台链接中开启伪静态才可以
+// 页面链接添加html后缀(需要后台链接中开启伪静态才可以
 function html_page_permalink()
 {
     global $wp_rewrite;
@@ -659,7 +681,7 @@ function balolog_get_the_posts()
         the_title();
         echo '" target="' . $target . '"rel="bookmark">';
         if (is_sticky()) echo '<span class="huux_thread_hlight_style1">';
-        echo wp_trim_words(get_the_title(),25);//限制标题字数
+        echo wp_trim_words(get_the_title(), 25);//限制标题字数
         echo '</a></h2>';
         the_tags('', '', '');
         echo '</div><span class="num-font text-muted" style="flex-shrink: 0;';
@@ -671,38 +693,73 @@ function balolog_get_the_posts()
 }
 
 //评论开启@人 回复
-function baolog_comment_add_at($comment_text, $comment = '') {  
-  if($comment->comment_parent > 0 & $comment->user_id == 1) {  
-    $comment_text = '<span class="badge badge-dark atwho">@ '.get_comment_author($comment->comment_parent) . '</span> ' . $comment_text.'';  
-  }  
-  if($comment->comment_parent > 0 & $comment->user_id != 1) {  
-    $comment_text = '<span class="badge badge-dark atwho">@ '.get_comment_author($comment->comment_parent) . '</span> ' . $comment_text;  
-  }
-  return $comment_text;  
-}  
-add_filter('comment_text', 'baolog_comment_add_at', 20, 2);  
+function baolog_comment_add_at($comment_text, $comment = '')
+{
+    if ($comment->comment_parent > 0 & $comment->user_id == 1) {
+        $comment_text = '<span class="badge badge-dark atwho">@ ' . get_comment_author($comment->comment_parent) . '</span> ' . $comment_text . '';
+    }
+    if ($comment->comment_parent > 0 & $comment->user_id != 1) {
+        $comment_text = '<span class="badge badge-dark atwho">@ ' . get_comment_author($comment->comment_parent) . '</span> ' . $comment_text;
+    }
+    return $comment_text;
+}
+
+add_filter('comment_text', 'baolog_comment_add_at', 20, 2);
 
 //返回本文章多少条评论
-function baolog_comments_counts($postid=0,$which=0) {
-    $comments = get_comments('status=approve&type=comment&post_id='.$postid); //获取文章的所有评论
+function baolog_comments_counts($postid = 0, $which = 0)
+{
+    $comments = get_comments('status=approve&type=comment&post_id=' . $postid); //获取文章的所有评论
     if ($comments) {
-        $i=0; $j=0; $commentusers=array();
+        $i = 0;
+        $j = 0;
+        $commentusers = array();
         foreach ($comments as $comment) {
             ++$i;
-            if ($i==1) { $commentusers[] = $comment->comment_author_email; ++$j; }
-            if ( !in_array($comment->comment_author_email, $commentusers) ) {
+            if ($i == 1) {
+                $commentusers[] = $comment->comment_author_email;
+                ++$j;
+            }
+            if (!in_array($comment->comment_author_email, $commentusers)) {
                 $commentusers[] = $comment->comment_author_email;
                 ++$j;
             }
         }
-        $output = array($j,$i);
+        $output = array($j, $i);
         $which = ($which == 0) ? 0 : 1;
         return $output[$which]; //返回评论人数
     }
     return 0; //没有评论返回 0
 }
 
+// 移除默认评论框下的三个输入框
+add_filter('comment_form_default_fields', 'remove_website_field');
+function remove_website_field($fields)
+{
 
+    if (isset($fields['url'])||isset($fields['author'])||isset($fields['email']) ) {
+        unset($fields['email']);
+        // unset($fields['cookies']);|| isset($fields['cookies'])
+        unset($fields['url']);
+        unset($fields['author']);
+    }
+    return $fields;
+}
+
+// 更改“在此浏览器中保存我的显示名称、邮箱地址和网站地址，以便下次评论时使用。”提示
+add_filter( 'comment_form_default_fields', 'tu_filter_comment_fields', 20 );
+function tu_filter_comment_fields( $fields ) {
+    $commenter = wp_get_current_commenter();
+
+    $consent   = empty( $commenter['comment_author_email'] ) ? '' : ' checked="checked"';
+
+    $fields['cookies'] = '<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"' . $consent . ' />' . '<label for="wp-comment-cookies-consent" style="color: gray;">在此网站保存评论信息，已方便下次评论。</label></p>';
+
+    return $fields;
+}
+
+// Remove the logout link in comment form
+add_filter('comment_form_logged_in', '__return_empty_string');
 
 //TODO 禁止解析html的评论内容
 
@@ -710,19 +767,21 @@ function baolog_comments_counts($postid=0,$which=0) {
 remove_filter('comment_text', 'wptexturize');
 
 //屏蔽纯英文评论和纯日文
-function refused_english_comments($incoming_comment) {
-  $pattern = '/[一-龥]/u';
-  // 禁止全英文评论
-  if(!preg_match($pattern, $incoming_comment['comment_content'])) {
-    wp_die( "您的评论中必须包含汉字!" );
-  }
-  $pattern = '/[あ-んア-ン]/u';
-  // 禁止日文评论
-  if(preg_match($pattern, $incoming_comment['comment_content'])) {
-    wp_die( "评论禁止包含日文!" );
-  }
-  return( $incoming_comment );
+function refused_english_comments($incoming_comment)
+{
+    $pattern = '/[一-龥]/u';
+    // 禁止全英文评论
+    if (!preg_match($pattern, $incoming_comment['comment_content'])) {
+        wp_die("您的评论中必须包含汉字!");
+    }
+    $pattern = '/[あ-んア-ン]/u';
+    // 禁止日文评论
+    if (preg_match($pattern, $incoming_comment['comment_content'])) {
+        wp_die("评论禁止包含日文!");
+    }
+    return ($incoming_comment);
 }
+
 add_filter('preprocess_comment', 'refused_english_comments');
 
 //自定义评论内容的样式
@@ -751,13 +810,13 @@ function aurelius_comment($comment, $args, $depth)
                         <em style="color: red">你的评论正在审核，稍后会显示出来！</em><br/>
                     <?php endif; ?>
                     <?php comment_text(); ?>
-                    
+
                 </div>
             </div>
 
         </div>
     </div>
-    <?php }
+<?php }
 
 
 //自定义提交评论按钮的样式
@@ -773,7 +832,6 @@ function filter_comment_form_submit_button($submit_button, $args)
     $submit_after = '</div>';
     return $submit_before . $submit_button . $submit_after;
 }
-
 
 
 add_filter('comment_form_submit_button', 'filter_comment_form_submit_button', 10, 2);
@@ -842,7 +900,7 @@ function register_user_front_end()
         $new_user_password = $_POST['new_user_password'];
         $new_user_confirm_password = $_POST['new_user_confirm_password'];
         $user_nice_name = strtolower($_POST['new_user_email']);
-        
+
         //校验邮箱是否正确
         $emailIsMatched = preg_match('~\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*~', $new_user_email);
         if ($emailIsMatched !== 1) {
@@ -850,7 +908,7 @@ function register_user_front_end()
             echo json_encode(array('status' => false, 'message' => $notice_key));
             die;
         }
-        
+
         //校验用户名 4到16位（字母，数字，下划线，减号）
         $usernameMatched = preg_match('~^[a-zA-Z0-9_-]{4,16}$~', $new_user_name);
         if ($usernameMatched !== 1) {
@@ -858,7 +916,7 @@ function register_user_front_end()
             echo json_encode(array('status' => false, 'message' => $notice_key));
             die;
         }
-        
+
         //判断用户密码是否两次都一样
         if ($new_user_password !== $new_user_confirm_password) {
             $notice_key = 'The two passwords are inconsistent';
@@ -866,7 +924,7 @@ function register_user_front_end()
             die;
         }
 
-        
+
         //判断用户密码强度 6到20位字符必须包含字母和数字
         $passwordIsMatched = preg_match('~^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]{6,20})$~', $new_user_password);
         if ($passwordIsMatched !== 1) {
@@ -953,9 +1011,8 @@ function baolog_wp_footer_analysis()
     $custom_footer = $options['baolog-footer-analysis'];
     echo $custom_footer;
 }
+
 add_action('wp_footer', 'baolog_wp_footer_analysis', 100);
-
-
 
 
 /**
@@ -973,3 +1030,7 @@ function baolog_check_sidebar_switcher($option)
     }
     echo $isCLose;
 }
+
+
+
+

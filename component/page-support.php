@@ -1,6 +1,6 @@
 <?php
 /**
-Template Name: 赞助我们
+Template Name: BaoLog-赞助我们
  **/
 get_header(); ?>
 <!--header-->

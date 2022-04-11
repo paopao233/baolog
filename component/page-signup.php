@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: 注册页面
+ * Template Name: BaoLog-注册页面
  **/
 global $wpdb, $user_ID;
 

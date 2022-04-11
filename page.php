@@ -75,7 +75,7 @@
             
             
                 <?php
-                get_template_part('inc/component/content-modal');
+                get_template_part('component/content-modal');
                 ?>
 
 

@@ -10,7 +10,8 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
     <div class="container">
         <div class="frend-link mb-2">
             友情链接：
-            <?php wp_get_links('after=&orderby=name'); ?>
+            <?php 
+			wp_get_links('after=&orderby=name'); ?>
         </div>
 
         <div class="copy-right mb-2">
@@ -24,7 +25,7 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
                 $options = get_option('baolog_framework');
                 echo $options['baolog-beian'];
             ?></a> | 
-            网页加载时间：<?php timer_stop(1); ?>/ms | 
+             queries in <?php timer_stop(3); ?> s |
             主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>
         </div>
 

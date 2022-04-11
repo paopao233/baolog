@@ -39,8 +39,7 @@ if (class_exists('CSF')) {
         'title' => '主题说明',
         'icon' => 'fa fa-bell',
         'description' => '<div class="groups_title"><h3>欢迎使用BaoLog线报主题，当前主题版本为V'. THEME_VERSIONNAME .'</h3><p>亲爱的用户你好呀！感谢您支持我的作品，一套优秀的作品离不开大家的共同维护和支持！本主题是开源作品，但是我想声明以下几点。</p><p style="margin-top:20px;">1. 本主题近阶段不会考虑收费版本，会一步一步迭代主题。</p><p>2. 本主题使用文档目前较少，可能对新手不友好。大多数人都是以采集为主，如果你觉得你采集的内容没有被收录就怪罪到本主题，请直接更换主题。</p><p>3. 本主题作者也是php新手，所以主题也会存在一些不足之处。如果你觉得这个主题很烂，请直接自行离开，不要在交流群BB。</p><p>4. 使用本主题时，请保留主题的底部作者信息，不要逼我加密开源。</p><p>5. 要作者更新的快，就快推荐朋友使用吧，或者直接赞助我们，让我们更好的用爱发电。</p><br><h3>主题交流群</h3><p>1. 作者 Q Q ：1319082534</p><p>2. 线报主题用户交流QQ群：781506134</p><br><h3>主题在线文档</h3><p>1. <a href="https://www.yuque.com/parklot/pcod7h">线报主题使用文档</a> （
-       目前正在一点点完善）</p><p>2. <a href="https://www.guluqiu.cc/archives/125.html">主题博文</a> </p><br><h3>关注作者</h3><p>1. 官方博客：<a href="https://
-       blog.guluqiu.cc">www.guluqiu.online</a></p><p>2. GITHUB：<a href="https://github.com/paopao233/baolog">欢迎STAR</a></p><p>3. 作者QQ: 1319082534</p><p>4. 赞助我们：<a href="https://www.guluqiu.online/donation.html">快来赞助我们呀</a></p></div>',
+       目前正在一点点完善）</p><p>2. <a href="https://www.guluqiu.cc/archives/125.html">主题博文</a> </p><br><h3>关注作者</h3><p>1. 官方博客：<a href="https://blog.guluqiu.cc">www.guluqiu.cc</a></p><p>2. GITHUB：<a href="https://github.com/paopao233/baolog">欢迎STAR</a></p><p>3. 作者QQ: 1319082534</p><p>4. 赞助我们：<a href="https://www.guluqiu.cc/donation.html">快来赞助我们呀</a></p></div>',
          'fields' => array(
                 
                 )
@@ -119,8 +118,27 @@ if (class_exists('CSF')) {
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
-            )
-
+            ),
+            array(
+                'id' => 'baolog-close-comment',
+                'type' => 'switcher',
+                'title' => '关闭全站评论',
+                'desc' => '关闭全站的评论',
+                'subtitle' => '评论默认是开启的',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+            ),            
+            array(
+                'id' => 'baolog-open-goto',
+                'type' => 'switcher',
+                'title' => '开启内链转外链跳转',
+                'desc' => '在点击文章的链接时，主题会默认将外链转为内链。如：guluqiu.cc/goto.html?url=xxx。需要自己建立一个以goto为模板的页面, 链接地址必须为：xxx.com/goto.html',
+                'subtitle' => '默认是没有跳转功能的',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+            ),
         )
     ));
 
@@ -393,7 +411,8 @@ if (class_exists('CSF')) {
                 'desc' => '例如： &lt;a href="#" target="_blank"&gt;&lt;img style="width: 100%;" src="#"&gt;&lt;/a&gt;',
                 'subtitle' => '自定义广告代码，可以放html代码，可放联盟广告',
                 'help' => '为空则不显示',
-        ),
+            ),
+            
         )
     ));
 
