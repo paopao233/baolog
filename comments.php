@@ -9,7 +9,7 @@ if (isset($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['S
 if (_lot('baolog-close-comment'))
     return;
 ?>
-
+<div class="divider"></div>
 <div class="comment-body">
     <div class="comment-input">
         <h5 class="text-center font-weight-bold my-4">发表评论</h5>

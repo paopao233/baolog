@@ -133,6 +133,12 @@
                         editor.insertContent('[reply]在这里填入内容[/reply]');
                     }
                 },
+                {
+                    text: '关注公众号获取密码',
+                    onclick: function () {
+                        editor.insertContent('[gzh2v keyword="输入关键词" key="输入密码"]在这里填入内容[/gzh2v]');
+                    }
+                },
 
             ]
         });

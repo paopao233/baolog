@@ -253,3 +253,24 @@ function reply_to_read($atts, $content = null)
     }
 
 }
+
+// 公众号关注填写关键词 blog.guluqiu.cc
+add_shortcode('gzh2v', 'baolog_secret_content');
+function baolog_secret_content($atts, $content=null){
+    extract(shortcode_atts(array('key'=>null,'keyword'=>null), $atts));
+    if(isset($_POST['secret_key']) && $_POST['secret_key']==$key){
+        return $content;
+    } else {
+        return
+            '
+            <div class="gzhhide">
+            <div class="hidden-blur-poster" style="background-image: url(https://s6.jpg.cm/2022/04/10/LjdUg2.png);"></div>
+            <div ><img class="gzhcode" style="vertical-align: revert" src="'._lot('baolog-opt-accordion-shortcodes')['baolog-shortcodes-gzhgz-qrcode'].'" width="130" height="130" alt="线报主题"></div>
+            <div class="gzhtitle">此内容为隐藏内容，输入密码后可见！<i class="fa icon icon-lock"></i><span></span></div>
+            <div class="gzh-content">请打开微信扫描右边的二维码回复关键字“<span><b>'.$keyword.'</b></span>”获取密码，也可以微信直接搜索"<b>'._lot('baolog-opt-accordion-shortcodes')['baolog-shortcodes-gzhgz-name'].'</b>"关注微信公众号获取密码。</div>
+            <div class="gzhbox"><form action="'.get_permalink().'" method="post">
+            <input id="pwbox" type="text" size="20" name="secret_key" placeholder="请输入从公众号获取到的密码">
+            <button type="submit">查看隐藏内容</button></form></div></div>';
+    }
+}
+

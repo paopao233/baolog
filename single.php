@@ -139,7 +139,6 @@ $options = get_option('baolog_framework');
                         endforeach; endif; ?>
                 </ul>
             </div>
-            <div class="divider"></div>
             <!--评论页面 -->
              <?php
             //上面出现的相关文章混乱了当前文章id 需要重置一下postid

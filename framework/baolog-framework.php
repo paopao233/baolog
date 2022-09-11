@@ -31,20 +31,18 @@ if (class_exists('CSF')) {
     // Create options
     CSF::createOptions($prefix, array(
         'ajax_save' => false,
-        'menu_title' => ''. THEME_NAME .'选项',
+        'menu_title' => '' . THEME_NAME . '选项',
         'menu_slug' => 'baolog-framework',
     ));
     // 主题说明
     CSF::createSection($prefix, array(
         'title' => '主题说明',
         'icon' => 'fa fa-bell',
-        'description' => '<div class="groups_title"><h3>欢迎使用BaoLog线报主题，当前主题版本为V'. THEME_VERSIONNAME .'</h3><p>亲爱的用户你好呀！感谢您支持我的作品，一套优秀的作品离不开大家的共同维护和支持！本主题是开源作品，但是我想声明以下几点。</p><p style="margin-top:20px;">1. 本主题近阶段不会考虑收费版本，会一步一步迭代主题。</p><p>2. 本主题使用文档目前较少，可能对新手不友好。大多数人都是以采集为主，如果你觉得你采集的内容没有被收录就怪罪到本主题，请直接更换主题。</p><p>3. 本主题作者也是php新手，所以主题也会存在一些不足之处。如果你觉得这个主题很烂，请直接自行离开，不要在交流群BB。</p><p>4. 使用本主题时，请保留主题的底部作者信息，不要逼我加密开源。</p><p>5. 要作者更新的快，就快推荐朋友使用吧，或者直接赞助我们，让我们更好的用爱发电。</p><br><h3>主题交流群</h3><p>1. 作者 Q Q ：1319082534</p><p>2. 线报主题用户交流QQ群：781506134</p><br><h3>主题在线文档</h3><p>1. <a href="https://www.yuque.com/parklot/pcod7h">线报主题使用文档</a> （
+        'description' => '<div class="groups_title"><h3>欢迎使用BaoLog线报主题，当前主题版本为V' . THEME_VERSIONNAME . '</h3><p>亲爱的用户你好呀！感谢您支持我的作品，一套优秀的作品离不开大家的共同维护和支持！本主题是开源作品，但是我想声明以下几点。</p><p style="margin-top:20px;">1. 本主题近阶段不会考虑收费版本，会一步一步迭代主题。</p><p>2. 本主题使用文档目前较少，可能对新手不友好。大多数人都是以采集为主，如果你觉得你采集的内容没有被收录就怪罪到本主题，请直接更换主题。</p><p>3. 本主题作者也是php新手，所以主题也会存在一些不足之处。如果你觉得这个主题很烂，请直接自行离开，不要在交流群BB。</p><p>4. 使用本主题时，请保留主题的底部作者信息，不要逼我加密开源。</p><p>5. 要作者更新的快，就快推荐朋友使用吧，或者直接赞助我们，让我们更好的用爱发电。</p><br><h3>主题交流群</h3><p>1. 作者 Q Q ：1319082534</p><p>2. 线报主题用户交流QQ群：781506134</p><br><h3>主题在线文档</h3><p>1. <a href="https://www.yuque.com/parklot/pcod7h">线报主题使用文档</a> （
        目前正在一点点完善）</p><p>2. <a href="https://www.guluqiu.cc/archives/125.html">主题博文</a> </p><br><h3>关注作者</h3><p>1. 官方博客：<a href="https://blog.guluqiu.cc">www.guluqiu.cc</a></p><p>2. GITHUB：<a href="https://github.com/paopao233/baolog">欢迎STAR</a></p><p>3. 作者QQ: 1319082534</p><p>4. 赞助我们：<a href="https://www.guluqiu.cc/donation.html">快来赞助我们呀</a></p></div>',
-         'fields' => array(
-                
-                )
-             
-        ));
+        'fields' => array()
+
+    ));
     // 全局设置
     CSF::createSection($prefix, array(
         'title' => '全局设置',
@@ -57,7 +55,7 @@ if (class_exists('CSF')) {
             array(
                 'type' => 'notice',
                 'style' => 'success',
-                'content' => '当前主题版本为V'. THEME_VERSIONNAME .',请关注作者https://github.com/paopao233查看更新内容。加入QQ群一起探讨：781506134',
+                'content' => '当前主题版本为V' . THEME_VERSIONNAME . ',请关注作者https://github.com/paopao233查看更新内容。加入QQ群一起探讨：781506134',
             ),
             array(
                 'id' => 'baolog-favicon',
@@ -128,7 +126,7 @@ if (class_exists('CSF')) {
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
-            ),            
+            ),
             array(
                 'id' => 'baolog-open-goto',
                 'type' => 'switcher',
@@ -139,6 +137,26 @@ if (class_exists('CSF')) {
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
             ),
+            array(
+                'id' => 'baolog-category-close',
+                'type' => 'switcher',
+                'title' => '开启去除URL中/category',
+                'desc' => '开启/关闭这个功能后都得对现有的分类目录进行更新，否则会查找不到新的目录地址。',
+                'subtitle' => '默认是没有开启的',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+            ),
+            array(
+                'id' => 'baolog-native-nav',
+                'type' => 'switcher',
+                'title' => '开启原生移动端导航',
+                'desc' => '默认采用新版移动端导航，对旧版有需求的可以开启这个。',
+                'subtitle' => '默认是没有开启的',
+                'text_off' => '点击开启此功能',
+                'text_on' => '点击关闭此功能',
+                'text_width' => 140,
+            )
         )
     ));
 
@@ -150,14 +168,14 @@ if (class_exists('CSF')) {
             array(
                 'type' => 'heading',
                 'content' => '这里是有关首页的设置',
-            ),array(
+            ), array(
                 'id' => 'baolog-subtitle',
                 'type' => 'text',
                 'title' => '网站描述',
                 'subtitle' => '只显示在首页的副标题 例如：baolog主题真的是太好用啦！',
                 'default' => '又一个Wordpress网站',
                 'help' => '可为空',
-            ),array(
+            ), array(
                 'id' => 'baolog-home-todayUpdate',
                 'type' => 'switcher',
                 'title' => '关闭文章&nbsp[今日更新]&nbsp提示',
@@ -166,7 +184,7 @@ if (class_exists('CSF')) {
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
-            ),array(
+            ), array(
                 'id' => 'baolog-home-one-layout',
                 'type' => 'switcher',
                 'title' => '开启首页单模块布局',
@@ -258,14 +276,42 @@ if (class_exists('CSF')) {
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140
-            ), 
-            array(
-            'id' => 'baolog-posts-content-tips-change',
-            'type' => 'text',
-            'title' => '文章页面底部来源提示内容',
-            'desc' => '显示在文章的底部，默认内容是：本条线报内容来自互联网，所推荐内容不代表本站立场，请自行鉴别。必须是开启该功能修改才会生效。',
-            'default' => '本条线报内容来自互联网，所推荐内容不代表本站立场，请自行鉴别。',
             ),
+            array(
+                'id' => 'baolog-posts-content-tips-change',
+                'type' => 'text',
+                'title' => '文章页面底部来源提示内容',
+                'desc' => '显示在文章的底部，默认内容是：本条线报内容来自互联网，所推荐内容不代表本站立场，请自行鉴别。必须是开启该功能修改才会生效。',
+                'default' => '本条线报内容来自互联网，所推荐内容不代表本站立场，请自行鉴别。',
+            ),
+            array(
+                'id' => 'baolog-opt-accordion-shortcodes',
+                'type' => 'accordion',
+                'title' => '短代码相关设置',
+                'accordions' => array(
+                    array(
+                        'title' => '关注公众号相关配置',
+                        'fields' => array(
+                            array(
+                                'id' => 'baolog-shortcodes-gzhgz-name',
+                                'type' => 'text',
+                                'title' => '公众号名字',
+                                'default'=>'万物天空',
+                                'desc'=>'请输入要关注获取密码的公众号，默认为博主的',
+                            ),
+                            array(
+                                'id' => 'baolog-shortcodes-gzhgz-qrcode',
+                                'type' => 'upload',
+                                'title' => '公众号二维码',
+                                'default' => get_stylesheet_directory_uri() . '/images/gzhgz-qrcode.jpg',
+                                'desc' => '请输入公众号的图片地址，默认为博主的。可以直接输入网址。',
+                            ),
+                        )
+                    ),
+
+                )
+            ),
+
 
         )
     ));
@@ -308,9 +354,9 @@ if (class_exists('CSF')) {
             array(
                 'id' => 'baolog-sidebar-app-switcher',
                 'type' => 'switcher',
-                'title' => '侧栏的app悬浮',
+                'title' => '开启侧栏的app悬浮',
                 'desc' => '关闭侧栏app悬浮以后，下面安卓app无论有没有图片都是不会显示的。',
-                'subtitle' => '默认是开启',
+                'subtitle' => '默认是关闭',
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
@@ -327,9 +373,9 @@ if (class_exists('CSF')) {
             array(
                 'id' => 'baolog-sidebar-qrcode-switcher',
                 'type' => 'switcher',
-                'title' => '侧栏的二维码悬浮',
+                'title' => '开启侧栏的二维码悬浮',
                 'desc' => '关闭侧栏的二维码悬浮以后，下面二维码图片无论有没有图片都是不会显示的。',
-                'subtitle' => '默认是开启',
+                'subtitle' => '默认是关闭',
                 'text_off' => '点击开启此功能',
                 'text_on' => '点击关闭此功能',
                 'text_width' => 140,
@@ -365,7 +411,7 @@ if (class_exists('CSF')) {
     ));
 
     //广告设置
-    CSF::createSection($prefix,array(
+    CSF::createSection($prefix, array(
         'title' => '广告设置',
         'icon' => 'fa fa-bandcamp',
         'fields' => array(
@@ -412,12 +458,12 @@ if (class_exists('CSF')) {
                 'subtitle' => '自定义广告代码，可以放html代码，可放联盟广告',
                 'help' => '为空则不显示',
             ),
-            
+
         )
     ));
 
-   //自定义代码
-    CSF::createSection($prefix,array(
+    //自定义代码
+    CSF::createSection($prefix, array(
         'title' => '自定义代码',
         'icon' => 'fa fa-code',
         'fields' => array(
@@ -425,7 +471,7 @@ if (class_exists('CSF')) {
                 'type' => 'heading',
                 'content' => '这里是有关全站的自定义代码设置区域。',
             ),
-           array(
+            array(
                 'id' => 'baolog-footer-custom',
                 'type' => 'code_editor',
                 'sanitize' => false,
@@ -438,8 +484,8 @@ if (class_exists('CSF')) {
                 'type' => 'code_editor',
                 'sanitize' => false,
                 'settings' => array(
-                    'theme'  => 'mbo',
-                    'mode'   => 'javascript',
+                    'theme' => 'mbo',
+                    'mode' => 'javascript',
                 ),
                 'title' => '统计代码',
                 'desc' => '例如：&lt;script&gt;我是统计代码~&lt;/script&gt;',

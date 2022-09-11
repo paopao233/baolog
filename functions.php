@@ -10,9 +10,8 @@ if (!defined('ABSPATH')) {
  * @date 2021-8月-9日 20:29
  * @license GPL v3 LICENSE
  */
-date_default_timezone_set("PRC");
 define('THEME_NAME', 'BaoLog');
-define('THEME_VERSIONNAME', '0.4.2');
+define('THEME_VERSIONNAME', '0.4.3');
 define('THEME_DOWNURL', 'https://www.guluqiu.cc');
 
 include(get_template_directory() . '/inc/functions.php');

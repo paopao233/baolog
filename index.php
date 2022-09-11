@@ -1,6 +1,5 @@
 <?php get_header();
-$theme_option = get_option('baolog_framework');
-$is_one_layout = $theme_option['baolog-home-one-layout'];
+$is_one_layout = _lot('baolog-home-one-layout');
 ?>
 <!--header-->
 <main id="body">

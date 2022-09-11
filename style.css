@@ -2,7 +2,7 @@
 Theme Name: BaoLog
 Theme URI: https://www.guluqiu.cc
 Description: 一个简洁的线报主题，自带有在线小工具。从现在起，我只想做一个快乐的affman。
-Version: 0.4.2
+Version: 0.4.3
 Author: parklot
 Author URI: https://github.com/paopao233
 Requires PHP: 5.2.4
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Author Blog: https://blog.guluqiu.cc
 Tags: 线报主题,简洁,好看
  */
- @charset "UTF-8";
+@charset "UTF-8";
 html {
     --theme: #409eff;
     --background: #fff;
@@ -65,7 +65,7 @@ html {
 @media (max-width: 992px) {
     .navbar-expand-lg .navbar-logo-brand{
         position: absolute;
-        top: -30%;
+        top: -40%;
         left: 10%;
     }
     .navbar.navbar-expand-lg {
@@ -104,7 +104,7 @@ html {
     
     .navbar-expand-lg .navbar-logo-brand{
         position: absolute;
-        top: -30%;
+        top: -40%;
         left: 10%;
     }
     
@@ -121,6 +121,7 @@ html {
     }
     
 }
+
 
 /* 动画 */
 @keyframes slide-down {
@@ -452,7 +453,11 @@ tr:hover td {
     background-color: #f5f7fa
 }
 
-td {
+table thead tr th {
+    font-weight: 500;
+    background: var(--classC);
+}
+td,th {
     transition: background-color .25s ease;
     padding: 8px;
     min-width: 0;
@@ -461,7 +466,7 @@ td {
     vertical-align: middle;
     position: relative;
     text-align: left;
-    border-bottom: 1px solid #ebeef5
+    border: 1px solid #ebeef5
 }
 
 /*折叠面板*/
@@ -612,14 +617,15 @@ td {
 }
 
 #indexTabContent>.tab-pane.fade {
-  transition: all 1.5s;
-  transform: translateY(1rem);
+    transition: all 1.5s;
+    transform: translateY(1rem);
 }
 
 #indexTabContent>.tab-pane.fade.show {
-  transform: translateY(0rem);
+    transform: translateY(0rem);
 }
 
+/* 回复模块 */
 .post-hidden-tips {
     position: relative;
     display: -webkit-box;
@@ -667,4 +673,176 @@ td {
     -webkit-transform: translate(150%,-50%);
     -ms-transform: translate(150%,-50%);
     transform: translate(150%,-50%);
+}
+
+/* 关注公众号 */
+.post_hide_box,.secret-password {
+    background:none repeat scroll 0 0 #efe;
+    border-left:5px solid #e74c3c;
+    color:#555;
+    padding:10px 0 10px 10px;
+    border-radius:5px;
+    margin-bottom:15px;
+    overflow:hidden;
+    clear:both;
+}
+.post_hide_box .post-secret {
+    font-size:18px;
+    line-height:20px;
+    color:#e74c3c;
+    margin:5px;
+}
+.post_hide_box form {
+    margin:15px 0;
+}
+.post_hide_box form span {
+    font-size:18px;
+    font-weight:700;
+}
+.post_hide_box .erweima {
+    margin-left:20px;
+    margin-right:16px;
+}
+.post_hide_box input[type=password] {
+    color:#9ba1a8;
+    padding:6px;
+    background-color:#f6f6f6;
+    border:1px solid #e4e6e8;
+    font-size:12px;
+    -moz-transition:border .25s linear,color .25s linear,background-color .25s linear;
+    -webkit-transition:border .25s linear,color .25s linear,background-color .25s linear;
+    -o-transition:border .25s linear,color .25s linear,background-color .25s linear;
+    transition:border .25s linear,color .25s linear,background-color .25s linear;
+}
+.post_hide_box input[type=submit] {
+    background:#F88C00;
+    border:none;
+    border:2px solid;
+    border-color:#F88C00;
+    border-left:none;
+    border-top:none;
+    padding:0px;
+    width:100px;
+    height:38px;
+    color:#fff;
+    outline:0;
+    border-radius:0 0 2px 0;
+    font-size:16px;
+}
+.post_hide_box .details span {
+    color:#e74c3c;
+}
+.post_hide_box .details
+span {
+    color:#e74c3c;
+}
+.gzhhide .gzhcode {
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:20px;
+    top:50%;
+    margin-top:-50px
+}
+.gzhhide {
+    background:#fff;
+    border-radius:10px;
+    padding:20px;
+    margin:15px 0;
+    position:relative;
+    /*box-shadow:0 0 20px #d0d0d0*/
+}
+.gzhhide .gzhtitle {
+    position:relative;
+    font-size:17px;
+    font-weight:700;
+    color:#000000cc;
+    padding:6px 140px 0 40px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+.gzhhide .gzhtitle .fa {
+    position:absolute;
+    left:0;
+    font-size:35px;
+    top:0
+}
+.gzh-content {
+    position: relative;
+    padding:20px 140px 15px 0;
+    font-size:14px;
+    color:#000000cc;
+}
+.gzhbox {
+    position: relative;
+    padding:0 140px 10px 0;
+}
+.gzhbox input {
+    width:45%;
+    border:none;
+    color:#737373;
+    font-size:13px;
+    height:35px;
+    line-height:35px;
+    background:#f2f2f2;
+    border-radius:4px;
+    outline:none;
+    float:left;
+    padding:0 10px
+}
+.gzhbox button {
+    width:20%;
+    margin-left: 2%;
+    border:none;
+    background:#3b8cff;
+    color:#fff;
+    padding:5px 0;
+    font-size:14px;
+    border-radius:5px
+}
+.gzhhide .gzhcode {
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:20px;
+    top:50%;
+    margin-top:-50px
+}
+.gzhbox {
+    padding:0
+}
+.gzh-content {
+    padding:20px 90px 15px 0
+}
+.gzhhide .gzhcode {
+    width:80px;
+    height:80px
+}
+#vivideo {
+    height:200px
+}
+.gzhhide .gzhtitle i {
+    font-style:normal;
+}
+
+/** tougao */
+
+form div.tt {
+    float: left;
+    width: 460px;
+    margin: 10px 0;
+}
+
+#submit_post {
+    margin: 20px 0;
+}
+
+#submit_post>.btn-outline-secondary{
+    margin-right: 10px;
+}
+
+#postform {
+    width: 100%;
+    padding: 0 15px;
 }

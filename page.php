@@ -88,7 +88,6 @@
                     </a>
                 </div>
            
-            <div class="divider"></div>
             <?php comments_template(); ?>
         </div>
 </main>

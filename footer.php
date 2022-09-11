@@ -17,14 +17,13 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
         <div class="copy-right mb-2">
             Copyright © <?php bloginfo('name'); ?> | 
             <?php
-            $options = get_option('baolog_framework');
-            echo $options['baolog-website-create'];
-            ?> | 
-            <a href="https://beian.miit.gov.cn/" target="_blank">
+            echo _lot('baolog-website-create');
+            ?> |
+            <a href="https://beian.miit.gov.cn/" target="_blank"
+                <?php if (!_lot('baolog-beian')) echo 'style="display:none;"';?>>
                 <?php
-                $options = get_option('baolog_framework');
-                echo $options['baolog-beian'];
-            ?></a> | 
+                echo _lot('baolog-beian');
+                ?>| </a>
              queries in <?php timer_stop(3); ?> s |
             主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>
         </div>
