@@ -87,7 +87,7 @@ if (isset($_POST['tougao_form']) && $_POST['tougao_form'] == 'send') {
             echo('<div style="text-align:center;">' . '<meta charset="UTF-8" /><meta http-equiv="refresh" content="5;URL=' . home_url() . '">' . '</div>');
             echo('<div style="position:relative;font-size:14px;margin-top:100px;text-align:center;">' . '投稿成功，感谢投稿，主人将会审核您的文章。5秒钟后将返回网站首页！' . '</div>');
             echo('<div style="position:relative;font-size:20px;margin-top:30px;text-align:center;">' . '<a href="/" >' . '立即返回网站首页' . '</a>' . '</div>');
-            wp_mail(array('1319082534@qq.com', $email), "您的投稿主人已经收到啦！", $info, array('Content-Type: text/html; charset=UTF-8'));
+            wp_mail(array($email), "您的投稿主人已经收到啦！", $info, array('Content-Type: text/html; charset=UTF-8'));
             die();
         } else {
             wp_die('投稿失败！');
