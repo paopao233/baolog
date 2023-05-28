@@ -1,17 +1,17 @@
 ![cover.png](https://i.loli.net/2021/10/15/Ng4bm2sBETYrylL.png)
 # baolog
 wordpress线报主题，发羊毛，我就要专一~<br>
-在线预览及其配置说明：https://www.guluqiu.cc/archives/125.html<br>
+在线预览及其配置说明：https://baolog.eu.org/archives/125.html<br>
 恳请大家在使用本主题的时候，留下作者的信息，毕竟开源不易。<br>
-欢迎捐赠：https://www.guluqiu.cc/donation.html<br>
-## 通知：本站域名已经更改为：guluqiu.cc
+欢迎捐赠：https://baolog.eu.org/donation.html<br>
+## 通知：本站域名已经更改为：baolog.eu.org 佛系更新
 ## 环境要求
 WordPress 4.4+
 WordPress 伪静态
 PHP 5.7+ 7.0+
 ## 捐赠
 > 支持我们，让线报主题走的更远！
-> https://www.guluqiu.cc/donation.html
+> https://baolog.eu.org/donation.html
 
 <a href="#" target="_blank"><img style="width:30%;hight:30%;" src="https://i.loli.net/2021/10/30/CXKWMDijLoB9SQu.png" /></a>
 
