@@ -39,13 +39,13 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
   <?php wp_footer(); ?>
 </div>
 </body>
-<script src="<?php bloginfo('template_url'); ?>/js/jquery-3.1.0.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/lang.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/popper.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/bootstrap.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/baolog-alert.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/baolog-func.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/baolog-page.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/assets/js/jquery-3.1.0.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/assets/js/lang.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/assets/js/popper.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/assets/js/bootstrap.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/assets/js/baolog-alert.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/assets/js/baolog-func.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/assets/js/baolog-page.js"></script>
 <?php 
     if (is_singular()) {
         wp_print_scripts('pagejs'); 

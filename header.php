@@ -108,9 +108,9 @@ $options = get_option('baolog_framework');
     ?>">
 
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/bootstrap.css">
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/baolog.css">
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/huux-notice.css" name="huux_notice">
+    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/assets/css/baolog.css">
+    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/assets/css/huux-notice.css" name="huux_notice">
     <?php wp_head(); ?>
 </head>
 

@@ -57,7 +57,7 @@ function baolog_advertisement($position)
 add_filter('avatar_defaults', 'mytheme_default_avatar');
 function mytheme_default_avatar($avatar_defaults)
 {
-    //$new_avatar_url = get_template_directory_uri() . '/images/default_avatar.png';
+    //$new_avatar_url = get_template_directory_uri() . '/assets/images/default_avatar.png';
     $new_avatar_url = 'https://cn.gravatar.com/avatar/642a9efe79c22c568dc852c8774b8abf';
     $avatar_defaults[$new_avatar_url] = 'Default Avatar';
     return $avatar_defaults;

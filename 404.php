@@ -26,8 +26,8 @@ get_header(); ?>
     </div>
 </main>
 
-<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/bodymovin.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/data.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/assets/js/bodymovin.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/assets/js/data.js"></script>
 <script>
 function backHome(){
     var ele = document.getElementById("backHome");

@@ -15,7 +15,7 @@ define('THEME_VERSIONNAME', '1.0');
 define('THEME_DOWNURL', 'https://baolog.loveasd.com');
 
 include(get_template_directory() . '/inc/functions.php');
-require_once dirname(__FILE__) . '/framework/baolog-framework.php';
+require_once dirname(__FILE__) . '/component/framework/baolog-framework.php';
 
 /**
  * functions
