@@ -15,7 +15,7 @@ define('THEME_VERSIONNAME', '1.0');
 define('THEME_DOWNURL', 'https://baolog.loveasd.com');
 
 include(get_template_directory() . '/inc/functions.php');
-require_once dirname(__FILE__) . '/component/framework/baolog-framework.php';
+require_once dirname(__FILE__) . '/framework/baolog-framework.php';
 
 /**
  * functions
@@ -236,70 +236,47 @@ add_filter('wp_resource_hints', 'remove_dns_prefetch', 10, 2);
 //the_tags过滤器
 // add custom class to tag blog.guluqiu.cc 标签自定义类名
 // 几个固定标签样式 京东、红包、淘宝、优惠券、放水、白菜、苏宁
-function add_class_the_tags($html)
-{
+function add_class_the_tags($html) {
     $postid = get_the_ID();
-    $tags = wp_get_post_tags($postid); //this is the adjustment, all the rest is bhlarsen
-    $class = '<a class="badge badge-pill mr-1 tag ';
-    $badge = array("badge-dark ", "badge-danger ", "badge-primary ", "badge-warning ", "badge-success ", "badge-secondary ", "badge-info ");
-    if ($tags != null) {
-        //这里是文章的id
+    $tags = wp_get_post_tags($postid);
+    $badge = array(
+        "优惠券" => "badge-dark",
+        "京东" => "badge-danger",
+        "红包" => "badge-primary",
+        "淘宝" => "badge-warning",
+        "白菜" => "badge-success",
+        "苏宁" => "badge-secondary",
+        "放水" => "badge-info",
+        "百度" => "badge-info"
+    );
+
+    if ($tags) {
         foreach ($tags as $tag) {
             $name = $tag->name;
-            //同篇文章中的标签也会得到这个class名 不知道怎么解决
-            switch ($name) {
-                case "优惠券":
-                {
-                    $class .= $badge[0];
-                    break;
-                }
-                case "京东":
-                {
-                    $class .= $badge[1];
-                    break;
-                }
-                case "红包":
-                {
-                    $class .= $badge[2];
-                    break;
-                }
-                case "淘宝":
-                {
-                    $class .= $badge[3];
-                    break;
-                }
-                case "白菜":
-                {
-                    $class .= $badge[4];
-                    break;
-                }
-                case "苏宁":
-                {
-                    $class .= $badge[5];
-                    break;
-                }
-                case "放水":
-                {
-                    $class .= $badge[6];
-                    break;
-                }
-                default:
-                {
-                    $class .= $badge[rand(0, 6)];
-                    break;
-                }
+            $cache_key = 'tag_badge_class_' . md5($name);
+
+            // 检查缓存中是否存在该标签的类名
+            $cached_class = wp_cache_get($cache_key, 'baolog');
+            if ($cached_class) {
+                $class = $cached_class;
+            } elseif (isset($badge[$name])) {
+                $class = $badge[$name];
+            } else {
+                // 如果$badge数组中没有对应的类名，随机选择一个类名
+                $class = $badge[array_rand($badge)];
+                // 将随机选择的类名存入缓存
+                wp_cache_set($cache_key, $class, 'baolog', 60*60*24); // 缓存一天
             }
-            break;
+
+            // 替换标签的class属性
+            $html = str_replace('<a href="' . get_tag_link($tag) . '" rel="tag">', '<a href="' . get_tag_link($tag) . '" rel="tag" class="badge badge-pill mr-1 tag ' . $class . '">', $html);
         }
-    } else {
-        //这里的post_id是页面文章的id
-        $class .= $badge[rand(0, 6)];
     }
-    $class .= '"';
-    $html = str_replace("<a", $class, $html);
+
     return $html;
 }
 
+// 将函数添加到'the_tags'过滤器
 add_filter('the_tags', 'add_class_the_tags');
 
 
@@ -313,6 +290,7 @@ add_filter('the_tags', 'add_class_the_tags');
 function baolog_pagenavi($page = '', $range = 4)
 {
     $code = 'class="page-link"';
+    $max_page = 0; // 初始化 $max_page
     global $paged, $wp_query;
     if (!$max_page) {
         if ($page == '') {
@@ -494,7 +472,7 @@ function countdown_js()
 
 add_shortcode('countdown', 'countdown');
 add_action('wp_footer', 'countdown_js');
-wp_register_script('countdown_js', get_template_directory_uri() . '/js/countdownjs.js', array(), '1.0', false);
+wp_register_script('countdown_js', get_template_directory_uri() . '/assets/js/countdownjs.js', array(), '1.0', false);
 wp_enqueue_script('countdown_js');
 
 
@@ -574,9 +552,8 @@ add_filter('get_avatar', 'baolog_get_avatar', 10, 3);
  */
 function baolog_get_most_viewed($limit, $day)
 {
-
     $options = get_option('baolog_framework');
-    $is_blank = $options['baolog-posts-blank'];
+    $is_blank = isset($options['baolog-posts-blank']) ? $options['baolog-posts-blank'] : false;
     $target = '_self';
     $args = array(
         'posts_per_page' => $limit,
@@ -591,45 +568,34 @@ function baolog_get_most_viewed($limit, $day)
         ),
     );
 
-    $str = implode('&', $args);
-    if ($day == 1) {
-        $postlist = wp_cache_get('day_hot_post_' . md5($str), 'baolog');
-        if (false === $postlist) {
-            $postlist = get_posts($args);
-            wp_cache_set('day_hot_post_' . md5($str), $postlist, 'baolog', 86400);
-        }
-    } else if ($day == 7) {
-        $postlist = wp_cache_get('week_hot_post_' . md5($str), 'baolog');
-        if (false === $postlist) {
-            $postlist = get_posts($args);
-            wp_cache_set('week_hot_post_' . md5($str), $postlist, 'baolog', 86400);
-        }
+    $cache_key = 'day_hot_post_' . md5(json_encode($args));
+    $postlist = wp_cache_get($cache_key, 'baolog');
+    if (false === $postlist) {
+        $postlist = get_posts($args);
+        wp_cache_set($cache_key, $postlist, 'baolog', 86400);
     }
 
-    if ($postlist != null) {
+    if (!empty($postlist)) {
         echo '<ul class="list-group post-list mt-3">';
         foreach ($postlist as $post) {
             echo '<li class="list-group-item px-0">
                  <div class="subject break-all">
-                            <h2><a class="mr-1" href="' . get_permalink($post->ID) . '" target="' . $target . '"  rel="bookmark"  
-                            title="' . $post->post_title . '">' . wp_trim_words($post->post_title, 25) . '</a></h2>';
+                            <h2><a class="mr-1" href="' . esc_url(get_permalink($post->ID)) . '" target="' . esc_attr($target) . '"  rel="bookmark"  
+                            title="' . esc_attr($post->post_title) . '">' . esc_html(wp_trim_words($post->post_title, 25)) . '</a></h2>';
             //标签
-
             echo get_the_tag_list('', '', '', $post->ID);
-
             echo '</div>';
             //日期
             echo '<span class="num-font text-muted" style="flex-shrink: 0;">'
-                . date('Y-m-d H:i', strtotime($post->post_date)) .
+                . esc_html(date('Y-m-d H:i', strtotime($post->post_date))) .
                 '</span></li>';
-
         }
         echo '</ul>';
     } else {
         echo '<h5 class="mt-5" style="text-align: center;">暂无文章哦~ </h5>';
     }
 
-    wp_reset_postdata();//
+    wp_reset_postdata(); // 重置文章数据
 }
 
 // 关闭顶部管理员登录工具
@@ -655,41 +621,50 @@ add_action('init', 'html_page_permalink', -1);
 
 //获取首页文章 包括置顶文章
 //https://wordpress.stackexchange.com/questions/104127/display-all-sticky-post-before-regular-post/104136
-function balolog_get_the_posts()
+function balolog_get_the_postsV2()
 {
+    // 提前获取当前日期和选项
     $today = date('Y-m-d');
     $options = get_option('baolog_framework');
-    $is_blank = $options['baolog-posts-blank'];//跳转方式
-    $is_open_posts_today = $options['baolog-home-todayUpdate'];//今日更新
-    $target = '_self';
-    if ($is_blank == 1) {
-        $target = '_blank';
-    }
+    $is_blank = $options['baolog-posts-blank'];
+    $is_open_posts_today = $options['baolog-home-todayUpdate'];
+    $target = $is_blank == 1 ? '_blank' : '_self';
 
-    //加入了一个判断 解决了显示两次置顶文章的问题
+    // 开始HTML输出
     while (have_posts()) {
         the_post();
-        echo '<li class="list-group-item px-0">
-                            <div class="subject break-all">
-                                <h2>';
-        if (($today == get_the_time('Y-m-d')) && !$is_open_posts_today) echo '<span class="font-weight-bold" style="color: red;">[&nbsp;今日更新&nbsp;]&nbsp;</span>';
+
+        $post_date = get_the_time('Y-m-d');
+        $post_time = get_the_time('Y-m-d H:i');
+        $post_title = wp_trim_words(get_the_title(), 25);
+        $post_permalink = get_the_permalink();
+        $post_tags = get_the_tag_list('', '', '');
+        $is_today_update = ($today == $post_date) && !$is_open_posts_today;
+
+        echo '<li class="list-group-item px-0">';
+        echo '<div class="subject break-all">';
+        echo '<h2>';
+
+        // 今日更新和置顶标签
+        if ($is_today_update) echo '<span class="font-weight-bold" style="color: red;">[&nbsp;今日更新&nbsp;]&nbsp;</span>';
         if (is_sticky()) echo '<span class="font-weight-bold">[&nbsp;置顶&nbsp;]&nbsp;</span>';
-        echo '<a class="mr-1" href="';
-        the_permalink();
-        echo '"title="';
-        the_title();
-        echo '" target="' . $target . '"rel="bookmark">';
+
+        echo '<a class="mr-1" href="' . esc_url($post_permalink) . '" title="' . esc_attr($post_title) . '" target="' . esc_attr($target) . '" rel="bookmark">';
         if (is_sticky()) echo '<span class="huux_thread_hlight_style1">';
-        echo wp_trim_words(get_the_title(), 25);//限制标题字数
+        echo esc_html($post_title);
         echo '</a></h2>';
-        the_tags('', '', '');
+
+        // 文章标签
+        echo $post_tags;
+
         echo '</div><span class="num-font text-muted" style="flex-shrink: 0;';
-        if (($today == get_the_time('Y-m-d')) && !$is_open_posts_today) echo 'color:red !important;';
+        if ($is_today_update) echo 'color:red !important;';
         echo '">';
-        the_time('Y-m-d H:i');
+        echo esc_html($post_time);
         echo '</span></li>';
     }
 }
+
 
 //评论开启@人 回复
 function baolog_comment_add_at($comment_text, $comment = '')
@@ -840,7 +815,7 @@ add_filter('comment_form_submit_button', 'filter_comment_form_submit_button', 10
 function ajax_login_init()
 {
 
-    wp_register_script('ajax-login-script', get_template_directory_uri() . '/js/ajax-login-script.js');
+    wp_register_script('ajax-login-script', get_template_directory_uri() . '/assets/js/ajax-login-script.js');
     // wp_enqueue_script('ajax-login-script');
 
     wp_localize_script('ajax-login-script', 'ajax_login_object', array(

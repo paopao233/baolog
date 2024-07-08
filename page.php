@@ -1,4 +1,10 @@
-<?php get_header(); ?>
+<?php
+/*
+* @author parklot
+* @link https://github.com/paopao233
+ */
+get_header();
+?>
 <body>
 <main id="body">
     <div class="container">
@@ -16,10 +22,11 @@
                 <div class="text-muted text-small">
                     <span class="mr-2">
                         <!--获取头像-->
-                    <?php
-                    the_post();
-                    echo get_avatar(get_the_author_meta('ID'), $args['96'], '', 'avatar', array('class' => 'avatar-1 mr-1'));
-                    rewind_posts();
+                    <span class="mr-2">
+                    <?php the_post();
+                        $args = array(96 => 96);
+                        echo get_avatar(get_the_author_meta('ID'), $args[96], '', 'avatar', array('class' => 'avatar-1 mr-1'));
+                        rewind_posts();
                     ?>
                         <!--获取作者名-->
                     <?php echo get_the_author_meta('display_name', $post->post_author) ?></span>
@@ -67,10 +74,7 @@
 
                 <!--support-->
                 <div class="support-author px-2">
-                    <a  website="<?php
-                    $options = get_option('baolog_framework');
-                    echo $options['baolog-page-support'];
-                    ?>" class="btn btn-outline-danger support-us">赞助网站</a>
+                    <a  class="btn btn-outline-danger support-us">赞助网站</a>
                 </div>
             
             

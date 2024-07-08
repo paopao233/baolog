@@ -4,123 +4,86 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d9a300d-348f-40cf-a278-666466e4288f" name="Changes" comment="v1.0 init">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_7_5_11_17__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_7_5_11_17__Changes_1.xml" beforeDir="false" />
+    <list default="true" id="8d9a300d-348f-40cf-a278-666466e4288f" name="Changes" comment="fix-整理目录结构">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/404.php" beforeDir="false" afterPath="$PROJECT_DIR$/404.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/page-douyin.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/page-goto.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/page-lanzou.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/page-login.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/page-signup.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/page-support.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/component/page-tougao.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/baolog.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/baolog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/huux-notice.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/huux-notice.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/FontAwesome.otf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/font/FontAwesome.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/fontawesome-webfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/assets/font/fontawesome-webfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/font/fontawesome-webfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/fontawesome-webfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/font/fontawesome-webfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/fontawesome-webfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/assets/font/fontawesome-webfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/font/fontawesome-webfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/assets/font/fontawesome-webfont.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/assets/css/style-rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/framework/assets/css/style-rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/assets/css/style.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/framework/assets/css/style.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/assets/images/checkerboard.png" beforeDir="false" afterPath="$PROJECT_DIR$/framework/assets/images/checkerboard.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/assets/images/wp-logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/framework/assets/images/wp-logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/assets/images/wp-plugin-logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/framework/assets/images/wp-plugin-logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/assets/js/main.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/framework/assets/js/main.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/assets/js/plugins.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/framework/assets/js/plugins.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/baolog-framework.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/baolog-framework.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/classes/abstract.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/classes/abstract.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/classes/admin-options.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/classes/admin-options.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/classes/fields.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/classes/fields.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/classes/setup.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/classes/setup.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/accordion/accordion.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/accordion/accordion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/background/background.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/background/background.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/backup/backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/backup/backup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/border/border.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/border/border.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/button_set/button_set.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/button_set/button_set.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/callback/callback.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/callback/callback.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/checkbox/checkbox.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/checkbox/checkbox.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/code_editor/code_editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/code_editor/code_editor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/color/color.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/color/color.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/color_group/color_group.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/color_group/color_group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/content/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/content/content.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/date/date.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/date/date.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/dimensions/dimensions.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/dimensions/dimensions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/fieldset/fieldset.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/fieldset/fieldset.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/gallery/gallery.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/gallery/gallery.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/group/group.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/group/group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/heading/heading.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/heading/heading.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/icon/fa4-icons.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/icon/fa4-icons.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/icon/fa5-icons.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/icon/fa5-icons.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/icon/icon.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/icon/icon.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/image_select/image_select.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/image_select/image_select.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/link/link.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/link/link.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/link_color/link_color.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/link_color/link_color.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/map/map.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/map/map.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/media/media.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/media/media.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/notice/notice.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/notice/notice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/number/number.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/number/number.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/palette/palette.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/palette/palette.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/radio/radio.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/radio/radio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/repeater/repeater.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/repeater/repeater.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/select/select.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/select/select.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/slider/slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/slider/slider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/sortable/sortable.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/sortable/sortable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/sorter/sorter.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/sorter/sorter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/spacing/spacing.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/spacing/spacing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/spinner/spinner.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/spinner/spinner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/subheading/subheading.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/subheading/subheading.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/submessage/submessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/submessage/submessage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/switcher/switcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/switcher/switcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/tabbed/tabbed.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/tabbed/tabbed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/text/text.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/text/text.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/textarea/textarea.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/textarea/textarea.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/typography/google-fonts.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/typography/google-fonts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/typography/typography.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/typography/typography.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/upload/upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/upload/upload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/fields/wp_editor/wp_editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/fields/wp_editor/wp_editor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/functions/actions.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/functions/actions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/functions/customize.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/functions/customize.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/functions/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/functions/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/functions/sanitize.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/functions/sanitize.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/functions/validate.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/functions/validate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/functions/walker.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/functions/walker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/framework/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/languages/es_ES.mo" beforeDir="false" afterPath="$PROJECT_DIR$/framework/languages/es_ES.mo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/languages/es_ES.po" beforeDir="false" afterPath="$PROJECT_DIR$/framework/languages/es_ES.po" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/languages/zh_CN.mo" beforeDir="false" afterPath="$PROJECT_DIR$/framework/languages/zh_CN.mo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/component/framework/languages/zh_CN.po" beforeDir="false" afterPath="$PROJECT_DIR$/framework/languages/zh_CN.po" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/assets/css/style-rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/assets/css/style-rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/assets/css/style.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/assets/css/style.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/assets/images/checkerboard.png" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/assets/images/checkerboard.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/assets/images/wp-logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/assets/images/wp-logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/assets/images/wp-plugin-logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/assets/images/wp-plugin-logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/assets/js/main.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/assets/js/main.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/assets/js/plugins.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/assets/js/plugins.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/baolog-framework.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/baolog-framework.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/classes/abstract.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/classes/abstract.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/classes/admin-options.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/classes/admin-options.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/classes/fields.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/classes/fields.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/classes/setup.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/classes/setup.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/accordion/accordion.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/accordion/accordion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/background/background.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/background/background.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/backup/backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/backup/backup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/border/border.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/border/border.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/button_set/button_set.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/button_set/button_set.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/callback/callback.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/callback/callback.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/checkbox/checkbox.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/checkbox/checkbox.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/code_editor/code_editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/code_editor/code_editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/color/color.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/color/color.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/color_group/color_group.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/color_group/color_group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/content/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/content/content.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/date/date.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/date/date.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/dimensions/dimensions.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/dimensions/dimensions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/fieldset/fieldset.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/fieldset/fieldset.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/gallery/gallery.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/gallery/gallery.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/group/group.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/group/group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/heading/heading.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/heading/heading.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/icon/fa4-icons.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/icon/fa4-icons.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/icon/fa5-icons.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/icon/fa5-icons.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/icon/icon.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/icon/icon.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/image_select/image_select.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/image_select/image_select.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/link/link.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/link/link.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/link_color/link_color.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/link_color/link_color.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/map/map.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/map/map.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/media/media.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/media/media.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/notice/notice.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/notice/notice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/number/number.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/number/number.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/palette/palette.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/palette/palette.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/radio/radio.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/radio/radio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/repeater/repeater.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/repeater/repeater.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/select/select.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/select/select.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/slider/slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/slider/slider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/sortable/sortable.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/sortable/sortable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/sorter/sorter.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/sorter/sorter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/spacing/spacing.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/spacing/spacing.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/spinner/spinner.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/spinner/spinner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/subheading/subheading.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/subheading/subheading.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/submessage/submessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/submessage/submessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/switcher/switcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/switcher/switcher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/tabbed/tabbed.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/tabbed/tabbed.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/text/text.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/text/text.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/textarea/textarea.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/textarea/textarea.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/typography/google-fonts.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/typography/google-fonts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/typography/typography.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/typography/typography.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/upload/upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/upload/upload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/fields/wp_editor/wp_editor.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/fields/wp_editor/wp_editor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/functions/actions.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/functions/actions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/functions/customize.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/functions/customize.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/functions/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/functions/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/functions/sanitize.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/functions/sanitize.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/functions/validate.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/functions/validate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/functions/walker.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/functions/walker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/languages/es_ES.mo" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/languages/es_ES.mo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/languages/es_ES.po" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/languages/es_ES.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/languages/zh_CN.mo" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/languages/zh_CN.mo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/languages/zh_CN.po" beforeDir="false" afterPath="$PROJECT_DIR$/component/framework/languages/zh_CN.po" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/app.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/app.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/comment.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/comment.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/gzhgz-qrcode.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/gzhgz-qrcode.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/miniapp.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/miniapp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/page/login/loader.gif" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/page/login/loader.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/page/support/alipay.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/page/support/alipay.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/page/support/wechat.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/page/support/wechat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/qqapp.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/qqapp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/quote.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/quote.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/sanjiao.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/sanjiao.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/wx.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/wx.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/func/shortcodes.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/func/shortcodes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ajax-login-script.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/ajax-login-script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/baolog-alert.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/baolog-alert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/baolog-func.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/baolog-func.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/baolog-page.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/baolog-page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/countdownjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/countdownjs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/info.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/info.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery-3.1.0.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/jquery-3.1.0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/lang.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/lang.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/mce-button.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/mce-button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/popper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/popper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/single.php" beforeDir="false" afterPath="$PROJECT_DIR$/single.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,17 +126,19 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "v1.0",
-    "last_opened_file_path": "D:/wjl/tool/phpstudy_pro/WWW/baolog.com/wp-content/themes/wordpress-theme-puock",
+    "last_opened_file_path": "D:/wjl/tool/phpstudy_pro/WWW/baolog.com/wp-content/themes/baolog-main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "ai.codegeex.plugin.settings.ApplicationConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\wjl\tool\phpstudy_pro\WWW\baolog.com\wp-content\themes\baolog-main" />
       <recent name="D:\wjl\tool\phpstudy_pro\WWW\baolog.com\wp-content\themes\baolog-main\component" />
       <recent name="D:\wjl\tool\phpstudy_pro\WWW\baolog.com\wp-content\themes\baolog-main\assest" />
       <recent name="D:\wjl\tool\phpstudy_pro\WWW\baolog.com\wp-content\themes\baolog-main\component\page" />
@@ -209,7 +174,9 @@
       <workItem from="1720150599101" duration="96000" />
       <workItem from="1720150698081" duration="71000" />
       <workItem from="1720150772810" duration="71000" />
-      <workItem from="1720167494868" duration="2716000" />
+      <workItem from="1720167494868" duration="19637000" />
+      <workItem from="1720425055346" duration="855000" />
+      <workItem from="1720425928175" duration="5030000" />
     </task>
     <task id="LOCAL-00001" summary="v0.5 init">
       <option name="closed" value="true" />
@@ -227,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720150471623</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix-整理目录结构">
+      <option name="closed" value="true" />
+      <created>1720170547987</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1720170547987</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +219,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="v1.0" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -259,6 +234,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v0.5 init" />
     <MESSAGE value="v1.0 init" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.0 init" />
+    <MESSAGE value="fix-整理目录结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix-整理目录结构" />
   </component>
 </project>

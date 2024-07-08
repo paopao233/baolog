@@ -4,8 +4,17 @@
 * @link https://github.com/paopao233
  */
 get_header();
-$the_post_category_name = get_the_category(get_the_ID())[0]->cat_name;
-$the_post_category_link = get_category_link(get_the_category(get_the_ID())[0]->term_id);
+
+$categories = get_the_category(get_the_ID());
+if (!empty($categories)) {
+    $the_post_category_name = $categories[0]->cat_name;
+    $the_post_category_link = get_category_link($categories[0]->term_id);
+} else {
+    // 如果没有分类，提供默认值
+    $the_post_category_name = '未分类';
+    $the_post_category_link = '#';
+}
+
 $options = get_option('baolog_framework');
 ?>
 <body>
@@ -26,8 +35,9 @@ $options = get_option('baolog_framework');
                 <div class="text-muted text-small">
                     <span class="mr-2">
                     <?php the_post();
-                    echo get_avatar(get_the_author_meta('ID'), $args['96'], '', 'avatar', array('class' => 'avatar-1 mr-1'));
-                    rewind_posts();
+                        $args = array(96 => 96);
+                        echo get_avatar(get_the_author_meta('ID'), $args[96], '', 'avatar', array('class' => 'avatar-1 mr-1'));
+                        rewind_posts();
                     ?>
                     <?php echo get_the_author_meta('display_name', $post->post_author) ?></span>
                     <span class="mr-2"><i class="icon-clock-o"></i> <?php the_time('Y-m-d H:i') ?></span>
@@ -87,16 +97,12 @@ $options = get_option('baolog_framework');
                     </div>
                     <!--support-->
                     <div class="support-author px-2">
-                        <a  website="<?php
-                        $options = get_option('baolog_framework');
-                        echo $options['baolog-page-support'];
-                        ?>" class="btn btn-outline-danger support-us">赞助网站</a>
+                        <a  class="btn btn-outline-danger support-us">赞助网站</a>
                     </div>
                     
                  <?php
                 get_template_part('component/content-modal');
                 ?>
-
                 </div>
                 
                <?php if($options['baolog-posts-content-tips'] == 1):?>

@@ -2,7 +2,7 @@
 $options = get_option('baolog_framework');
 ?>
 <!DOCTYPE html>
-<html>
+<html <?php language_attributes(); ?>>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="content-language" content="zh-CN">
@@ -11,6 +11,7 @@ $options = get_option('baolog_framework');
     <meta name="renderer" content="webkit"/>
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv='content-language' content='<?php echo get_locale() ?>'>
     <title><?php if (is_home()) {
             bloginfo('name');
             echo " - ";

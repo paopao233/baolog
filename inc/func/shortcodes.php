@@ -20,7 +20,7 @@ function wd_add_mce_button()
 add_action('admin_head', 'wd_add_mce_button');
 function wd_add_tinymce_plugin($plugin_array)
 {
-    $plugin_array['wd_mce_button'] = get_template_directory_uri() . '/js/mce-button.js';
+    $plugin_array['wd_mce_button'] = get_template_directory_uri() . '/assets/js/mce-button.js';
     return $plugin_array;
 }
 

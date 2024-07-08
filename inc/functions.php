@@ -108,6 +108,40 @@ if(!function_exists('cn_nf_url_parse')){
 }
 add_filter( 'the_content', 'cn_nf_url_parse');
 
+//======搜索
+/**
+ * 让 WordPress 只搜索文章的标题
+ * https://www.wpdaxue.com/search-by-title-only.html
+ */
+function __search_by_title_only( $search, $wp_query )
+{
+    global $wpdb;
+
+    if ( empty( $search ) )
+        return $search; // skip processing - no search term in query
+
+    $q = $wp_query->query_vars;
+    $n = ! empty( $q['exact'] ) ? '' : '%';
+
+    $search =
+    $searchand = '';
+
+    foreach ( (array) $q['search_terms'] as $term ) {
+        $term = esc_sql( like_escape( $term ) );
+        $search .= "{$searchand}($wpdb->posts.post_title LIKE '{$n}{$term}{$n}')";
+        $searchand = ' AND ';
+    }
+
+    if ( ! empty( $search ) ) {
+        $search = " AND ({$search}) ";
+        if ( ! is_user_logged_in() )
+            $search .= " AND ($wpdb->posts.post_password = '') ";
+    }
+
+    return $search;
+}
+add_filter( 'posts_search', '__search_by_title_only', 500, 2 );
+
 //===============================================
 // 去除分类category
 if(_lot('baolog-category-close')){
@@ -247,12 +281,23 @@ function unregister_default_widgets()
 add_action("widgets_init", "unregister_default_widgets", 11);
 
 //admin css
-add_filter('login_headerurl', create_function(false,"return get_bloginfo('siteurl');"));
-add_filter('login_headertitle', create_function(false,"return get_bloginfo('description');"));
+add_filter('login_headerurl', function() {
+    return get_bloginfo('siteurl');
+});
+
+add_filter('login_headertitle', function() {
+    return get_bloginfo('description');
+});
+
 function nowspark_login_head() {
-    echo '<style type="text/css">body.login #login h1 a {background:url(https://cn.gravatar.com/avatar/642a9efe79c22c568dc852c8774b8abf) no-repeat 0 0 transparent;}</style>';
+    echo '<style type="text/css">
+            body.login #login h1 a {
+                background: url(https://cn.gravatar.com/avatar/642a9efe79c22c568dc852c8774b8abf) no-repeat 0 0 transparent;
+            }
+          </style>';
 }
 add_action("login_head", "nowspark_login_head");
+
 
 /**
  * SEO
@@ -285,4 +330,49 @@ function add_robots_rewrite( $output, $public ) {
     
     $output .= "Sitemap: ". get_option('home')."/wp-sitemap.xml\n";
     return $output; 
+}
+
+///wordpress蜘蛛爬行记录生成
+function get_naps_bot()
+{
+    $useragent = strtolower($_SERVER['HTTP_USER_AGENT']);
+    if (strpos($useragent, 'googlebot') !== false) {
+        return 'Googlebot';
+    }
+    if (strpos($useragent, 'msnbot') !== false) {
+        return 'MSNbot';
+    }
+    if (strpos($useragent, 'slurp') !== false) {
+        return 'Yahoobot';
+    }
+    if (strpos($useragent, 'baiduspider') !== false) {
+        return 'Baiduspider';
+    }
+    if (strpos($useragent, 'sohu-search') !== false) {
+        return 'Sohubot';
+    }
+    if (strpos($useragent, 'lycos') !== false) {
+        return 'Lycos';
+    }
+    if (strpos($useragent, 'robozilla') !== false) {
+        return 'Robozilla';
+    }
+    return false;
+}
+function nowtime()
+{
+    date_default_timezone_set('Asia/Shanghai');
+    $date = date("Y-m-d.G:i:s");
+    return $date;
+}
+$searchbot = get_naps_bot();
+if ($searchbot) {
+    $tlc_thispage = addslashes($_SERVER['HTTP_USER_AGENT']);
+    $url = $_SERVER['HTTP_REFERER'];
+    $file = "robotslogs.txt";
+    $time = nowtime();
+    $data = fopen($file, "a");
+    $PR = "{$_SERVER['REQUEST_URI']}";
+    fwrite($data, "Time:{$time} robot:{$searchbot} URL:{$tlc_thispage}\n page:{$PR}\r\n");
+    fclose($data);
 }

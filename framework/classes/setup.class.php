@@ -371,7 +371,8 @@ if ( ! class_exists( 'CSF' ) ) {
 
     // Set url constant
     public static function include_plugin_url( $file ) {
-      return esc_url(self::$url) . 'setup.class.php/' . ltrim( $file, '/' );
+      // return esc_url(self::$url) . 'setup.class.php/' . ltrim( $file, '/' );
+      return esc_url(self::$url) . '/' . ltrim( $file, '/' );
     }
 
     // Include files

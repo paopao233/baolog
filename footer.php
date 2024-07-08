@@ -9,9 +9,18 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
 <div class="footer text-muted text-center py-3">
     <div class="container">
         <div class="frend-link mb-2">
-            友情链接：
-            <?php 
-			wp_get_links('after=&orderby=name'); ?>
+            <?php
+            $links = get_bookmarks(array(
+                'orderby' => 'name',
+            ));
+
+            if (!empty($links)) {
+                echo '友情链接：';
+                foreach ($links as $link) {
+                    echo '<a href="' . esc_url($link->link_url) . '" title="' . esc_attr($link->link_name) . '">' . esc_html($link->link_name) . '</a>';
+                }
+            }
+            ?>
         </div>
 
         <div class="copy-right mb-2">
@@ -28,11 +37,11 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
             主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>
         </div>
 
-        <!--<div class="loadtime">-->
-        <!--    网页加载时间：<?php timer_stop(1); ?>/ms-->
-            <!--制作不易 请给个star 勿移除本声明-->
-        <!--  主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>-->
-        <!--</div>-->
+<!--        <div class="loadtime">-->
+<!--            网页加载时间：--><?php //timer_stop(1); ?><!--/ms-->
+<!--            制作不易 请给个star 勿移除本声明-->
+<!--          主题作者：<a href="https://github.com/paopao233/baolog">parklot</a>-->
+<!--        </div>-->
 
 
     </div>
@@ -57,7 +66,6 @@ echo '<script>console.log("\n %c '. THEME_NAME .'主题v' . THEME_VERSIONNAME . 
     jsearch_form.on('submit', function () {
         var keyword = jsearch_form.find('input[name="s"]').val();
         if ($.trim(keyword) == '') {
-            //php7.3 only
             $.alert('请输入关键词后再搜索...', 30, {size: 'sm'});
             return false;
         }
