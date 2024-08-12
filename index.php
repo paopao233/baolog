@@ -42,10 +42,11 @@ $is_one_layout = _lot('baolog-home-one-layout');
                             </ul>
                         </div>
                         <div class="tab-pane fade" id="dayhot" role="tabpanel" aria-labelledby="dayhot-tab">
-                            <?php baolog_get_most_viewed(15, 1); ?>
+                            <!--fixme 标签样式失效-->
+                            <?php baolog_get_most_viewed(30, 1); ?>
                         </div>
                         <div class="tab-pane fade" id="weekhot" role="tabpanel" aria-labelledby="weekhot-tab">
-                            <?php baolog_get_most_viewed(15, 7); ?>
+                            <?php baolog_get_most_viewed(30, 7); ?>
                         </div>
                     </div>
                 <?php } ?>

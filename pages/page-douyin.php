@@ -50,7 +50,7 @@ get_header(); ?>
                     </div>
                     <input type="text" id="input-result-url" class="form-control" disabled="">
                     <div class="input-group-append">
-                        <button class="btn btn-dark" type="button" id="button-douyin-url">打开</button>
+                        <button class="btn btn-dark" type="button" id="button-douyin-url">复制</button>
                     </div>
                 </div>
             </div>

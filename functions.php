@@ -16,6 +16,9 @@ define('THEME_DOWNURL', 'https://baolog.loveasd.com');
 
 include(get_template_directory() . '/inc/functions.php');
 require_once dirname(__FILE__) . '/framework/baolog-framework.php';
+require_once get_theme_file_path('classes/class-baolog-wpjson.php'); // 接口类
+
+add_action('rest_api_init', ['Baolog_JsonData', 'jsondata_init']);
 
 /**
  * functions
@@ -278,6 +281,7 @@ function add_class_the_tags($html) {
 
 // 将函数添加到'the_tags'过滤器
 add_filter('the_tags', 'add_class_the_tags');
+
 
 
 /**
@@ -584,6 +588,7 @@ function baolog_get_most_viewed($limit, $day)
                             title="' . esc_attr($post->post_title) . '">' . esc_html(wp_trim_words($post->post_title, 25)) . '</a></h2>';
             //标签
             echo get_the_tag_list('', '', '', $post->ID);
+
             echo '</div>';
             //日期
             echo '<span class="num-font text-muted" style="flex-shrink: 0;">'
