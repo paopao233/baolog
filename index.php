@@ -9,7 +9,7 @@ $is_one_layout = _lot('baolog-home-one-layout');
             <div class="post-body">
                 <?php if ($is_one_layout) { ?>
                     <ul class="list-group post-list mt-3">
-                        <?php balolog_get_the_postsV2(); ?>
+                        <?php baolog_get_the_postsV2(); ?>
                     </ul>
                     <ul class="pagination justify-content-center mt-md-5 mt-3 num-font">
                         <?php baolog_pagenavi(); ?>
@@ -35,14 +35,13 @@ $is_one_layout = _lot('baolog-home-one-layout');
                              aria-labelledby="newposts-tab">
                             <!--blog posts-->
                             <ul class="list-group post-list mt-3">
-                                <?php balolog_get_the_postsV2(); ?>
+                                <?php baolog_get_the_postsV2(); ?>
                             </ul>
                             <ul class="pagination justify-content-center mt-md-5 mt-3 num-font">
                                 <?php baolog_pagenavi(); ?>
                             </ul>
                         </div>
                         <div class="tab-pane fade" id="dayhot" role="tabpanel" aria-labelledby="dayhot-tab">
-                            <!--fixme 标签样式失效-->
                             <?php baolog_get_most_viewed(30, 1); ?>
                         </div>
                         <div class="tab-pane fade" id="weekhot" role="tabpanel" aria-labelledby="weekhot-tab">

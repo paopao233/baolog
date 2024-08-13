@@ -626,7 +626,7 @@ add_action('init', 'html_page_permalink', -1);
 
 //获取首页文章 包括置顶文章
 //https://wordpress.stackexchange.com/questions/104127/display-all-sticky-post-before-regular-post/104136
-function balolog_get_the_postsV2()
+function baolog_get_the_postsV2()
 {
     // 提前获取当前日期和选项
     $today = date('Y-m-d');
@@ -635,15 +635,23 @@ function balolog_get_the_postsV2()
     $is_open_posts_today = $options['baolog-home-todayUpdate'];
     $target = $is_blank == 1 ? '_blank' : '_self';
 
-    // 开始HTML输出
-    while (have_posts()) {
-        the_post();
+    // 自定义查询，仅获取所需字段
+    $args = array(
+        'fields' => 'ids',  // 仅返回文章ID
+    );
 
-        $post_date = get_the_time('Y-m-d');
-        $post_time = get_the_time('Y-m-d H:i');
-        $post_title = wp_trim_words(get_the_title(), 25);
-        $post_permalink = get_the_permalink();
-        $post_tags = get_the_tag_list('', '', '');
+    $query = new WP_Query($args);
+
+    // 开始HTML输出
+    while ($query->have_posts()) {
+        $query->the_post();
+
+        $post_id = get_the_ID();
+        $post_date = get_the_time('Y-m-d', $post_id);
+        $post_time = get_the_time('Y-m-d H:i', $post_id);
+        $post_title = wp_trim_words(get_the_title($post_id), 25);
+        $post_permalink = get_the_permalink($post_id);
+        $post_tags = get_the_tag_list('', '', '', $post_id);
         $is_today_update = ($today == $post_date) && !$is_open_posts_today;
 
         echo '<li class="list-group-item px-0">';
@@ -652,10 +660,10 @@ function balolog_get_the_postsV2()
 
         // 今日更新和置顶标签
         if ($is_today_update) echo '<span class="font-weight-bold" style="color: red;">[&nbsp;今日更新&nbsp;]&nbsp;</span>';
-        if (is_sticky()) echo '<span class="font-weight-bold">[&nbsp;置顶&nbsp;]&nbsp;</span>';
+        if (is_sticky($post_id)) echo '<span class="font-weight-bold">[&nbsp;置顶&nbsp;]&nbsp;</span>';
 
         echo '<a class="mr-1" href="' . esc_url($post_permalink) . '" title="' . esc_attr($post_title) . '" target="' . esc_attr($target) . '" rel="bookmark">';
-        if (is_sticky()) echo '<span class="huux_thread_hlight_style1">';
+        if (is_sticky($post_id)) echo '<span class="huux_thread_hlight_style1">';
         echo esc_html($post_title);
         echo '</a></h2>';
 
@@ -668,7 +676,12 @@ function balolog_get_the_postsV2()
         echo esc_html($post_time);
         echo '</span></li>';
     }
+
+    wp_reset_postdata();
 }
+
+
+
 
 
 //评论开启@人 回复

@@ -12,9 +12,11 @@ get_header(); ?>
     <div class="container">
         <div class="divider"></div>
         <!-- 适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。-->
-        <div class="post-body">
-            <!--动画-->
-            <div id="svgContainer"></div>
+        <div class="post-body mb-5">
+            <div class="col-md-12 text-center mt-5">
+                <h1>404</h1>
+                <h2>未找到对应的页面</h2>
+            </div>
         </div>
         <!--按钮 -->
         <div  class="center-404">
@@ -26,8 +28,7 @@ get_header(); ?>
     </div>
 </main>
 
-<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/assets/js/bodymovin.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/assets/js/data.js"></script>
+
 <script>
 function backHome(){
     var ele = document.getElementById("backHome");
@@ -35,15 +36,7 @@ function backHome(){
     window.location=title;
 }
 </script>
-<script type="text/javascript">
-    var svgContainer = document.getElementById('svgContainer');
-    var animItem = bodymovin.loadAnimation({
-        wrapper: svgContainer,
-        animType: 'svg',
-        loop: true,
-        animationData: JSON.parse(animationData)
-    });
-</script>
+
 
 <!--footer-->
 <?php get_footer(); ?>

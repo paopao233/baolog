@@ -46,12 +46,12 @@ function baolog_advertisement($position)
         echo "位置错误";
         return;
     }
-    echo $GLOBALS['theme_options'][$ad_result.=$position];
+    echo $GLOBALS['theme_options'][$ad_result .= $position];
 }
 
 /**
  * 用户相关
- * 
+ *
  */
 //自定义默认头像
 add_filter('avatar_defaults', 'mytheme_default_avatar');
@@ -64,18 +64,18 @@ function mytheme_default_avatar($avatar_defaults)
 }
 
 /**
- * 内容相关 
+ * 内容相关
  */
 //给外链加上nofollow及新窗口打开
-if(!function_exists('cn_nf_url_parse')){
-    function cn_nf_url_parse( $content ) {
+if (!function_exists('cn_nf_url_parse')) {
+    function cn_nf_url_parse($content)
+    {
         $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>";
-        if(preg_match_all("/$regexp/siU", $content, $matches, PREG_SET_ORDER)) {
-            if( !empty($matches) ) {
+        if (preg_match_all("/$regexp/siU", $content, $matches, PREG_SET_ORDER)) {
+            if (!empty($matches)) {
 
                 $srcUrl = get_option('siteurl');
-                for ($i=0; $i < count($matches); $i++)
-                {
+                for ($i = 0; $i < count($matches); $i++) {
 
                     $tag = $matches[$i][0];
                     $tag2 = $matches[$i][0];
@@ -85,19 +85,19 @@ if(!function_exists('cn_nf_url_parse')){
 
                     $pattern = '/target\s*=\s*"\s*_blank\s*"/';
                     preg_match($pattern, $tag2, $match, PREG_OFFSET_CAPTURE);
-                    if( count($match) < 1 )
+                    if (count($match) < 1)
                         $noFollow .= ' target="_blank" ';
 
                     $pattern = '/rel\s*=\s*"\s*[n|d]ofollow\s*"/';
                     preg_match($pattern, $tag2, $match, PREG_OFFSET_CAPTURE);
-                    if( count($match) < 1 )
+                    if (count($match) < 1)
                         $noFollow .= ' rel="nofollow" ';
 
-                    $pos = strpos($url,$srcUrl);
+                    $pos = strpos($url, $srcUrl);
                     if ($pos === false) {
-                        $tag = rtrim ($tag,'>');
-                        $tag .= $noFollow.'>';
-                        $content = str_replace($tag2,$tag,$content);
+                        $tag = rtrim($tag, '>');
+                        $tag .= $noFollow . '>';
+                        $content = str_replace($tag2, $tag, $content);
                     }
                 }
             }
@@ -106,57 +106,60 @@ if(!function_exists('cn_nf_url_parse')){
         return $content;
     }
 }
-add_filter( 'the_content', 'cn_nf_url_parse');
+add_filter('the_content', 'cn_nf_url_parse');
 
 //======搜索
 /**
  * 让 WordPress 只搜索文章的标题
  * https://www.wpdaxue.com/search-by-title-only.html
  */
-function __search_by_title_only( $search, $wp_query )
+function __search_by_title_only($search, $wp_query)
 {
     global $wpdb;
 
-    if ( empty( $search ) )
+    if (empty($search))
         return $search; // skip processing - no search term in query
 
     $q = $wp_query->query_vars;
-    $n = ! empty( $q['exact'] ) ? '' : '%';
+    $n = !empty($q['exact']) ? '' : '%';
 
     $search =
     $searchand = '';
 
-    foreach ( (array) $q['search_terms'] as $term ) {
-        $term = esc_sql( like_escape( $term ) );
+    foreach ((array)$q['search_terms'] as $term) {
+        $term = esc_sql(like_escape($term));
         $search .= "{$searchand}($wpdb->posts.post_title LIKE '{$n}{$term}{$n}')";
         $searchand = ' AND ';
     }
 
-    if ( ! empty( $search ) ) {
+    if (!empty($search)) {
         $search = " AND ({$search}) ";
-        if ( ! is_user_logged_in() )
+        if (!is_user_logged_in())
             $search .= " AND ($wpdb->posts.post_password = '') ";
     }
 
     return $search;
 }
-add_filter( 'posts_search', '__search_by_title_only', 500, 2 );
+
+add_filter('posts_search', '__search_by_title_only', 500, 2);
 
 //===============================================
 // 去除分类category
-if(_lot('baolog-category-close')){
+if (_lot('baolog-category-close')) {
     // Refresh rules on activation/deactivation/category changes
     register_activation_hook(__FILE__, 'no_category_base_refresh_rules');
     add_action('created_category', 'no_category_base_refresh_rules');
     add_action('edited_category', 'no_category_base_refresh_rules');
     add_action('delete_category', 'no_category_base_refresh_rules');
-    function no_category_base_refresh_rules() {
+    function no_category_base_refresh_rules()
+    {
         global $wp_rewrite;
-        $wp_rewrite -> flush_rules();
+        $wp_rewrite->flush_rules();
     }
 
     register_deactivation_hook(__FILE__, 'no_category_base_deactivate');
-    function no_category_base_deactivate() {
+    function no_category_base_deactivate()
+    {
         remove_filter('category_rewrite_rules', 'no_category_base_rewrite_rules');
         // We don't want to insert our custom rules again
         no_category_base_refresh_rules();
@@ -164,29 +167,31 @@ if(_lot('baolog-category-close')){
 
 // Remove category base
     add_action('init', 'no_category_base_permastruct');
-    function no_category_base_permastruct() {
+    function no_category_base_permastruct()
+    {
         global $wp_rewrite, $wp_version;
         if (version_compare($wp_version, '3.4', '<')) {
             // For pre-3.4 support
-            $wp_rewrite -> extra_permastructs['category'][0] = '%category%';
+            $wp_rewrite->extra_permastructs['category'][0] = '%category%';
         } else {
-            $wp_rewrite -> extra_permastructs['category']['struct'] = '%category%';
+            $wp_rewrite->extra_permastructs['category']['struct'] = '%category%';
         }
     }
 
 // Add our custom category rewrite rules
     add_filter('category_rewrite_rules', 'no_category_base_rewrite_rules');
-    function no_category_base_rewrite_rules($category_rewrite) {
+    function no_category_base_rewrite_rules($category_rewrite)
+    {
         //var_dump($category_rewrite); // For Debugging
 
         $category_rewrite = array();
         $categories = get_categories(array('hide_empty' => false));
         foreach ($categories as $category) {
-            $category_nicename = $category -> slug;
-            if ($category -> parent == $category -> cat_ID)// recursive recursion
-                $category -> parent = 0;
-            elseif ($category -> parent != 0)
-                $category_nicename = get_category_parents($category -> parent, false, '/', true) . $category_nicename;
+            $category_nicename = $category->slug;
+            if ($category->parent == $category->cat_ID)// recursive recursion
+                $category->parent = 0;
+            elseif ($category->parent != 0)
+                $category_nicename = get_category_parents($category->parent, false, '/', true) . $category_nicename;
             $category_rewrite['(' . $category_nicename . ')/(?:feed/)?(feed|rdf|rss|rss2|atom)/?$'] = 'index.php?category_name=$matches[1]&feed=$matches[2]';
             $category_rewrite['(' . $category_nicename . ')/page/?([0-9]{1,})/?$'] = 'index.php?category_name=$matches[1]&paged=$matches[2]';
             $category_rewrite['(' . $category_nicename . ')/?$'] = 'index.php?category_name=$matches[1]';
@@ -204,14 +209,16 @@ if(_lot('baolog-category-close')){
 
 // Add 'category_redirect' query variable
     add_filter('query_vars', 'no_category_base_query_vars');
-    function no_category_base_query_vars($public_query_vars) {
+    function no_category_base_query_vars($public_query_vars)
+    {
         $public_query_vars[] = 'category_redirect';
         return $public_query_vars;
     }
 
 // Redirect if 'category_redirect' is set
     add_filter('request', 'no_category_base_request');
-    function no_category_base_request($query_vars) {
+    function no_category_base_request($query_vars)
+    {
         //print_r($query_vars); // For Debugging
         if (isset($query_vars['category_redirect'])) {
             $catlink = trailingslashit(get_option('home')) . user_trailingslashit($query_vars['category_redirect'], 'category');
@@ -228,15 +235,16 @@ if(_lot('baolog-category-close')){
 
 // 文章外链转内链并转入跳转页面，只有内容的外链 2022/3/31------------------------------
 // https://www.jianzhanmi.com/wordpress/wp-35.html
-if(_lot('baolog-open-goto')){
-    
-    add_filter('the_content','goto_url',999);
-    function goto_url($content){
-        preg_match_all('/href="(.*?)"/',$content,$matches);
-        if($matches){
-            foreach($matches[1] as $val){
-                if( strpos($val,home_url())===false&&strpos($val,"javascript:void(0)")===false )
-                    $content=str_replace("href=\"$val\"", "rel=\"nofollow\" target=\"_blank\" href=\"" . get_bloginfo('home'). "/goto.html?url=" .$val. "\"",$content);
+if (_lot('baolog-open-goto')) {
+
+    add_filter('the_content', 'goto_url', 999);
+    function goto_url($content)
+    {
+        preg_match_all('/href="(.*?)"/', $content, $matches);
+        if ($matches) {
+            foreach ($matches[1] as $val) {
+                if (strpos($val, home_url()) === false && strpos($val, "javascript:void(0)") === false)
+                    $content = str_replace("href=\"$val\"", "rel=\"nofollow\" target=\"_blank\" href=\"" . get_bloginfo('home') . "/goto.html?url=" . $val . "\"", $content);
             }
         }
         return $content;
@@ -248,23 +256,24 @@ if(_lot('baolog-open-goto')){
 //文章页底部小提示
 
 
-
 //给文章添加一个noopener noreferrer值 预防跨站攻击
-function bzg_targeted_link_rel($rel, $link_html) {
-	$site_url = parse_url(site_url());
-	preg_match('/href=[\'\"](https?:\/\/.*)[\'\"]/i', $link_html, $matchs);
-	if(empty($matchs[1])) return '';
-	$target_url = parse_url($matchs[1]);
-	
-	if($target_url['host'] == $site_url['host']) {
-		return '';
-	}
-	return $rel;
+function bzg_targeted_link_rel($rel, $link_html)
+{
+    $site_url = parse_url(site_url());
+    preg_match('/href=[\'\"](https?:\/\/.*)[\'\"]/i', $link_html, $matchs);
+    if (empty($matchs[1])) return '';
+    $target_url = parse_url($matchs[1]);
+
+    if ($target_url['host'] == $site_url['host']) {
+        return '';
+    }
+    return $rel;
 }
+
 /**
  * wp后台相关
  */
- 
+
 //删除自带小工具
 function unregister_default_widgets()
 {
@@ -278,40 +287,44 @@ function unregister_default_widgets()
     unregister_widget("WP_Widget_Recent_Posts");
     unregister_widget("WP_Nav_Menu_Widget");
 }
+
 add_action("widgets_init", "unregister_default_widgets", 11);
 
 //admin css
-add_filter('login_headerurl', function() {
+add_filter('login_headerurl', function () {
     return get_bloginfo('siteurl');
 });
 
-add_filter('login_headertitle', function() {
+add_filter('login_headertitle', function () {
     return get_bloginfo('description');
 });
 
-function nowspark_login_head() {
+function nowspark_login_head()
+{
     echo '<style type="text/css">
             body.login #login h1 a {
                 background: url(https://cn.gravatar.com/avatar/642a9efe79c22c568dc852c8774b8abf) no-repeat 0 0 transparent;
             }
           </style>';
 }
+
 add_action("login_head", "nowspark_login_head");
 
 
 /**
  * SEO
  */
- 
+
 /**
-* WordPress发布文章/页面时自动添加默认的自定义字段
-* https://www.wpdaxue.com/add-custom-field-automatically-post-page-publish.html
-*/
+ * WordPress发布文章/页面时自动添加默认的自定义字段
+ * https://www.wpdaxue.com/add-custom-field-automatically-post-page-publish.html
+ */
 add_action('publish_page', 'add_custom_field_automatically');//发布页面时
 add_action('publish_post', 'add_custom_field_automatically');//发布文章时
-function add_custom_field_automatically($post_ID) {
+function add_custom_field_automatically($post_ID)
+{
     global $wpdb;
-    if(!wp_is_post_revision($post_ID)) {
+    if (!wp_is_post_revision($post_ID)) {
         add_post_meta($post_ID, 'description', '', true);
         add_post_meta($post_ID, 'keywords', '', true);
     }
@@ -321,15 +334,16 @@ add_filter('wp_targeted_link_rel', 'bzg_targeted_link_rel', 10, 2);
 
 
 // define the do_robots ---------------------------------------------------------------------
-add_filter( 'robots_txt', 'add_robots_rewrite', 10, 2 );
-function add_robots_rewrite( $output, $public ) {
+add_filter('robots_txt', 'add_robots_rewrite', 10, 2);
+function add_robots_rewrite($output, $public)
+{
     $output = "User-agent: *\n";
     $output .= "Disallow: /wp-admin/\n";
     $output .= "Disallow: /goto.php?*\n";
     $output .= "Allow: /wp-admin/admin-ajax.php\n";
-    
-    $output .= "Sitemap: ". get_option('home')."/wp-sitemap.xml\n";
-    return $output; 
+
+    $output .= "Sitemap: " . get_option('home') . "/wp-sitemap.xml\n";
+    return $output;
 }
 
 ///wordpress蜘蛛爬行记录生成
@@ -359,12 +373,14 @@ function get_naps_bot()
     }
     return false;
 }
+
 function nowtime()
 {
     date_default_timezone_set('Asia/Shanghai');
     $date = date("Y-m-d.G:i:s");
     return $date;
 }
+
 $searchbot = get_naps_bot();
 if ($searchbot) {
     $tlc_thispage = addslashes($_SERVER['HTTP_USER_AGENT']);
@@ -376,3 +392,42 @@ if ($searchbot) {
     fwrite($data, "Time:{$time} robot:{$searchbot} URL:{$tlc_thispage}\n page:{$PR}\r\n");
     fclose($data);
 }
+
+function xin2_enqueue_assets()
+{
+    $purl = get_stylesheet_directory_uri();
+
+    // Define CSS files to load
+    $css_files = array(
+        'baolog' => array(
+            'src' => $purl . '/assets/css/baolog.css',
+            'deps' => array(), // No dependencies
+        ),
+        'huux-notice' => array(
+            'src' => $purl . '/assets/css/huux-notice.css',
+            'deps' => array(), // No dependencies
+        ),
+    );
+
+    // Define JS files to load
+    $js_files = array(
+        'lang' => array(
+            'src' => $purl . '/assets/js/lang.js',
+        ),
+    );
+
+    // Enqueue the CSS files
+    foreach ($css_files as $handle => $file) {
+        wp_enqueue_style($handle, $file['src'], array(), null, 'all');
+    }
+
+    // Enqueue the JS files
+    foreach ($js_files as $handle => $file) {
+        wp_enqueue_script($handle, $file['src'], array(), null, true);
+    }
+}
+
+// Correctly add the action
+add_action('wp_enqueue_scripts', 'xin2_enqueue_assets');
+
+

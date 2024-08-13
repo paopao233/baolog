@@ -146,16 +146,6 @@ if (class_exists('CSF')) {
                 'text_off' => '已禁用',
                 'text_on' => '已启用',
                 'text_width' => 140,
-            ),
-            array(
-                'id' => 'baolog-native-nav',
-                'type' => 'switcher',
-                'title' => '开启原生移动端导航',
-                'desc' => '默认采用新版移动端导航，对旧版有需求的可以开启这个。',
-                'subtitle' => '默认是没有开启的',
-                'text_off' => '已禁用',
-                'text_on' => '已启用',
-                'text_width' => 140,
             )
         )
     ));

@@ -110,8 +110,6 @@ $options = get_option('baolog_framework');
 
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen"/>
     <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/assets/css/baolog.css">
-    <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/assets/css/huux-notice.css" name="huux_notice">
     <?php wp_head(); ?>
 </head>
 
@@ -119,97 +117,86 @@ $options = get_option('baolog_framework');
 <?php flush(); ?>
 <div class="header mb-3">
     <div class="container">
-        <?php if (_lot('baolog-native-nav')) {
-            echo '<div class="jumbotron bg-white mb-0 text-center hidden-sm">';
-        } else {
-            echo '<div class="jumbotron d-lg-block d-none bg-white mb-0 text-center ">';
-        }
-        ?>
-        <h1><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h1>
-        <span class="text-grey"><?php
-            $options = get_option('baolog_framework');
-            echo $options['baolog-description'];
-            ?></span>
-    </div>
-    <?php
-    if (_lot('baolog-native-nav')) {
+        <div class="jumbotron d-lg-block d-none bg-white mb-0 text-center ">
+            <h1><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name') ?></a></h1>
+            <span class="text-grey"><?php
+                $options = get_option('baolog_framework');
+                echo $options['baolog-description'];
+                ?></span>
+        </div>
+        <?php
         echo '<div class="d-sm-none d-block text-center mt-4 navbar-logo-brand"><h2><a href="';
         echo get_option('home') . '">';
         echo bloginfo('name') . '</a></h2></div>';
-    }
-    ?>
+        ?>
 
-    <!--primary menu-->
-    <?php
-    if (!_lot('baolog-native-nav')) {
-        echo '<nav class="row navbar navbar-expand-lg">';
-        echo '<button class="navbar-toggler border-0 pl-0" type="button" data-toggle="collapse"
+        <!--primary menu-->
+        <?php
+        if (!_lot('baolog-native-nav')) {
+            echo '<nav class="row navbar navbar-expand-lg">';
+            echo '<button class="navbar-toggler border-0 pl-0" type="button" data-toggle="collapse"
                 data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="iconfont icon-bars"></span></button>';
-        echo '<div class="d-lg-none d-block text-center mt-4 navbar-logo-brand"><h2><a href="';
-        echo get_option('home') . '">';
-        echo bloginfo('name') . '</a></h2></div>';
-    } else {
-        echo '<nav class="row">';
-    }
-    if (has_nav_menu('menu_primary')) {
-        if (_lot('baolog-native-nav')) {
-            wp_nav_menu(array(
-                    'theme_location' => 'menu_primary',
-                    'container_class' => 'col-sm-8 px-0',
-                    'menu_class' => 'nav sm-center',
-                    'menu_id' => 'menu-primary-items',
-                    'fallback_cb' => '', 'depth' => 2,
-                    'walker' => new baolog_Walker_Nav_Menu())
-            );
+            echo '<div class="d-lg-none d-block text-center mt-4 navbar-logo-brand"><h2><a href="';
+            echo get_option('home') . '">';
+            echo bloginfo('name') . '</a></h2></div>';
         } else {
-            wp_nav_menu(array(
-                    'theme_location' => 'menu_primary',
-                    'container_class' => 'col-md-8 px-0 collapse navbar-collapse',
-                    'container_id' => 'navbarContent',
-                    'menu_class' => 'nav sm-center',
-                    'menu_id' => 'menu-primary-items',
-                    'fallback_cb' => '', 'depth' => 2,
-                    'walker' => new baolog_Walker_Nav_Menu())
-            );
+            echo '<nav class="row">';
         }
+        if (has_nav_menu('menu_primary')) {
+            if (_lot('baolog-native-nav')) {
+                wp_nav_menu(array(
+                        'theme_location' => 'menu_primary',
+                        'container_class' => 'col-sm-8 px-0',
+                        'menu_class' => 'nav sm-center',
+                        'menu_id' => 'menu-primary-items',
+                        'fallback_cb' => '', 'depth' => 2,
+                        'walker' => new baolog_Walker_Nav_Menu())
+                );
+            } else {
+                wp_nav_menu(array(
+                        'theme_location' => 'menu_primary',
+                        'container_class' => 'col-md-8 px-0 collapse navbar-collapse',
+                        'container_id' => 'navbarContent',
+                        'menu_class' => 'nav sm-center',
+                        'menu_id' => 'menu-primary-items',
+                        'fallback_cb' => '', 'depth' => 2,
+                        'walker' => new baolog_Walker_Nav_Menu())
+                );
+            }
 
-    } else {
-        if (_lot('baolog-native-nav')) {
-            echo '<div class="col-sm-8 px-0">';
         } else {
-            echo '<div class="col-md-8 px-0 collapse navbar-collapse" id="navbarContent">';
-        }
-        echo '<ul class="nav sm-center">
+            echo '<div class="col-sm-8 px-0">';
+            echo '<ul class="nav sm-center">
 							<li class="nav-item">
 								<a class="nav-link" href="' . get_option('home') . '"> 
 								首页 </a>
 							</li>';
-        echo '<li class="nav-item">
+            echo '<li class="nav-item">
 								<a class="nav-link" href="' . get_option('home') . '/wp-admin/nav-menus.php">
                                 请到后台添加导航(我是主导航)</a>
 							</li>';
-        echo '</ul></div>';
-    }
-    ?>
+            echo '</ul></div>';
+        }
+        ?>
 
 
-    <!--搜索-->
-    <?php
-    if (!_lot('baolog-native-nav')) {
-        echo '<button class="navbar-toggler border-0 px-1 ml-auto" type="button" data-toggle="collapse"
+        <!--搜索-->
+        <?php
+        if (!_lot('baolog-native-nav')) {
+            echo '<button class="navbar-toggler border-0 px-1 ml-auto" type="button" data-toggle="collapse"
                 data-target="#navbarSearch"
                 aria-controls="navbarSearch" aria-expanded="false" aria-label="Search navigation">
             <span class="iconfont icon-search"></span></button>';
-        echo '<div class="col-md-auto collapse navbar-collapse navbar-collapse-search" id="navbarSearch">';
-    } else {
-        echo '<div class="col-sm-4">';
-    }
-    ?>
-    <?php get_search_form(); ?>
+            echo '<div class="col-md-auto collapse navbar-collapse navbar-collapse-search" id="navbarSearch">';
+        } else {
+            echo '<div class="col-sm-4">';
+        }
+        ?>
+        <?php get_search_form(); ?>
 
 
-</div>
-</nav>
+    </div>
+    </nav>
 </div>
 </div>
