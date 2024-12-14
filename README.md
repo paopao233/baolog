@@ -4,7 +4,7 @@ wordpress线报主题，发羊毛，我就要专一~<br>
 在线预览及其配置说明：https://baolog.eu.org/archives/125.html<br>
 恳请大家在使用本主题的时候，留下作者的信息，毕竟开源不易。<br>
 欢迎捐赠：https://baolog.eu.org/donation.html<br>
-## 通知：本站域名已经更改为：baolog.eu.org 佛系更新
+## 通知：主题已停止更新 有改造的需求可以联系我Q 1319082534 （NO FREE 请注明来源）。仿主题、定制主题或者定制系统都可以找我。
 ## 环境要求
 WordPress 4.4+
 WordPress 伪静态
