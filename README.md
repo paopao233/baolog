@@ -37,6 +37,7 @@ PHP 5.7+ 7.0+
 请到releases中查看
 ## 鸣谢
 Jetbrains
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
 ## License
 GPL-3.0 License © parklot <br>
 All assets licensed under a GPL-compatible license.<br>
